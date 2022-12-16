@@ -1,0 +1,34 @@
+.mainmenu-container {
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ingredients {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+    background-color: #ffffff0f;
+    padding: 1rem;
+}
+
+.ingredients-cell {
+    width: 90vw;
+    min-height: 3rem;
+    border: 1px #FFFFFF solid;
+    border-radius: .5em;
+    padding: .5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ingredients-cell b {
+    font-size: 1.5rem;
+}
+
+.ingredients-cell p {
+    margin: 0;
+}
