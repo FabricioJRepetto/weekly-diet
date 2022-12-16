@@ -242,11 +242,13 @@ const protein = [{
         vegC: true,
         name: 'Mandioca'
     }],
+    vegetal = vegA.concat(vegB),
     carbohydrate = carbo.concat(vegC)
 
 const group = {
     protein,
     carbohydrate,
+    vegetal,
     vegA,
     vegB,
     vegC

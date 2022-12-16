@@ -4,12 +4,19 @@ import Modal from './helpers/Modal'
 import { useModal } from './helpers/useModal'
 import IngredientList from './IngredientList'
 import Plate from './Plate'
+import group from '../constants'
 
-import './style/MainMenu.css'
+import './style/MealMenu.css'
 
 const MealMenu = () => {
     const [ingredientList, setIngredientList] = useState(false)
     const [proportions, setProportions] = useState('')
+    const [suggestions, setSuggestions] = useState({})
+    const [checkIt, setCheckIt] = useState({
+        protein: false,
+        carbohydrate: false,
+        vegetal: false
+    })
     const { state: {
         protein,
         carbohydrate,
@@ -23,6 +30,14 @@ const MealMenu = () => {
     }
 
     useEffect(() => {
+        if (protein.length > 0 && !checkIt.protein)
+            setCheckIt(current => ({ ...current, protein: true }))
+        if (carbohydrate.length > 0 && !checkIt.carbohydrate)
+            setCheckIt(current => ({ ...current, carbohydrate: true }))
+        if (vegetal.length > 0 && !checkIt.vegetal)
+            setCheckIt(current => ({ ...current, vegetal: true }))
+
+        //? Proporciones
         let p = protein.length
             ? protein.length && carbohydrate.length
                 ? 1
@@ -40,8 +55,59 @@ const MealMenu = () => {
         setProportions(`
             ${p ? 'Proteínas: ' + (25 * p) + '%, ' : ''}
             ${c ? 'Carbohidratos: ' + (25 * c) + '%, ' : ''}
-            ${v ? 'Vegetales: ' + (25 * v) + '%, ' : ''}
+            ${v ? 'Vegetales: ' + (25 * v) + '%' : ''}
         `)
+
+        //? Recomendaciones
+        const vegChecker = (arr, g) => {
+            let vegGroup
+            g === 'A'
+                ? (vegGroup = 'vegA')
+                : (vegGroup = 'vegB')
+
+            arr.length < 1
+                ? setSuggestions(s => (
+                    {
+                        ...s,
+                        [vegGroup]: `Puedes agregar vegetales del grupo ${g} para mejorar la variedad del plato.`
+                    }
+                ))
+                : setSuggestions(s => {
+                    if (s[vegGroup]) {
+                        let aux = { ...s }
+                        delete aux[vegGroup]
+                        return aux
+                    } else return s
+                })
+        }
+
+        if (vegetal.length > 0 || checkIt.vegetal) {
+            let groupA = [],
+                groupB = []
+
+            vegetal.map(v =>
+                group.vegB.map(n => n.name).includes(v)
+                    ? groupB.push(v)
+                    : groupA.push(v)
+            )
+            if (groupA.length < 1 && groupB.length < 1) {
+                setSuggestions(s => ({
+                    ...s,
+                    vegetal: 'Utiliza vegetales de los grupos A y B para rellenar la mitad del plato.'
+                }))
+            } else {
+                if (suggestions.vegetal) {
+                    setSuggestions(s => {
+                        let aux = { ...s }
+                        delete aux.vegetal
+                        return aux
+                    })
+                }
+                vegChecker(groupA, 'A')
+                vegChecker(groupB, 'B')
+            }
+        }
+        // eslint-disable-next-line
     }, [protein, carbohydrate, vegetal])
 
     const openSection = (section) => {
@@ -54,6 +120,9 @@ const MealMenu = () => {
             <p>veg. C semanal: X X X</p>
             <Plate />
             <p>{proportions}</p>
+            <ul>{Object.values(suggestions).length > 0 &&
+                Object.values(suggestions).map(s => <li key={s}>{s}</li>)}
+            </ul>
 
             <section className='ingredients'>
                 {protein.length > 0 &&

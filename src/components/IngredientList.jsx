@@ -52,6 +52,10 @@ const IngredientList = ({ list, openList }) => {
     }
 
     const clearList = () => {
+        state[list].forEach(e => {
+            let ele = document.getElementById('ingOpt' + e)
+            ele.checked = false
+        });
         dispatch({
             type: list,
             payload: []
@@ -60,41 +64,28 @@ const IngredientList = ({ list, openList }) => {
 
     return (
         <div className="ingredient-list">
-            {list === 'vegetal'
-                ? <>
-                    <>
-                        <button onClick={() => setVeg('vegA')}>Vegetales A</button>
-                        <button onClick={() => setVeg('vegB')}>Vegetales B</button>
-                    </>
-                    {group[veg].map(ing =>
-                        <label htmlFor={'ingOpt' + ing.name}
-                            key={ing.name} >
-                            <div className='ingOption'>
-                                <input type="checkbox"
-                                    name={'ingOpt' + ing.name}
-                                    id={'ingOpt' + ing.name}
-                                    defaultChecked={state[list].includes(ing.name)}
-                                    onClick={() => handleSelect(ing.name)} />
-                                <b style={{ color: ing.color }}>|</b>
-                                {ing.name}
-                            </div>
-                        </label>)}
-                </>
-                : group[list].map(ing =>
-                    <label htmlFor={'ingOpt' + ing.name}
-                        key={ing.name}>
-                        <div className='ingOption'>
-                            <input type="checkbox"
-                                name={'ingOpt' + ing.name}
-                                id={'ingOpt' + ing.name}
-                                defaultChecked={state[list].includes(ing.name)}
-                                onClick={() => handleSelect(ing.name)} />
-                            <b style={{ color: ing.color }}>|</b>
-                            {ing.name}
-                        </div>
-                    </label>
-                )
-            }
+            {list === 'vegetal' &&
+                <>
+                    <button onClick={() => setVeg('vegA')}>Vegetales A</button>
+                    <button onClick={() => setVeg('vegB')}>Vegetales B</button>
+                </>}
+
+            {group[list].map(ing =>
+                <label key={ing.name}
+                    htmlFor={'ingOpt' + ing.name}
+                    className={(list === 'vegetal' && veg !== 'veg' + ing.group) ? 'invisible' : ''}>
+                    <div className='ingOption'>
+                        <input type="checkbox"
+                            name={'ingOpt' + ing.name}
+                            id={'ingOpt' + ing.name}
+                            defaultChecked={state[list].includes(ing.name)}
+                            onClick={() => handleSelect(ing.name)} />
+                        <b style={{ color: ing.color }}>|</b>
+                        {ing.name}
+                    </div>
+                </label>
+            )}
+
             <button onClick={clearList}>borrar</button>
             <button onClick={() => openList(false)}>back</button>
         </div>
