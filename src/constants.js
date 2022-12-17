@@ -243,7 +243,24 @@ const protein = [{
         name: 'Mandioca'
     }],
     vegetal = vegA.concat(vegB),
-    carbohydrate = carbo.concat(vegC)
+    carbohydrate = carbo.concat(vegC),
+    compounds = [
+        {
+            name: 'Omelette',
+            type: ['protein'],
+            img: 'https://media.istockphoto.com/id/485040276/es/foto/herb-omelette-con-chives-y-orégano.jpg?b=1&s=612x612&w=0&k=20&c=GdB6Nn-XEzx8s3yVk9BJVgoAOMJSdohNOzUeCFsUCdQ='
+        },
+        {
+            name: 'Tortilla de papas',
+            type: ['protein', 'carbohydrate'],
+            img: 'https://media.istockphoto.com/id/1297400965/es/foto/un-primer-plano-de-una-tortilla-española-fresca-y-sabrosa-un-plato-tradicional-de-españa.jpg?b=1&s=612x612&w=0&k=20&c=IBu0TpC29gDchTv2iLe1yKIfgwDdHAbQCcKccbmCYAs='
+        },
+        {
+            name: 'Milanesa de soja',
+            type: ['carbohydrate'],
+            img: 'https://nyc3.digitaloceanspaces.com/dec-solimeno/__sized__/products/Milanesa_soja_clasica-1-crop-c0-5__0-5-1080x1080-70.jpg'
+        },
+    ]
 
 const group = {
     protein,
@@ -251,7 +268,8 @@ const group = {
     vegetal,
     vegA,
     vegB,
-    vegC
+    vegC,
+    compounds
 }
 
 export default group

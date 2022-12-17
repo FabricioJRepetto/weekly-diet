@@ -1,0 +1,69 @@
+.ingredient-list-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: calc(80vh + 4em);
+}
+
+.ingList {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    gap: 1em;
+    max-height: 80%;
+    padding: 2em 0;
+}
+
+.ingList-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 5em;
+    width: 100%;
+}
+
+.ingList-buttons>button {
+    height: 1.5em;
+}
+
+.ingOption {
+    display: flex;
+    padding: .25em;
+    border: 1px solid #808080;
+    border-radius: .5em;
+    padding: 0 2rem 0 1em;
+    background: linear-gradient(90deg, #252525 0%, #000000 90%);
+    background-size: 300%;
+    background-position: 100%;
+    transition: .25s all linear;
+    /* cursor: pointer; */
+}
+
+.selectedOpt {
+    border: 1px solid #ffffff;
+    background-position: 0%;
+}
+
+.ingOption input {
+    appearance: none;
+
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+
+    border: 1px solid rgb(255, 255, 255);
+    transition: 0.2s all linear;
+    margin: auto 5px;
+}
+
+.ingOption input:checked {
+    border: 6px solid rgb(255, 255, 255);
+    box-shadow: 0 0 10px 3px #ffffff29;
+}
+
+
+.ingOption-text {
+    width: 100%;
+    text-align: right;
+}

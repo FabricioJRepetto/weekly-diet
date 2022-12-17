@@ -10,17 +10,18 @@
     flex-direction: column;
     gap: .5rem;
     align-items: center;
-    background-color: #ffffff0f;
-    padding: 1rem;
+    width: 100%;
+    padding: 1rem 0;
+    /* background-color: #ffffff0f; */
 }
 
 .ingredients-cell {
-    width: 90vw;
+    width: 90%;
     min-height: 3rem;
     border: 1px #FFFFFF solid;
     border-radius: .5em;
     padding: .5em;
-    cursor: pointer;
+    /* cursor: pointer; */
 
     display: flex;
     flex-direction: column;
@@ -35,6 +36,14 @@
     margin: 0;
 }
 
+.button {
+    text-align: center;
+}
+
 .invisible {
     display: none;
+}
+
+.modal-menu-container {
+    width: 100%;
 }

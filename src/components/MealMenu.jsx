@@ -146,39 +146,44 @@ const MealMenu = () => {
                         <p>{vegetal.toString().replaceAll(',', ', ')}</p>
                     </div>}
 
-                <button onClick={openType}
-                    className='ingredients-cell'>
-                    Agregar al plato +
-                </button>
+                <div onClick={openType}
+                    className='ingredients-cell button'>
+                    Agregar ingrediente +
+                </div>
             </section>
 
             <Modal
                 isOpen={isOpenType}
                 closeModal={closeTypeHandler}>
-                <div>
+                <div className='modal-menu-container'>
                     {!ingredientList &&
-                        <>
-                            <p className='ingredients-cell'
+                        <div className='ingredients'>
+                            <div className='ingredients-cell'
                                 onClick={() => setIngredientList('protein')}>
-                                Proteína
-                            </p>
-                            <p className='ingredients-cell'
+                                <p>
+                                    Proteína 🥩
+                                </p>
+                            </div>
+                            <div className='ingredients-cell'
                                 onClick={() => setIngredientList('carbohydrate')}>
-                                Carbohidratos
-                            </p>
-                            <p className='ingredients-cell'
+                                <p>
+                                    Carbohidratos  🌾
+                                </p>
+                            </div>
+                            <div className='ingredients-cell'
                                 onClick={() => setIngredientList('vegetal')}>
-                                Vegetales
-                            </p>
+                                <p>
+                                    Vegetales 🥦
+                                </p>
+                            </div>
                             <button onClick={closeType}>x</button>
-                        </>}
+                        </div>}
 
                     {ingredientList &&
                         <IngredientList
                             list={ingredientList}
                             openList={setIngredientList} />}
                 </div>
-
             </Modal>
         </div>
     )

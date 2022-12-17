@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { usePlate } from '../plate-context'
 import group from '../constants.js'
 
+import '../components/style/IngredientList.css'
+
 const IngredientList = ({ list, openList }) => {
     const [veg, setVeg] = useState('vegA')
     const { dispatch,
@@ -63,31 +65,44 @@ const IngredientList = ({ list, openList }) => {
     }
 
     return (
-        <div className="ingredient-list">
+        <div className="ingredient-list-container">
             {list === 'vegetal' &&
                 <>
                     <button onClick={() => setVeg('vegA')}>Vegetales A</button>
                     <button onClick={() => setVeg('vegB')}>Vegetales B</button>
                 </>}
 
-            {group[list].map(ing =>
-                <label key={ing.name}
-                    htmlFor={'ingOpt' + ing.name}
-                    className={(list === 'vegetal' && veg !== 'veg' + ing.group) ? 'invisible' : ''}>
-                    <div className='ingOption'>
-                        <input type="checkbox"
-                            name={'ingOpt' + ing.name}
-                            id={'ingOpt' + ing.name}
-                            defaultChecked={state[list].includes(ing.name)}
-                            onClick={() => handleSelect(ing.name)} />
-                        <b style={{ color: ing.color }}>|</b>
-                        {ing.name}
-                    </div>
-                </label>
-            )}
+            <div className="ingList">
+                {group[list].map(ing =>
+                    <label key={ing.name}
+                        htmlFor={'ingOpt' + ing.name}
+                        className={(list === 'vegetal' && veg !== 'veg' + ing.group) ? 'invisible' : ''}>
+                        <div className={`ingOption ${state[list].includes(ing.name) ? 'selectedOpt' : ''}`}
+                            style={
+                                {
+                                    borderRight: `5px solid ${ing.color}`
+                                }
+                            }>
+                            <input type="checkbox"
+                                name={'ingOpt' + ing.name}
+                                id={'ingOpt' + ing.name}
+                                defaultChecked={state[list].includes(ing.name)}
+                                onClick={() => handleSelect(ing.name)} />
 
-            <button onClick={clearList}>borrar</button>
-            <button onClick={() => openList(false)}>back</button>
+                            <div className='ingOption-text'>
+                                <p>
+                                    {ing.name}
+                                </p>
+                            </div>
+                        </div>
+                    </label>
+                )}
+            </div>
+
+            <div className='ingList-buttons'>
+                <button onClick={() => openList(false)}>volver</button>
+                <button onClick={clearList}>quitar todo</button>
+            </div>
         </div>
     )
 }
