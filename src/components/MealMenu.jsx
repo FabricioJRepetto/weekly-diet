@@ -8,7 +8,7 @@ import group from '../constants'
 
 import './style/MealMenu.css'
 
-const MealMenu = () => {
+const MealMenu = ({ close }) => {
     const [ingredientList, setIngredientList] = useState(false)
     const [proportions, setProportions] = useState('')
     const [suggestions, setSuggestions] = useState({})
@@ -17,11 +17,15 @@ const MealMenu = () => {
         carbohydrate: false,
         vegetal: false
     })
-    const { state: {
-        protein,
-        carbohydrate,
-        vegetal
-    } } = usePlate()
+    const {
+        dispatch,
+        state: {
+            protein,
+            carbohydrate,
+            vegetal,
+            vegetalC,
+            history
+        } } = usePlate()
     const [isOpenType, openType, closeType] = useModal();
 
     const closeTypeHandler = () => {
@@ -30,12 +34,8 @@ const MealMenu = () => {
     }
 
     useEffect(() => {
-        if (protein.length > 0 && !checkIt.protein)
-            setCheckIt(current => ({ ...current, protein: true }))
-        if (carbohydrate.length > 0 && !checkIt.carbohydrate)
-            setCheckIt(current => ({ ...current, carbohydrate: true }))
-        if (vegetal.length > 0 && !checkIt.vegetal)
-            setCheckIt(current => ({ ...current, vegetal: true }))
+        if (!checkIt && (protein.length > 0 || carbohydrate.length > 0 || vegetal.length > 0))
+            setCheckIt(() => true)
 
         //? Proporciones
         let p = protein.length
@@ -81,7 +81,7 @@ const MealMenu = () => {
                 })
         }
 
-        if (vegetal.length > 0 || checkIt.vegetal) {
+        if (vegetal.length > 0 || checkIt) {
             let groupA = [],
                 groupB = []
 
@@ -115,10 +115,29 @@ const MealMenu = () => {
         openType()
     }
 
+    const save = () => {
+        let aux = {
+            protein: [...protein],
+            carbohydrate: [...carbohydrate],
+            vegetal: [...vegetal],
+            vegetalC,
+            date: new Date().toString()
+        }
+        dispatch({
+            type: 'save',
+            payload: aux
+        })
+        close()
+        dispatch({ type: 'reset' })
+    }
+
     return (
         <div className='mainmenu-container'>
             <p>veg. C semanal: X X X</p>
-            <Plate />
+            <Plate size={'34vh'}
+                protein={protein}
+                carbohydrate={carbohydrate}
+                vegetal={vegetal} />
             <p>{proportions}</p>
             <ul>{Object.values(suggestions).length > 0 &&
                 Object.values(suggestions).map(s => <li key={s}>{s}</li>)}
@@ -151,6 +170,11 @@ const MealMenu = () => {
                     Agregar ingrediente +
                 </div>
             </section>
+
+            <div className='ingredients'>
+                <button className='ingredients-cell button' onClick={save}>SAVE</button>
+                <button className='ingredients-cell button' onClick={close}>CLOSE</button>
+            </div>
 
             <Modal
                 isOpen={isOpenType}

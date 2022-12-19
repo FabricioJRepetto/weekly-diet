@@ -4,6 +4,22 @@ export const PlateContext = createContext()
 
 function plateReducer(state, action) {
     switch (action.type) {
+        case 'save': {
+            let aux = [...state.history, action.payload]
+            return {
+                ...state,
+                history: aux
+            }
+        }
+        case 'reset': {
+            return {
+                ...state,
+                protein: [],
+                carbohydrate: [],
+                vegetal: [],
+                vegetalC: false
+            }
+        }
         case 'protein': {
             return {
                 ...state,
@@ -39,7 +55,8 @@ function PlateProvider({ children }) {
         protein: [],
         carbohydrate: [],
         vegetal: [],
-        vegetalC: false
+        vegetalC: false,
+        history: []
     })
     const value = { state, dispatch }
 

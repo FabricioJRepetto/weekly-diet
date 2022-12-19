@@ -1,11 +1,10 @@
 .plate-container {
     position: relative;
-    height: 34vh;
-    width: 100vw;
+    width: 100%;
 }
 
 .plate {
-    max-height: 34vh;
+    max-height: 100%;
     left: 50%;
     transform: translate(-50%);
     position: absolute;
@@ -16,8 +15,8 @@
     top: 11.6%;
     left: 50.2%;
     border-radius: 3% 0 0 3%;
-    height: 26vh;
-    width: 12.5vh;
+    height: 76.47%;
+    width: 38.23%;
     z-index: 10;
     overflow: hidden;
 }
@@ -28,95 +27,81 @@
     height: 100%;
     width: 200%;
     border-radius: 50%;
-    background-color: rgb(84, 154, 23);
+    background-color: #B6E2A1;
 }
 
-.protein-container {
+.protein-c {
     position: absolute;
     top: 11.6%;
     left: 50%;
     transform: translate(-102%);
     border-radius: 0 3% 3% 0;
-    height: 26vh;
-    width: 12.5vh;
+    width: 38.23%;
     z-index: 11;
     overflow: hidden;
-    /* border: 1px solid red; */
+
 }
 
-.protein-half-container {
-    position: absolute;
-    top: 11.6%;
-    left: 50%;
-    transform: translate(-102%);
-    border-radius: 0 3% 3% 0;
-    height: 12.5vh;
-    width: 12.5vh;
-    z-index: 11;
-    overflow: hidden;
+.p-c {
+    height: 76.47%;
+}
+
+.p-half-c {
+    height: 38.23%;
     margin-bottom: 0.3%;
-    /* border: 1px solid red; */
+}
+
+.protein-c div {
+    position: absolute;
+    left: 0%;
+    background-color: #F7A4A4;
 }
 
 .protein {
-    position: absolute;
-    left: 0%;
     height: 100%;
     width: 200%;
     border-radius: 50%;
-    background-color: rgb(149, 45, 24);
 }
 
 .half-protein {
-    position: absolute;
-    left: 0%;
     height: 200%;
     width: 200%;
     border-radius: 50% 0 0 0;
-    background-color: rgb(149, 45, 24);
 }
 
-.carbo-container {
+.carbo-c {
     position: relative;
+    left: 50%;
+    transform: translate(-102%);
+    border-radius: 0 3% 3% 0;
+    width: 38.23%;
+    z-index: 11;
+    overflow: hidden;
+}
+
+.c-c {
     top: 11.6%;
-    left: 50%;
-    transform: translate(-102%);
-    border-radius: 0 3% 3% 0;
-    height: 26vh;
-    width: 12.5vh;
-    z-index: 11;
-    overflow: hidden;
-    /* border: 1px solid red; */
+    height: 76.47%;
 }
 
-.carbo-half-container {
-    position: relative;
+.c-half-c {
     top: 50%;
-    left: 50%;
-    transform: translate(-102%);
-    border-radius: 0 3% 3% 0;
-    height: 12.5vh;
-    width: 12.5vh;
-    z-index: 11;
-    overflow: hidden;
-    /* border: 1px solid red; */
+    height: 38.23%;
+}
+
+.carbo-c div {
+    position: absolute;
+    left: 0%;
+    width: 200%;
+    border-radius: 50%;
+    background-color: #FEBE8C;
 }
 
 .carbo {
-    position: absolute;
-    left: 0%;
     height: 100%;
-    width: 200%;
-    border-radius: 50%;
-    background-color: rgb(230, 187, 47);
 }
 
 .half-carbo {
-    position: absolute;
     top: -100%;
-    left: 0%;
     height: 200%;
-    width: 200%;
-    border-radius: 50%;
-    background-color: rgb(230, 187, 47);
 }
