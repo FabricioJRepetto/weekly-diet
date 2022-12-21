@@ -9,7 +9,7 @@ const PlateCard = ({ data }) => {
         carbohydrate,
         vegetal,
         vegetalC,
-        date
+        // date
     } = data
 
     return (
@@ -17,9 +17,9 @@ const PlateCard = ({ data }) => {
             <Plate size={'100%'}
                 protein={protein}
                 carbohydrate={carbohydrate}
-                vegetal={vegetal} />
-            {vegetalC && <b>veg. C</b>}
-            <i>{new Date(date).toLocaleString("es-Ar").slice(0, -3)}</i>
+                vegetal={vegetal}
+                vegC={vegetalC} />
+            {/* <i>{new Date(date).toLocaleString("es-Ar").slice(0, -3)}</i> */}
         </div>
     )
 }

@@ -15,6 +15,8 @@ const IngredientList = ({ list, openList }) => {
         }
     } = usePlate()
 
+    if (list === 'search') return (<></>)
+
     const handleSelect = (ing) => {
         let aux = []
 

@@ -3,12 +3,7 @@ import React from 'react'
 
 import "../components/style/Plate.css"
 
-const Plate = ({ protein, carbohydrate, vegetal, size }) => {
-    // const { state: {
-    //     protein,
-    //     carbohydrate,
-    //     vegetal
-    // } } = usePlate()
+const Plate = ({ protein, carbohydrate, vegetal, vegC, size }) => {
 
     return (
         <div className='plate-container'
@@ -37,6 +32,20 @@ const Plate = ({ protein, carbohydrate, vegetal, size }) => {
                     <div className={protein.length > 0
                         ? 'half-carbo'
                         : 'carbo'}></div>
+                </div>}
+
+            {vegC &&
+                <div className='vegC-mark'>
+                    <b>
+                        Veg. C
+                    </b>
+                </div>}
+
+            {(vegetal.length < 1 || (protein.length < 1 && carbohydrate.length < 1)) &&
+                <div className='badplate-mark'>
+                    <b>
+                        !
+                    </b>
                 </div>}
         </div>
     )

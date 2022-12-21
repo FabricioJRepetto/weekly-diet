@@ -588,6 +588,12 @@ template {
     display: none;
 }
 
+:root {
+    --prot: #F7A4A4;
+    --carb: #FEBE8C;
+    --veg: #B6E2A1;
+}
+
 body {
     background: rgb(32, 32, 32);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

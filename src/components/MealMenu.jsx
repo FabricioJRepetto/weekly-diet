@@ -5,18 +5,15 @@ import { useModal } from './helpers/useModal'
 import IngredientList from './IngredientList'
 import Plate from './Plate'
 import group from '../constants'
+import SearchIngredient from './SearchIngredient'
 
 import './style/MealMenu.css'
 
 const MealMenu = ({ close }) => {
     const [ingredientList, setIngredientList] = useState(false)
-    const [proportions, setProportions] = useState('')
+    // const [proportions, setProportions] = useState('')
     const [suggestions, setSuggestions] = useState({})
-    const [checkIt, setCheckIt] = useState({
-        protein: false,
-        carbohydrate: false,
-        vegetal: false
-    })
+    const [checkIt, setCheckIt] = useState(false)
     const {
         dispatch,
         state: {
@@ -24,7 +21,7 @@ const MealMenu = ({ close }) => {
             carbohydrate,
             vegetal,
             vegetalC,
-            history
+            // history
         } } = usePlate()
     const [isOpenType, openType, closeType] = useModal();
 
@@ -38,25 +35,25 @@ const MealMenu = ({ close }) => {
             setCheckIt(() => true)
 
         //? Proporciones
-        let p = protein.length
-            ? protein.length && carbohydrate.length
-                ? 1
-                : 2
-            : 0,
-            c = carbohydrate.length
-                ? carbohydrate.length && protein.length
-                    ? 1
-                    : 2
-                : 0,
-            v = vegetal.length
-                ? 2
-                : 0
+        // let p = protein.length
+        //     ? protein.length && carbohydrate.length
+        //         ? 1
+        //         : 2
+        //     : 0,
+        //     c = carbohydrate.length
+        //         ? carbohydrate.length && protein.length
+        //             ? 1
+        //             : 2
+        //         : 0,
+        //     v = vegetal.length
+        //         ? 2
+        //         : 0
 
-        setProportions(`
-            ${p ? 'Proteínas: ' + (25 * p) + '%, ' : ''}
-            ${c ? 'Carbohidratos: ' + (25 * c) + '%, ' : ''}
-            ${v ? 'Vegetales: ' + (25 * v) + '%' : ''}
-        `)
+        // setProportions(`
+        //     ${p ? 'Proteínas: ' + (25 * p) + '%, ' : ''}
+        //     ${c ? 'Carbohidratos: ' + (25 * c) + '%, ' : ''}
+        //     ${v ? 'Vegetales: ' + (25 * v) + '%' : ''}
+        // `)
 
         //? Recomendaciones
         const vegChecker = (arr, g) => {
@@ -81,7 +78,7 @@ const MealMenu = ({ close }) => {
                 })
         }
 
-        if (vegetal.length > 0 || checkIt) {
+        if (checkIt || vegetal.length > 0) {
             let groupA = [],
                 groupB = []
 
@@ -107,6 +104,20 @@ const MealMenu = ({ close }) => {
                 vegChecker(groupB, 'B')
             }
         }
+
+        if (checkIt && protein.length < 1 && carbohydrate.length < 1) {
+            setSuggestions(s => ({
+                ...s,
+                incomplete: 'No olvides agregar Proteinas y/o Carbohidratos.'
+            }))
+        } else if (suggestions.incomplete) {
+            setSuggestions(s => {
+                let aux = { ...s }
+                delete aux.incomplete
+                return aux
+            })
+        }
+
         // eslint-disable-next-line
     }, [protein, carbohydrate, vegetal])
 
@@ -121,7 +132,8 @@ const MealMenu = ({ close }) => {
             carbohydrate: [...carbohydrate],
             vegetal: [...vegetal],
             vegetalC,
-            date: new Date().toString()
+            date: new Date().toLocaleDateString('en')
+            // date: datetest
         }
         dispatch({
             type: 'save',
@@ -133,12 +145,13 @@ const MealMenu = ({ close }) => {
 
     return (
         <div className='mainmenu-container'>
-            <p>veg. C semanal: X X X</p>
+            <p>Veg. C semanal: 0/3</p>
             <Plate size={'34vh'}
                 protein={protein}
                 carbohydrate={carbohydrate}
-                vegetal={vegetal} />
-            <p>{proportions}</p>
+                vegetal={vegetal}
+                vegC={vegetalC} />
+            {/* <p>{proportions}</p> */}
             <ul>{Object.values(suggestions).length > 0 &&
                 Object.values(suggestions).map(s => <li key={s}>{s}</li>)}
             </ul>
@@ -146,21 +159,21 @@ const MealMenu = ({ close }) => {
             <section className='ingredients'>
                 {protein.length > 0 &&
                     <div onClick={() => openSection('protein')}
-                        className='ingredients-cell'>
+                        className='ingredients-cell ing-p'>
                         <b>Proteína</b>
                         <p>{protein.toString().replaceAll(',', ', ')}</p>
                     </div>}
 
                 {carbohydrate.length > 0 &&
                     <div onClick={() => openSection('carbohydrate')}
-                        className='ingredients-cell'>
+                        className='ingredients-cell ing-c'>
                         <b>Carbohidratos</b>
                         <p>{carbohydrate.toString().replaceAll(',', ', ')}</p>
                     </div>}
 
                 {vegetal.length > 0 &&
                     <div onClick={() => openSection('vegetal')}
-                        className='ingredients-cell'>
+                        className='ingredients-cell ing-v'>
                         <b>Vegetales</b>
                         <p>{vegetal.toString().replaceAll(',', ', ')}</p>
                     </div>}
@@ -171,7 +184,7 @@ const MealMenu = ({ close }) => {
                 </div>
             </section>
 
-            <div className='ingredients'>
+            <div className='ingredients forButtons'>
                 <button className='ingredients-cell button' onClick={save}>SAVE</button>
                 <button className='ingredients-cell button' onClick={close}>CLOSE</button>
             </div>
@@ -180,6 +193,9 @@ const MealMenu = ({ close }) => {
                 isOpen={isOpenType}
                 closeModal={closeTypeHandler}>
                 <div className='modal-menu-container'>
+
+                    <SearchIngredient changeList={setIngredientList} />
+
                     {!ingredientList &&
                         <div className='ingredients'>
                             <div className='ingredients-cell'

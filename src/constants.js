@@ -173,11 +173,6 @@ const protein = [{
         name: 'Alcaucil'
     },
     {
-        color: '#44a745',
-        group: 'B',
-        name: 'Arvejas'
-    },
-    {
         color: '#FFFFFF',
         group: 'B',
         name: 'Cebolla'
@@ -260,7 +255,13 @@ const protein = [{
             type: ['carbohydrate'],
             img: 'https://nyc3.digitaloceanspaces.com/dec-solimeno/__sized__/products/Milanesa_soja_clasica-1-crop-c0-5__0-5-1080x1080-70.jpg'
         },
-    ]
+        {
+            name: 'Hamburguesa',
+            type: ['carbohydrate', 'protein'],
+            img: 'https://media.istockphoto.com/id/1206323282/es/foto/hamburguesa-jugosa-sobre-fondo-blanco.jpg?s=612x612&w=0&k=20&c=r2mLaVFZxtRk4MeKpdQLtwTkcctyOpGEP-OxPeyo4_c='
+        },
+    ],
+    everything = protein.concat(carbo, vegetal, compounds)
 
 const group = {
     protein,
@@ -269,7 +270,8 @@ const group = {
     vegA,
     vegB,
     vegC,
-    compounds
+    compounds,
+    everything
 }
 
 export default group

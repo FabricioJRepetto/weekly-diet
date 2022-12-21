@@ -39,6 +39,22 @@
     text-overflow: ellipsis;
 }
 
+.ing-p {
+    color: var(--prot);
+}
+
+.ing-c {
+    color: var(--carb);
+}
+
+.ing-v {
+    color: var(--veg);
+}
+
+.forButtons {
+    flex-direction: row;
+}
+
 .button {
     text-align: center;
 }

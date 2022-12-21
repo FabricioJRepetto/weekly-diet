@@ -27,7 +27,7 @@
     height: 100%;
     width: 200%;
     border-radius: 50%;
-    background-color: #B6E2A1;
+    background-color: var(--veg);
 }
 
 .protein-c {
@@ -54,7 +54,7 @@
 .protein-c div {
     position: absolute;
     left: 0%;
-    background-color: #F7A4A4;
+    background-color: var(--prot);
 }
 
 .protein {
@@ -94,7 +94,7 @@
     left: 0%;
     width: 200%;
     border-radius: 50%;
-    background-color: #FEBE8C;
+    background-color: var(--carb);
 }
 
 .carbo {
@@ -104,4 +104,30 @@
 .half-carbo {
     top: -100%;
     height: 200%;
+}
+
+.vegC-mark {
+    position: absolute;
+    bottom: 5%;
+    left: 10%;
+    width: fit-content;
+    height: fit-content;
+    padding: .25em .5em;
+    border-radius: .5em;
+    background-color: var(--carb);
+    color: #000000;
+    z-index: 20;
+}
+
+.badplate-mark {
+    position: absolute;
+    bottom: 5%;
+    right: 10%;
+    width: fit-content;
+    height: fit-content;
+    padding: .25em .5em;
+    border-radius: .5em;
+    background-color: var(--prot);
+    color: #000000;
+    z-index: 20;
 }
