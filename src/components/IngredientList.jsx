@@ -80,11 +80,7 @@ const IngredientList = ({ list, openList }) => {
                         htmlFor={'ingOpt' + ing.name}
                         className={(list === 'vegetal' && veg !== 'veg' + ing.group) ? 'invisible' : ''}>
                         <div className={`ingOption ${state[list].includes(ing.name) ? 'selectedOpt' : ''}`}
-                            style={
-                                {
-                                    borderRight: `5px solid ${ing.color}`
-                                }
-                            }>
+                            style={{ borderRight: `5px solid ${ing.color}` }}>
                             <input type="checkbox"
                                 name={'ingOpt' + ing.name}
                                 id={'ingOpt' + ing.name}

@@ -29,7 +29,6 @@
 
 .ingOption {
     display: flex;
-    padding: .25em;
     border: 1px solid #808080;
     border-radius: .5em;
     padding: 0 2rem 0 1em;
@@ -38,6 +37,10 @@
     background-position: 100%;
     transition: .25s all linear;
     /* cursor: pointer; */
+}
+
+.ingOpt-correction {
+    padding: 0 .5em;
 }
 
 .selectedOpt {

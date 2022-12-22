@@ -5,6 +5,20 @@
 }
 
 .search-results {
+    margin-top: 1em;
     height: 50vh;
     overflow-y: auto;
+}
+
+.search-input-container {
+    display: flex;
+    padding: 0 .5em;
+    height: 2em;
+    /* border: 1px solid green; */
+}
+
+.search-input-container input {
+    width: 100%;
+    height: 100%;
+    border-radius: .5em 0 0 .5em;
 }

@@ -194,7 +194,8 @@ const MealMenu = ({ close }) => {
                 closeModal={closeTypeHandler}>
                 <div className='modal-menu-container'>
 
-                    <SearchIngredient changeList={setIngredientList} />
+                    {(!ingredientList || ingredientList === 'search') &&
+                        <SearchIngredient changeList={setIngredientList} />}
 
                     {!ingredientList &&
                         <div className='ingredients'>

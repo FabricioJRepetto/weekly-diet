@@ -55,10 +55,6 @@
     flex-direction: row;
 }
 
-.button {
-    text-align: center;
-}
-
 .invisible {
     display: none;
 }
