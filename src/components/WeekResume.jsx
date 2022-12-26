@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { usePlate } from '../plate-context'
+import axios from 'axios'
 import LastMeal from './LastMeal'
 import PlateCard from './PlateCard'
+import { BACK_URL } from '../constants'
 
 import './style/Week.css'
 
@@ -22,108 +24,6 @@ const WeekResume = () => {
         sunday: false
     })
 
-    useEffect(() => {
-        const {
-            today,
-            start,
-            // end
-        } = defineWeek()
-
-        let aux = {
-            today: [],
-            monday: [],
-            tuesday: [],
-            wednesday: [],
-            thursday: [],
-            friday: [],
-            saturday: [],
-            sunday: []
-        }
-
-        history.forEach(e => {
-            if (e.date >= start && e.date <= today) {
-
-                if (e.date === today) aux.today.push(e)
-
-                switch (new Date(e.date).getDay()) {
-                    case 1:
-                        aux.monday.push(e)
-                        break;
-                    case 2:
-                        aux.tuesday.push(e)
-                        break;
-                    case 3:
-                        aux.wednesday.push(e)
-                        break;
-                    case 4:
-                        aux.thursday.push(e)
-                        break;
-                    case 5:
-                        aux.friday.push(e)
-                        break;
-                    case 6:
-                        aux.saturday.push(e)
-                        break;
-                    default:
-                        aux.sunday.push(e)
-                        break;
-                }
-            }
-        })
-
-        Object.entries(aux).forEach(d => {
-            let balanced = true,
-                message = [],
-                day = d[0]
-
-            if (d[0] !== 'today' && d[1].length > 1) {
-                let p1 = {
-                    p: !!d[1][0].protein.length,
-                    c: !!d[1][0].carbohydrate.length,
-                    v: !!d[1][0].vegetal.length
-                },
-                    p2 = {
-                        p: !!d[1][1].protein.length,
-                        c: !!d[1][1].carbohydrate.length,
-                        v: !!d[1][1].vegetal.length
-                    }
-
-
-                if (!p1.v && !p2.v) { //? si falta vegetal en ambas comidas
-                    balanced = false
-                    message.push('Faltan vegetales')
-                }
-                if (!p1.p && !p2.p) { //? si falta proteina en ambas comidas
-                    balanced = false
-                    message.push('Faltan proteinas')
-                }
-                if (!p1.c && !p2.c) { //? si falta carbos en ambas comidas
-                    balanced = false
-                    message.push('Faltan carbohidratos')
-                }
-
-                if ((p1.p && !p2.p) || (!p1.p && p2.p)) {
-                    if (p1.c && p2.c) {
-                        balanced = false
-                        message.push('Faltan proteínas')
-                    }
-                }
-                if ((p1.c && !p2.c) || (!p1.c && p2.c)) {
-                    if (p1.p && p2.p) {
-                        balanced = false
-                        message.push('Faltan carbohidratos')
-                    }
-                }
-
-                if (!balanced) aux[day].push(message)
-            }
-        })
-
-        console.log(aux)
-        setWeek(() => aux)
-        // eslint-disable-next-line
-    }, [])
-
     const defineWeek = () => {
         let hoy = new Date(),
             dia = (hoy.getDay() === 0) ? 7 : hoy.getDay(),
@@ -139,6 +39,18 @@ const WeekResume = () => {
             end
         }
     }
+
+    useEffect(() => {
+        (async () => {
+            let { today, start } = defineWeek()
+            const { data } = await axios(`${BACK_URL}/history/week?today=${today}&start=${start}`)
+            console.log(data)
+            data.week && setWeek(() => data)
+        })()
+
+        // eslint-disable-next-line
+    }, [])
+
 
     return (
         <div>
@@ -216,8 +128,3 @@ const WeekResume = () => {
 }
 
 export default WeekResume
-
-                // history.length > 0 && history.map((m, i) =>
-                //     <PlateCard key={m.date + i}
-                //         data={m} />
-                // )

@@ -1,28 +1,29 @@
-const protein = [{
-    list: 'protein',
-    color: '#9b6d6d',
-    name: 'Carne roja'
-},
-{
-    list: 'protein',
-    color: '#f1d490',
-    name: 'Pollo'
-},
-{
-    list: 'protein',
-    color: '#bbc8ca',
-    name: 'Pescado'
-},
-{
-    list: 'protein',
-    color: '#f6c9c9',
-    name: 'Cerdo'
-},
-{
-    list: 'protein',
-    color: 'white',
-    name: 'Huevo'
-}],
+const BACK_URL = 'http://localhost:4000',
+    protein = [{
+        list: 'protein',
+        color: '#9b6d6d',
+        name: 'Carne roja'
+    },
+    {
+        list: 'protein',
+        color: '#f1d490',
+        name: 'Pollo'
+    },
+    {
+        list: 'protein',
+        color: '#bbc8ca',
+        name: 'Pescado'
+    },
+    {
+        list: 'protein',
+        color: '#f6c9c9',
+        name: 'Cerdo'
+    },
+    {
+        list: 'protein',
+        color: 'white',
+        name: 'Huevo'
+    }],
     carbo = [{
         list: 'carbohydrate',
         color: '#7f6341',
@@ -325,4 +326,4 @@ const group = {
     everything
 }
 
-export default group
+export { BACK_URL, group }

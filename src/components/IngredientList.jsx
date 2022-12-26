@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { usePlate } from '../plate-context'
-import group from '../constants.js'
+import { group } from '../constants.js'
 
 import '../components/style/IngredientList.css'
 

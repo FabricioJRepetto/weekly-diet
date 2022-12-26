@@ -4,7 +4,7 @@ import Modal from './helpers/Modal'
 import { useModal } from './helpers/useModal'
 import IngredientList from './IngredientList'
 import Plate from './Plate'
-import group from '../constants'
+import { group } from '../constants'
 import SearchIngredient from './SearchIngredient'
 
 import './style/MealMenu.css'
@@ -133,7 +133,6 @@ const MealMenu = ({ close }) => {
             vegetal: [...vegetal],
             vegetalC,
             date: new Date().toLocaleDateString('en')
-            // date: datetest
         }
         dispatch({
             type: 'save',

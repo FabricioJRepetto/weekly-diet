@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import group from '../constants'
+import { group } from '../constants'
 import { usePlate } from '../plate-context'
 
 import './style/SearchIngredient.css'
