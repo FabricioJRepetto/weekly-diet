@@ -1,4 +1,6 @@
-const BACK_URL = 'http://localhost:4000',
+//diet-backend.vercel.app
+//http://localhost:4000
+const BACK_URL = 'diet-backend.vercel.app',
     protein = [{
         list: 'protein',
         color: '#9b6d6d',
