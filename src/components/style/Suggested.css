@@ -1,0 +1,18 @@
+.suggestions-container p {
+    margin: .3em;
+    padding: .2em .5em;
+    background-color: #FFFFFF10;
+    border-radius: .5em;
+}
+
+.good {
+    color: var(--veg);
+}
+
+.bad {
+    color: var(--prot);
+}
+
+.neutral {
+    color: #FFFFFF;
+}

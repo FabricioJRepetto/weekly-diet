@@ -14,7 +14,8 @@ const LastMeal = ({ data }) => {
         <div className='lastmeal-container'>
             {/* <p>Ultima comida de hoy</p> */}
             <PlateCard key={'lastMeal'}
-                data={data} />
+                data={data}
+                details={false} />
 
             <div className='lastmeal-text'>
                 <h3>Última comida</h3>

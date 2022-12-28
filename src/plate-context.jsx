@@ -18,6 +18,13 @@ function plateReducer(state, action) {
                 history: aux
             }
         }
+        case 'allHistory': {
+            return {
+                ...state,
+                history: action.payload.history,
+                week: action.payload.week
+            }
+        }
         case 'reset': {
             return {
                 ...state,
@@ -65,7 +72,8 @@ function PlateProvider({ children }) {
         vegetalC: false,
         session: false,
         id: false,
-        history: []
+        history: [],
+        week: []
     })
     const value = { state, dispatch }
 

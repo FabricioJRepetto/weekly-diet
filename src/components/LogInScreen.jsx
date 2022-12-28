@@ -15,7 +15,7 @@ const LogInScreen = () => {
 
     const login = async (e) => {
         e.preventDefault()
-        if (password !== repeatPw) {
+        if (!loginin && password !== repeatPw) {
             setmessage(() => 'las contraseñas no coinciden')
             return
         }
