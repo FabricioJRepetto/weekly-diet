@@ -95,8 +95,8 @@ const MealMenu = ({ close }) => {
             </section>
 
             <div className='ingredients forButtons'>
-                <button className='ingredients-cell button' onClick={save}>SAVE</button>
-                <button className='ingredients-cell button' onClick={close}>CLOSE</button>
+                <button className='ingredients-cell button' onClick={save}>guardar</button>
+                <button className='ingredients-cell button' onClick={close}>salir</button>
             </div>
 
             <Modal

@@ -8,6 +8,7 @@ import { BACK_URL } from './constants';
 import { defineWeek } from './components/helpers/defineWeek';
 
 import './App.css';
+import { getCookie } from './components/helpers/cookies';
 
 function App() {
     const [mealMenu, setMealMenu] = useState(false)
@@ -23,6 +24,22 @@ function App() {
                 const { data } = await axios(`${BACK_URL}/history/fullhistory?today=${today}&start=${start}&id=${id}`)
                 dispatch({ type: 'allHistory', payload: data })
             })()
+        } else {
+            const token = getCookie('autoLogin')
+            if (token) {
+                //: utilizar el token para iniciar sesión automaticamente
+                //: agregar el token al header de todas las peticiones                
+                console.log(token)
+                    (async () => {
+                        const { data } = await axios.post(`${BACK_URL}/autologin`, { token })
+                        if (!data.error) {
+                            dispatch({
+                                type: 'login',
+                                payload: data.id
+                            })
+                        }
+                    })()
+            }
         }
         // eslint-disable-next-line
     }, [session])
