@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Plate from './Plate'
+import { usePlate } from '../plate-context'
+import Modal from './helpers/Modal'
+import { useModal } from './helpers/useModal'
+import { defineWeek } from './helpers/defineWeek'
+import axios from 'axios'
 
 import '../components/style/PlateCard.css'
 
@@ -10,8 +15,12 @@ const PlateCard = ({ data, details = true }) => {
         protein,
         carbohydrate,
         vegetal,
-        vegetalC
+        vegetalC,
+        date,
+        _id
     } = data
+    const { dispatch } = usePlate()
+    const [isOpenDelete, openDelete, closeDelete] = useModal()
 
     //? Proporciones
     useEffect(() => {
@@ -41,6 +50,40 @@ const PlateCard = ({ data, details = true }) => {
         })
         // eslint-disable-next-line
     }, [])
+
+    const edit = (e) => {
+        e.stopPropagation()
+        dispatch({
+            type: 'edit', payload: {
+                edit: {
+                    id: _id,
+                    date
+                },
+                protein,
+                carbohydrate,
+                vegetal,
+                vegetalC
+            }
+        })
+    }
+
+    const deleteHandler = (e) => {
+        e.stopPropagation()
+        openDelete()
+    }
+
+    const deleteConfirmed = async () => {
+        closeDelete()
+        const {
+            today,
+            start
+        } = defineWeek()
+        const { data } = await axios.delete(`/history?today=${today}&start=${start}&meal_id=${_id}`)
+        console.log(data);
+        if (!data.error) {
+            dispatch({ type: 'save', payload: data })
+        }
+    }
 
     return (
         <div className='platecard-container'
@@ -89,7 +132,21 @@ const PlateCard = ({ data, details = true }) => {
                         <li>{carbohydrate.toString().replaceAll(',', ', ')}</li>
                         <li>{vegetal.toString().replaceAll(',', ', ')}</li>
                     </ul>
+
+                    <b onClick={edit}>editar</b>
+                    <b onClick={deleteHandler}>borrar</b>
                 </div>}
+
+            <Modal isOpen={isOpenDelete}
+                closeModal={closeDelete}>
+                <>
+                    <p>¿Seguro que deseas eliminar este plato?</p>
+                    <>
+                        <button onClick={deleteConfirmed}>eliminar</button>
+                        <button onClick={closeDelete}>cancelar</button>
+                    </>
+                </>
+            </Modal>
         </div>
     )
 }

@@ -8,10 +8,12 @@ export const Suggested = () => {
     const {
         state:
         {
-            protein,
-            carbohydrate,
-            vegetal,
-            vegetalC,
+            currentPlate: {
+                protein,
+                carbohydrate,
+                vegetal,
+                vegetalC
+            },
             week
         }
     } = usePlate()

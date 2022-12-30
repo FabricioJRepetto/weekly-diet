@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { usePlate } from './plate-context';
 import MealMenu from './components/MealMenu';
 import WeekResume from './components/WeekResume';
 import LogInScreen from './components/LogInScreen';
-import { BACK_URL } from './constants';
 import { defineWeek } from './components/helpers/defineWeek';
-
-import './App.css';
 import { getCookie } from './components/helpers/cookies';
 
+import './App.css';
+
 function App() {
-    const [mealMenu, setMealMenu] = useState(false)
-    const { dispatch, state: { week, session, id } } = usePlate();
+    const { dispatch, state: { week, session, mealMenu } } = usePlate();
 
     useEffect(() => {
         if (session) {
@@ -21,29 +19,35 @@ function App() {
                     today,
                     start
                 } = defineWeek()
-                const { data } = await axios(`${BACK_URL}/history/fullhistory?today=${today}&start=${start}&id=${id}`)
-                dispatch({ type: 'allHistory', payload: data })
+                const { data } = await axios(`/history/fullhistory?today=${today}&start=${start}`)
+                dispatch({ type: 'save', payload: data })
             })()
         } else {
             const token = getCookie('autoLogin')
             if (token) {
-                //: utilizar el token para iniciar sesión automaticamente
-                //: agregar el token al header de todas las peticiones                
-                console.log(token)
-                    (async () => {
-                        const { data } = await axios.post(`${BACK_URL}/autologin`, { token })
-                        if (!data.error) {
-                            dispatch({
-                                type: 'login',
-                                payload: data.id
-                            })
-                        }
-                    })()
+                (async () => {
+                    const { data } = await axios(`/user/autologin`)
+                    if (!data.error) {
+                        dispatch({
+                            type: 'login',
+                            payload: data.id
+                        })
+                    } else {
+                        dispatch({
+                            type: 'loading',
+                            payload: false
+                        })
+                    }
+                })()
+            } else {
+                dispatch({
+                    type: 'loading',
+                    payload: false
+                })
             }
         }
         // eslint-disable-next-line
     }, [session])
-
 
     return (
         <div className="App">
@@ -51,11 +55,11 @@ function App() {
             {!session
                 ? <LogInScreen />
                 : <>
-                    {mealMenu && <MealMenu close={() => setMealMenu(false)} />}
+                    {mealMenu && <MealMenu />}
                     {!mealMenu &&
                         <button className='ingredients-cell button'
                             disabled={week?.today?.length > 1}
-                            onClick={() => setMealMenu(true)}>
+                            onClick={() => dispatch({ type: 'mealMenu', payload: true })}>
                             Agregar comida +
                         </button>}
 

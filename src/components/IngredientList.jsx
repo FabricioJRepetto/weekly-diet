@@ -7,12 +7,13 @@ import '../components/style/IngredientList.css'
 const IngredientList = ({ list, openList }) => {
     const [veg, setVeg] = useState('vegA')
     const { dispatch,
-        state,
         state: {
-            protein,
-            carbohydrate,
-            vegetal
-        }
+            currentPlate,
+            currentPlate: {
+                protein,
+                carbohydrate,
+                vegetal
+            } }
     } = usePlate()
 
     if (list === 'search') return (<></>)
@@ -56,7 +57,7 @@ const IngredientList = ({ list, openList }) => {
     }
 
     const clearList = () => {
-        state[list].forEach(e => {
+        currentPlate[list].forEach(e => {
             let ele = document.getElementById('ingOpt' + e)
             ele.checked = false
         });
@@ -79,12 +80,12 @@ const IngredientList = ({ list, openList }) => {
                     <label key={ing.name}
                         htmlFor={'ingOpt' + ing.name}
                         className={(list === 'vegetal' && veg !== 'veg' + ing.group) ? 'invisible' : ''}>
-                        <div className={`ingOption ${state[list].includes(ing.name) ? 'selectedOpt' : ''}`}
+                        <div className={`ingOption ${currentPlate[list].includes(ing.name) ? 'selectedOpt' : ''}`}
                             style={{ borderRight: `5px solid ${ing.color}` }}>
                             <input type="checkbox"
                                 name={'ingOpt' + ing.name}
                                 id={'ingOpt' + ing.name}
-                                defaultChecked={state[list].includes(ing.name)}
+                                defaultChecked={currentPlate[list].includes(ing.name)}
                                 onClick={() => handleSelect(ing.name)} />
 
                             <div className='ingOption-text'>

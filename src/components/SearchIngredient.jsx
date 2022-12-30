@@ -14,11 +14,13 @@ const SearchIngredient = ({ changeList }) => {
 
     const {
         dispatch,
-        state,
         state: {
-            protein,
-            carbohydrate,
-            vegetal
+            currentPlate,
+            currentPlate: {
+                protein,
+                carbohydrate,
+                vegetal
+            }
         }
     } = usePlate()
 
@@ -98,12 +100,12 @@ const SearchIngredient = ({ changeList }) => {
                     <label key={e.name}
                         className='ingOpt-correction'
                         htmlFor={'ingOpt' + e.name}>
-                        <div className={`ingOption ${state[e.list].includes(e.name) ? 'selectedOpt' : ''}`}
+                        <div className={`ingOption ${currentPlate[e.list].includes(e.name) ? 'selectedOpt' : ''}`}
                             style={{ borderRight: `5px solid ${e.color}` }}>
                             <input type="checkbox"
                                 name={'ingOpt' + e.name}
                                 id={'ingOpt' + e.name}
-                                defaultChecked={state[e.list].includes(e.name)}
+                                defaultChecked={currentPlate[e.list].includes(e.name)}
                                 onClick={() => handleSelect(e.name, e.list)} />
 
                             <div className='ingOption-text'>

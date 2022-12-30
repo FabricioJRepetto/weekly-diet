@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-// import jwtDecode from 'jwt-decode'
-import { BACK_URL } from '../constants'
 import { usePlate } from '../plate-context'
 import { setCookie } from './helpers/cookies'
 
 import './style/LogInScreen.css'
 
 const LogInScreen = () => {
-    const { dispatch } = usePlate()
+    const { dispatch, state: { loading } } = usePlate()
+    const [message, setmessage] = useState('')
     const [loginin, setLoginin] = useState(true)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPw, setRepeatPw] = useState('')
-    const [message, setmessage] = useState('')
 
     const login = async (e) => {
         e.preventDefault()
@@ -21,16 +19,16 @@ const LogInScreen = () => {
             setmessage(() => 'las contraseñas no coinciden')
             return
         }
-        const { data } = await axios.post(`${BACK_URL}/user/${loginin ? 'login' : 'signup'}`,
+        const { data } = await axios.post(`/user/${loginin ? 'login' : 'signup'}`,
             {
                 password,
                 email
             }
         )
-        console.log(data)
         if (data.error) setmessage(() => data.error)
         else {
             setmessage(() => 'Bienvenido!')
+            setCookie('autoLogin', data.token, 7)
             setTimeout(() => {
                 dispatch({ type: 'login', payload: data.user_id })
             }, 2000);
@@ -41,14 +39,16 @@ const LogInScreen = () => {
         const token = res.credential
         //const userData = jwtDecode(res.credential)
 
-        const { data } = await axios.post(`${BACK_URL}/user/googlelogin`, { token })
+        const { data } = await axios.post(`/user/googlelogin`, { token })
         if (!data.error) {
-            //: guardar token?
-            setCookie('autoLogin', token, 7)
+            //? guarda token en cookies?
+            setCookie('autoLogin', data.token, 7)
             dispatch({
                 type: 'login',
                 payload: data.id
             })
+        } else {
+            setmessage(data.message)
         }
     }
 
@@ -78,27 +78,30 @@ const LogInScreen = () => {
 
     return (
         <div>
-            <h3>{`hola :)`}</h3>
-            {<form onSubmit={login} className='login-form' >
-                <input type="text"
-                    autoComplete='off'
-                    onChange={(e) => setEmail(e.target.value)} />
-                <input type="password"
-                    autoComplete='off'
-                    onChange={(e) => setPassword(e.target.value)} />
-                {!loginin &&
+            <h1>"LOGO"</h1>
+            {loading && <h1>"CARGANDO"</h1>}
+            <div className={loading ? 'transparent' : ''}>
+                {<form onSubmit={login} className='login-form' >
+                    <input type="text"
+                        autoComplete='off'
+                        onChange={(e) => setEmail(e.target.value)} />
                     <input type="password"
                         autoComplete='off'
-                        onChange={(e) => setRepeatPw(e.target.value)} />}
-                <button>{loginin ? 'iniciar sesion' : 'crear cuenta'}</button>
-            </form>}
-            {message && <b>{message}</b>}
-            <br />
-            <b onClick={() => setLoginin(!loginin)}>{!loginin ? '...o iniciar sesion' : '...o crear cuenta'}</b>
-            <br />
-            <br />
-            <p>o inicia con google</p>
-            <div id='googleButtonDiv'></div>
+                        onChange={(e) => setPassword(e.target.value)} />
+                    {!loginin &&
+                        <input type="password"
+                            autoComplete='off'
+                            onChange={(e) => setRepeatPw(e.target.value)} />}
+                    <button>{loginin ? 'iniciar sesion' : 'crear cuenta'}</button>
+                </form>}
+                {message && <b>{message}</b>}
+                <br />
+                <b onClick={() => setLoginin(!loginin)}>{!loginin ? '...o iniciar sesion' : '...o crear cuenta'}</b>
+                <br />
+                <br />
+                <p>o inicia con google</p>
+                <div id='googleButtonDiv'></div>
+            </div>
         </div>
     )
 }

@@ -5,23 +5,24 @@ import Modal from './helpers/Modal'
 import { useModal } from './helpers/useModal'
 import IngredientList from './IngredientList'
 import Plate from './Plate'
-import { BACK_URL } from '../constants'
 import SearchIngredient from './SearchIngredient'
 import { Suggested } from './Suggested'
 import { defineWeek } from './helpers/defineWeek'
 
 import './style/MealMenu.css'
 
-const MealMenu = ({ close }) => {
+const MealMenu = () => {
     const [ingredientList, setIngredientList] = useState(false)
     const {
         dispatch,
         state: {
-            protein,
-            carbohydrate,
-            vegetal,
-            vegetalC,
-            id,
+            currentPlate: {
+                protein,
+                carbohydrate,
+                vegetal,
+                vegetalC,
+                edit
+            },
             week
         } } = usePlate()
     const [isOpenType, openType, closeType] = useModal();
@@ -36,21 +37,41 @@ const MealMenu = ({ close }) => {
         openType()
     }
 
+    const close = () => {
+        dispatch({ type: 'mealMenu', payload: false })
+    }
+
     const save = async () => {
         let aux = {
             protein: [...protein],
             carbohydrate: [...carbohydrate],
             vegetal: [...vegetal],
             vegetalC,
-            date: new Date().toLocaleDateString('en')
+            date: edit ? edit.date : new Date().toLocaleDateString('en')
         }
+        let leData = null
         const {
             today,
             start
         } = defineWeek()
-        const { data } = await axios.post(`${BACK_URL}/history?today=${today}&start=${start}&id=${id}`, { meal: aux })
 
-        dispatch({ type: 'allHistory', payload: data })
+        if (edit) {
+            //! crear endpoint
+            const { data } = await axios.put(`/history`,
+                {
+                    meal: aux,
+                    meal_id: edit.id,
+                    start,
+                    today
+                })
+            !data.error && (leData = data)
+        } else {
+            //: como está guardando esto???
+            const { data } = await axios.post(`/history?today=${today}&start=${start}`, { meal: aux })
+            !data.error && (leData = data)
+        }
+
+        dispatch({ type: 'save', payload: leData })
         close()
         dispatch({ type: 'reset' })
     }

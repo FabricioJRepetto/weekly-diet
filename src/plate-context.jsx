@@ -8,54 +8,82 @@ function plateReducer(state, action) {
             return {
                 ...state,
                 session: true,
-                id: action.payload
+                id: action.payload,
+                loading: false
+            }
+        }
+        case 'loading': {
+            return {
+                ...state,
+                loading: action.payload
+            }
+        }
+        case 'mealMenu': {
+            return {
+                ...state,
+                mealMenu: action.payload
             }
         }
         case 'save': {
-            let aux = [...state.history, action.payload]
-            return {
-                ...state,
-                history: aux
-            }
-        }
-        case 'allHistory': {
             return {
                 ...state,
                 history: action.payload.history,
                 week: action.payload.week
             }
         }
+        case 'edit': {
+            return {
+                ...state,
+                mealMenu: true,
+                currentPlate: action.payload
+            }
+        }
         case 'reset': {
             return {
                 ...state,
-                protein: [],
-                carbohydrate: [],
-                vegetal: [],
-                vegetalC: false
+                currentPlate: {
+                    edit: false,
+                    protein: [],
+                    carbohydrate: [],
+                    vegetal: [],
+                    vegetalC: false
+                }
             }
         }
         case 'protein': {
             return {
                 ...state,
-                protein: action.payload
+                currentPlate: {
+                    ...state.currentPlate,
+                    protein: action.payload
+                }
             }
         }
         case 'carbohydrate': {
             return {
                 ...state,
-                carbohydrate: action.payload
+                currentPlate: {
+                    ...state.currentPlate,
+                    carbohydrate: action.payload
+                }
             }
         }
         case 'vegetal': {
             return {
                 ...state,
-                vegetal: action.payload
+                currentPlate: {
+                    ...state.currentPlate,
+                    vegetal: action.payload
+                }
             }
         }
         case 'vegC': {
             return {
                 ...state,
-                vegetalC: action.payload
+                currentPlate: {
+                    ...state.currentPlate,
+                    vegetalC: action.payload
+                }
             }
         }
         default: {
@@ -66,14 +94,19 @@ function plateReducer(state, action) {
 
 function PlateProvider({ children }) {
     const [state, dispatch] = useReducer(plateReducer, {
-        protein: [],
-        carbohydrate: [],
-        vegetal: [],
-        vegetalC: false,
+        currentPlate: {
+            edit_id: false,
+            protein: [],
+            carbohydrate: [],
+            vegetal: [],
+            vegetalC: false
+        },
         session: false,
+        loading: true,
         id: false,
         history: [],
-        week: []
+        week: [],
+        mealMenu: false
     })
     const value = { state, dispatch }
 

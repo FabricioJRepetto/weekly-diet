@@ -1,5 +1,4 @@
 import React from 'react'
-// import { usePlate } from '../plate-context'
 
 import "../components/style/Plate.css"
 
