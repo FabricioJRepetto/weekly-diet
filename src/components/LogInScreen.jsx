@@ -5,6 +5,8 @@ import { setCookie } from './helpers/cookies'
 
 import './style/LogInScreen.css'
 
+const { REACT_APP_GOOGLE_CLIENT_ID } = process.env
+
 const LogInScreen = () => {
     const { dispatch, state: { loading } } = usePlate()
     const [message, setmessage] = useState('')
@@ -55,7 +57,7 @@ const LogInScreen = () => {
     useEffect(() => {
         /* global google */
         google.accounts.id.initialize({
-            client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+            client_id: REACT_APP_GOOGLE_CLIENT_ID,
             callback: handleGoogleLogin
         });
         google.accounts.id.renderButton(
