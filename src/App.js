@@ -6,6 +6,7 @@ import WeekResume from './components/WeekResume';
 import LogInScreen from './components/LogInScreen';
 import { defineWeek } from './components/helpers/defineWeek';
 import { getCookie } from './components/helpers/cookies';
+import { NavBar } from './components/NavBar';
 
 import './App.css';
 
@@ -51,13 +52,13 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Dieta semanal</h1>
             {!session
                 ? <LogInScreen />
                 : <>
+                    <NavBar />
                     {mealMenu && <MealMenu />}
                     {!mealMenu &&
-                        <button className='ingredients-cell button'
+                        <button className='ingredients-cell add-ing'
                             disabled={week?.today?.length > 1}
                             onClick={() => dispatch({ type: 'mealMenu', payload: true })}>
                             Agregar comida +

@@ -11,8 +11,8 @@
     flex-direction: column;
     overflow: scroll;
     gap: 1em;
-    max-height: 80%;
-    padding: 2em 0;
+    height: 80vh;
+    margin-top: 2em;
 }
 
 .ingList-buttons {
@@ -36,7 +36,6 @@
     background-size: 300%;
     background-position: 100%;
     transition: .25s all linear;
-    /* cursor: pointer; */
 }
 
 .ingOpt-correction {
@@ -69,4 +68,9 @@
 .ingOption-text {
     width: 100%;
     text-align: right;
+}
+
+.vegetal-group-button {
+    display: flex;
+    justify-content: center;
 }

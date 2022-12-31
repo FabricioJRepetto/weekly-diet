@@ -12,6 +12,23 @@ function plateReducer(state, action) {
                 loading: false
             }
         }
+        case 'logout': {
+            return {
+                currentPlate: {
+                    edit_id: false,
+                    protein: [],
+                    carbohydrate: [],
+                    vegetal: [],
+                    vegetalC: false
+                },
+                session: false,
+                loading: false,
+                id: false,
+                history: [],
+                week: [],
+                mealMenu: false
+            }
+        }
         case 'loading': {
             return {
                 ...state,

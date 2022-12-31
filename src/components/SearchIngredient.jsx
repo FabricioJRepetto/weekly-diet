@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { group } from '../constants'
 import { usePlate } from '../plate-context'
+import { BiSearch, BiX } from 'react-icons/bi';
 
 import './style/SearchIngredient.css'
 
@@ -92,7 +93,14 @@ const SearchIngredient = ({ changeList }) => {
                     placeholder='Buscar por nombre'
                     onFocus={deploy}
                     onChange={(e) => find(e.target.value)} />
-                {deployed ? <button onClick={close}>X</button> : <button onClick={deploy}>Q</button>}
+                {deployed
+                    ? <button className='icon-button' onClick={close}>
+                        <BiX className='icon' />
+                    </button>
+                    : <button className='icon-button' onClick={deploy}>
+                        <BiSearch className='icon' />
+                    </button>}
+
             </div>
 
             {deployed && <div className='search-results ingList'>{

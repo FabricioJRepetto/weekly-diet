@@ -110,14 +110,14 @@ const MealMenu = () => {
                     </div>}
 
                 <div onClick={openType}
-                    className='ingredients-cell button'>
+                    className='ingredients-cell add-ing'>
                     Agregar ingrediente +
                 </div>
             </section>
 
             <div className='ingredients forButtons'>
                 <button className='ingredients-cell button' onClick={save}>guardar</button>
-                <button className='ingredients-cell button' onClick={close}>salir</button>
+                <button className='ingredients-cell button button-sec' onClick={close}>salir</button>
             </div>
 
             <Modal
@@ -132,23 +132,22 @@ const MealMenu = () => {
                         <div className='ingredients'>
                             <div className='ingredients-cell'
                                 onClick={() => setIngredientList('protein')}>
-                                <p>
-                                    Proteína 🥩
-                                </p>
+                                <p>Proteína 🥩</p>
                             </div>
                             <div className='ingredients-cell'
                                 onClick={() => setIngredientList('carbohydrate')}>
-                                <p>
-                                    Carbohidratos  🌾
-                                </p>
+                                <p>Carbohidratos 🌾</p>
                             </div>
                             <div className='ingredients-cell'
                                 onClick={() => setIngredientList('vegetal')}>
-                                <p>
-                                    Vegetales 🥦
-                                </p>
+                                <p>Vegetales 🥦</p>
                             </div>
-                            <button onClick={closeType}>x</button>
+                            <div className='divisor'></div>
+                            <div className='ingredients-cell'
+                                onClick={() => undefined}>
+                                <p>Mis Preparaciones ⭐</p>
+                            </div>
+                            <button className='button' onClick={closeType}>volver</button>
                         </div>}
 
                     {ingredientList &&

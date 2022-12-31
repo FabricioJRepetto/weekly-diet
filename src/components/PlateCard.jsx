@@ -39,9 +39,9 @@ const PlateCard = ({ data, details = true }) => {
                 : 0
 
         setProportions({
-            p: { width: `${25 * p}%`, backgroundColor: 'var(--prot)' },
-            c: { width: `${25 * c}%`, backgroundColor: 'var(--carb)' },
-            v: { width: `${25 * v}%`, backgroundColor: 'var(--veg)' },
+            p: { height: `${25 * p}%` },
+            c: { height: `${25 * c}%` },
+            v: { height: `${25 * v}%` },
             boolean: {
                 p: !!p,
                 c: !!c,
@@ -97,44 +97,46 @@ const PlateCard = ({ data, details = true }) => {
                 : <div className='platecard-details'>
                     <div className='platecard-head'>
                         <div className='platecard-proportions'>
-                            <div style={proportions.p}></div>
-                            <div style={proportions.c}></div>
-                            <div style={proportions.v}></div>
+                            <div style={{ ...proportions.p, backgroundColor: 'var(--prot)' }}></div>
+                            <div style={{ ...proportions.c, backgroundColor: 'var(--carb)' }}></div>
+                            <div style={{ ...proportions.v, backgroundColor: 'var(--veg)' }}></div>
                         </div>
-                        {proportions.boolean.p &&
-                            <div className='platecard-legend'>
-                                <span style={{ background: `var(--prot)` }}></span>
-                                Proteínas
-                            </div>}
-                        {proportions.boolean.c &&
-                            <div className='platecard-legend'>
-                                <span style={{ background: `var(--carb)` }}></span>
-                                Carbohidratos
-                            </div>}
-                        {proportions.boolean.v &&
-                            <div className='platecard-legend'>
-                                <span style={{ background: `var(--veg)` }}></span>
-                                Vegetales
-                            </div>}
 
-                        {vegetalC &&
-                            <div className='platecard-legend-mark mark-vegc'>
-                                Vegetal C
-                            </div>}
-                        {(vegetal.length < 1 || (protein.length < 1 && carbohydrate.length < 1)) &&
-                            <div className='platecard-legend-mark mark-badplate'>
-                                Plato no balanceado
-                            </div>}
+                        <div className='plate-card-ingredients'>
+                            {proportions.boolean.p &&
+                                <div className='platecard-legend' style={proportions.p}>
+                                    <b style={{ color: 'var(--prot)' }}>Proteínas</b>
+                                    <p>{protein.toString().replaceAll(',', ', ')}</p>
+                                </div>}
+                            {proportions.boolean.c &&
+                                <div className='platecard-legend' style={proportions.c}>
+                                    <b style={{ color: 'var(--carb)' }}>Carbohidratos</b>
+                                    <p>{carbohydrate.toString().replaceAll(',', ', ')}</p>
+                                </div>}
+                            {proportions.boolean.v &&
+                                <div className='platecard-legend' style={proportions.v}>
+                                    <b style={{ color: 'var(--veg)' }}>Vegetales</b>
+                                    <p>{vegetal.toString().replaceAll(',', ', ')}</p>
+                                </div>}
+                        </div>
                     </div>
 
-                    <ul>
-                        <li>{protein.toString().replaceAll(',', ', ')}</li>
-                        <li>{carbohydrate.toString().replaceAll(',', ', ')}</li>
-                        <li>{vegetal.toString().replaceAll(',', ', ')}</li>
-                    </ul>
+                    <div className='card-options'>
+                        {vegetalC &&
+                            <p className='platecard-legend-mark mark-vegc'>
+                                Vegetal C
+                            </p>}
+                        {(vegetal.length < 1 || (protein.length < 1 && carbohydrate.length < 1)) &&
+                            <p className='platecard-legend-mark mark-badplate'>
+                                ! Desbalanceado
+                            </p>}
+                    </div>
 
-                    <b onClick={edit}>editar</b>
-                    <b onClick={deleteHandler}>borrar</b>
+                    <div className='card-options underline'>
+                        <p onClick={edit}>editar</p>
+                        <p onClick={deleteHandler}>borrar</p>
+                    </div>
+
                 </div>}
 
             <Modal isOpen={isOpenDelete}

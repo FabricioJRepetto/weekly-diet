@@ -6,10 +6,39 @@
 }
 
 .button {
-    /* width: fit-content; */
+    max-width: 50%;
     min-height: 3rem;
     border-radius: .5em;
-    background-color: #eaeaea;
+    background-color: #FFFFFF;
+    border: 1px #FFFFFF solid;
     color: #000000;
+    padding: .5em 1em;
     align-items: center;
+}
+
+.button-sec {
+    border: 1px solid #FFFFFF;
+    background-color: #00000000;
+    color: #FFFFFF;
+}
+
+.icon-button {
+    position: absolute;
+    height: 2.5em;
+    width: 2.5em;
+    right: 0;
+    border: none;
+    background: none;
+}
+
+.icon {
+    transform: translateY(10%) scale(1.5);
+}
+
+.i-margin {
+    margin-right: .5em;
+}
+
+.i-white {
+    color: #FFFFFF;
 }

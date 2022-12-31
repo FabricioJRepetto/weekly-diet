@@ -4,6 +4,7 @@
     align-items: center;
     height: 50vw;
     width: 50vw;
+    /* border: 1px dashed lime; */
 }
 
 .platecard-details {
@@ -12,60 +13,82 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 80%;
+    height: 90%;
 }
 
 .platecard-head {
-    width: 100%;
+    height: 80%;
+    width: 95%;
+    max-width: 95%;
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
 .platecard-legend {
-    width: fit-content;
-    max-width: 50%;
+    width: calc(100% - 1em);
+    display: flex;
+    flex-direction: column;
+    margin-left: .5em;
+}
+
+.platecard-legend b {
+    text-align: left;
+    margin: 0;
     font-size: .8em;
+}
+
+.platecard-legend p {
+    text-align: left;
+    padding-left: .5em;
+    margin: 0;
 }
 
 .platecard-legend-mark {
     width: fit-content;
     height: fit-content;
-    margin-top: 1em;
-    padding: .25em .5em;
-    border-radius: .5em;
-    color: #000000;
+    font-size: .8em;
 }
 
 .mark-vegc {
-    background-color: var(--carb);
+    color: var(--carb);
 }
 
 .mark-badplate {
-    background-color: var(--prot);
-}
-
-.platecard-details span {
-    margin: auto .3em;
-    border-radius: 50%;
-    width: .5em;
-    height: .5em;
+    color: var(--prot);
 }
 
 .platecard-proportions {
-    width: 90%;
-    height: .6em;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: .6em;
     border-radius: .3em;
     overflow: hidden;
     background-color: rgb(63, 63, 63);
 }
 
 .platecard-proportions div {
-    height: 1em;
+    width: 1em;
 }
 
-.platecard-container ul {
-    list-style-type: none;
-    padding-inline-start: 0;
-    text-align: center;
+.plate-card-ingredients {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-options {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 10%;
+}
+
+.card-options p {
+    margin: 0;
+}
+
+.underline p {
+    text-decoration: underline;
 }

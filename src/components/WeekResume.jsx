@@ -13,6 +13,7 @@ const WeekResume = () => {
     return (
         <div>
             <h2>Tu semana:</h2>
+            <b>Vegetales C: {week.vegetalC}/4</b>
             {week.today?.length === 1 && <LastMeal />}
 
             <section className='week-container'>

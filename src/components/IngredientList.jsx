@@ -70,10 +70,10 @@ const IngredientList = ({ list, openList }) => {
     return (
         <div className="ingredient-list-container">
             {list === 'vegetal' &&
-                <>
-                    <button onClick={() => setVeg('vegA')}>Vegetales A</button>
-                    <button onClick={() => setVeg('vegB')}>Vegetales B</button>
-                </>}
+                <div className='vegetal-group-button'>
+                    <button className={`button ${veg === 'vegA' ? '' : 'button-sec'}`} onClick={() => setVeg('vegA')}>Vegetales A</button>
+                    <button className={`button ${veg === 'vegB' ? '' : 'button-sec'}`} onClick={() => setVeg('vegB')}>Vegetales B</button>
+                </div>}
 
             <div className="ingList">
                 {group[list].map(ing =>
@@ -99,8 +99,8 @@ const IngredientList = ({ list, openList }) => {
             </div>
 
             <div className='ingList-buttons'>
-                <button onClick={() => openList(false)}>volver</button>
-                <button onClick={clearList}>quitar todo</button>
+                <button className='button' onClick={() => openList(false)}>volver</button>
+                <button className='button button-sec' onClick={clearList}>quitar todo</button>
             </div>
         </div>
     )
