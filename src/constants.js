@@ -1,31 +1,6 @@
 //https://diet-backend.vercel.app
 //http://localhost:4000
 const BACK_URL = 'https://diet-backend.vercel.app',
-    protein = [{
-        list: 'protein',
-        color: '#9b6d6d',
-        name: 'Carne roja'
-    },
-    {
-        list: 'protein',
-        color: '#f1d490',
-        name: 'Pollo'
-    },
-    {
-        list: 'protein',
-        color: '#bbc8ca',
-        name: 'Pescado'
-    },
-    {
-        list: 'protein',
-        color: '#f6c9c9',
-        name: 'Cerdo'
-    },
-    {
-        list: 'protein',
-        color: 'white',
-        name: 'Huevo'
-    }],
     carbo = [{
         list: 'carbohydrate',
         color: '#7f6341',
@@ -74,7 +49,12 @@ const BACK_URL = 'https://diet-backend.vercel.app',
     {
         list: 'carbohydrate',
         color: '#ffe59c',
-        name: 'Tartas'
+        name: 'Tarta'
+    },
+    {
+        list: 'carbohydrate',
+        color: '#deb954',
+        name: 'Milanesa de soja'
     },
     {
         list: 'carbohydrate',
@@ -291,28 +271,104 @@ const BACK_URL = 'https://diet-backend.vercel.app',
         vegC: true,
         name: 'Mandioca'
     }],
+    red_meat = [{
+        list: 'protein',
+        color: '#9b6d6d',
+        name: 'Bife'
+    },
+    {
+        list: 'protein',
+        color: '#9b6d6d',
+        name: 'Churrasco'
+    },
+    {
+        list: 'protein',
+        color: '#9b6d6d',
+        name: 'Milanesa al horno'
+    },
+    {
+        list: 'protein',
+        color: '#9b6d6d',
+        name: 'Carne a la plancha'
+    },
+    {
+        list: 'protein',
+        color: '#9b6d6d',
+        name: 'Carne al horno'
+    },
+    {
+        list: 'protein',
+        color: '#9b6d6d',
+        name: 'Carne a la parrilla'
+    }],
+    chicken = [{
+        list: 'protein',
+        color: '#f1d490',
+        name: 'Pollo a la plancha'
+    },
+    {
+        list: 'protein',
+        color: '#f1d490',
+        name: 'Milanesa de pollo'
+    },
+    {
+        list: 'protein',
+        color: '#f1d490',
+        name: 'Pollo al horno'
+    },
+    {
+        list: 'protein',
+        color: '#f1d490',
+        name: 'Pollo la parrilla'
+    }],
+    fish = [{
+        list: 'protein',
+        color: '#bbc8ca',
+        name: 'Pescado a la plancha'
+    },
+    {
+        list: 'protein',
+        color: '#bbc8ca',
+        name: 'Pescado empanado al horno'
+    }],
+    pig = [{
+        list: 'protein',
+        color: '#f6c9c9',
+        name: 'Pechito de cerdo'
+    },
+    {
+        list: 'protein',
+        color: '#f6c9c9',
+        name: 'Costillita de cerdo'
+    },
+    {
+        list: 'protein',
+        color: '#f6c9c9',
+        name: 'Milanesa de cerdo'
+    }],
+    egg = [{
+        list: 'protein',
+        color: '#FFFFFF',
+        name: 'Huevo'
+    },
+    {
+        list: 'protein',
+        color: '#FFFFFF',
+        name: 'Omelette'
+    }],
+    protein = red_meat.concat(chicken, fish, pig, egg),
     vegetal = vegA.concat(vegB),
     carbohydrate = carbo.concat(vegC),
-    compounds = [
-        {
-            name: 'Omelette',
-            type: ['protein'],
-            img: 'https://media.istockphoto.com/id/485040276/es/foto/herb-omelette-con-chives-y-orégano.jpg?b=1&s=612x612&w=0&k=20&c=GdB6Nn-XEzx8s3yVk9BJVgoAOMJSdohNOzUeCFsUCdQ='
-        },
+    foods = [
         {
             name: 'Tortilla de papas',
-            type: ['protein', 'carbohydrate'],
-            img: 'https://media.istockphoto.com/id/1297400965/es/foto/un-primer-plano-de-una-tortilla-española-fresca-y-sabrosa-un-plato-tradicional-de-españa.jpg?b=1&s=612x612&w=0&k=20&c=IBu0TpC29gDchTv2iLe1yKIfgwDdHAbQCcKccbmCYAs='
-        },
-        {
-            name: 'Milanesa de soja',
-            type: ['carbohydrate'],
-            img: 'https://nyc3.digitaloceanspaces.com/dec-solimeno/__sized__/products/Milanesa_soja_clasica-1-crop-c0-5__0-5-1080x1080-70.jpg'
+            mix: true,
+            lists: ['protein', 'carbohydrate']
         },
         {
             name: 'Hamburguesa',
-            type: ['carbohydrate', 'protein'],
-            img: 'https://media.istockphoto.com/id/1206323282/es/foto/hamburguesa-jugosa-sobre-fondo-blanco.jpg?s=612x612&w=0&k=20&c=r2mLaVFZxtRk4MeKpdQLtwTkcctyOpGEP-OxPeyo4_c='
+            mix: true,
+            lists: ['carbohydrate', 'protein']
         },
     ],
     everything = protein.concat(carbo, vegetal)
@@ -321,10 +377,15 @@ const group = {
     protein,
     carbohydrate,
     vegetal,
+    red_meat,
+    chicken,
+    fish,
+    pig,
+    egg,
     vegA,
     vegB,
     vegC,
-    compounds,
+    foods,
     everything
 }
 

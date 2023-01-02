@@ -28,18 +28,31 @@ export const Suggested = () => {
 
     useEffect(() => {
         let groupA = [],
-            groupB = []
+            groupB = [],
+            salad = vegetal.includes('Ensalada')
 
-        vegetal.map(v =>
-            group.vegB.map(n => n.name).includes(v)
-                ? groupB.push(v)
-                : groupA.push(v)
-        )
-        if (groupA.length < 1 && groupB.length < 1) {
-            setTip(s => ({
-                ...s,
-                vegetal: 'X Utiliza vegetales de los grupos A y B.'
-            }))
+        if (!salad) {
+            vegetal.map(v =>
+                group.vegB.map(n => n.name).includes(v)
+                    ? groupB.push(v)
+                    : groupA.push(v)
+            )
+            if (groupA.length < 1 && groupB.length < 1) {
+                setTip(s => ({
+                    ...s,
+                    vegetal: 'X Utiliza vegetales de los grupos A y B.'
+                }))
+            } else {
+                if (tip.vegetal) {
+                    setTip(s => {
+                        let aux = { ...s }
+                        delete aux.vegetal
+                        return aux
+                    })
+                }
+                vegChecker(groupA, 'A')
+                vegChecker(groupB, 'B')
+            }
         } else {
             if (tip.vegetal) {
                 setTip(s => {
@@ -48,8 +61,6 @@ export const Suggested = () => {
                     return aux
                 })
             }
-            vegChecker(groupA, 'A')
-            vegChecker(groupB, 'B')
         }
         // eslint-disable-next-line
     }, [vegetal])

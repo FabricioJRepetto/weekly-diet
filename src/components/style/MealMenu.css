@@ -34,6 +34,7 @@
 }
 
 .divisor {
+    align-self: center;
     width: 90%;
     margin: .5em 0;
     border-bottom: 1px solid #FFFFFF;
@@ -63,6 +64,8 @@
 }
 
 .forButtons {
+    position: fixed;
+    bottom: 0;
     flex-direction: row;
 }
 

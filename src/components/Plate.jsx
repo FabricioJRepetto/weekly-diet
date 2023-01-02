@@ -7,8 +7,10 @@ const Plate = ({ protein, carbohydrate, vegetal, vegC, size }) => {
     return (
         <div className='plate-container'
             style={{ height: size, width: size }}>
-            <img src={require('../assets/plate-white.png')}
-                alt="plate" className='plate' />
+
+            <div className='white-plate'>
+                <div></div>
+            </div>
 
             {vegetal.length > 0 &&
                 <div className='salad-container'>

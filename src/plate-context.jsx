@@ -17,6 +17,7 @@ function plateReducer(state, action) {
                 currentPlate: {
                     edit_id: false,
                     protein: [],
+                    foods: [],
                     carbohydrate: [],
                     vegetal: [],
                     vegetalC: false
@@ -61,6 +62,7 @@ function plateReducer(state, action) {
                 currentPlate: {
                     edit: false,
                     protein: [],
+                    foods: [],
                     carbohydrate: [],
                     vegetal: [],
                     vegetalC: false
@@ -73,6 +75,15 @@ function plateReducer(state, action) {
                 currentPlate: {
                     ...state.currentPlate,
                     protein: action.payload
+                }
+            }
+        }
+        case 'foods': {
+            return {
+                ...state,
+                currentPlate: {
+                    ...state.currentPlate,
+                    foods: action.payload
                 }
             }
         }
@@ -114,6 +125,7 @@ function PlateProvider({ children }) {
         currentPlate: {
             edit_id: false,
             protein: [],
+            foods: [],
             carbohydrate: [],
             vegetal: [],
             vegetalC: false

@@ -22,6 +22,14 @@
     color: #FFFFFF;
 }
 
+.button-opt {
+    font-weight: 600;
+}
+
+.b-o-delete {
+    color: var(--prot);
+}
+
 .icon-button {
     position: absolute;
     height: 2.5em;

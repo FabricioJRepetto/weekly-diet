@@ -1,3 +1,7 @@
+.suggestions-container {
+    margin-top: 1em;
+}
+
 .suggestions-container p {
     margin: .3em;
     padding: .2em .5em;

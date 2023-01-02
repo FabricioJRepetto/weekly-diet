@@ -13,6 +13,7 @@ const PlateCard = ({ data, details = true }) => {
     const [proportions, setProportions] = useState(false)
     const {
         protein,
+        foods,
         carbohydrate,
         vegetal,
         vegetalC,
@@ -60,6 +61,7 @@ const PlateCard = ({ data, details = true }) => {
                     date
                 },
                 protein,
+                foods,
                 carbohydrate,
                 vegetal,
                 vegetalC
@@ -133,8 +135,8 @@ const PlateCard = ({ data, details = true }) => {
                     </div>
 
                     <div className='card-options underline'>
-                        <p onClick={edit}>editar</p>
-                        <p onClick={deleteHandler}>borrar</p>
+                        <p className='button-opt' onClick={edit}>editar</p>
+                        <p className='button-opt b-o-delete' onClick={deleteHandler}>borrar</p>
                     </div>
 
                 </div>}

@@ -25,9 +25,9 @@ export const NavBar = () => {
             </button>
             <div className={`navbar-menu ${open && 'navbar-menu-open'}`}>
                 <div>
-                    <p>option#1</p>
-                    <p>option#2</p>
-                    <p>option#3</p>
+                    <p>{'[Historal]'}</p>
+                    <p>{'[Agregar Control]'}</p>
+                    <p>{'[Configuración]'}</p>
                 </div>
                 <p onClick={logout}>
                     <BiLogOut className='icon i-margin' />
