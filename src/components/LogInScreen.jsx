@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { usePlate } from '../plate-context'
 import { setCookie } from './helpers/cookies'
+import { Spinner } from './Spinner'
+import LoadingHints from './LoadingHints'
 
 import './style/LogInScreen.css'
 
@@ -21,6 +23,7 @@ const LogInScreen = () => {
             setmessage(() => 'las contraseñas no coinciden')
             return
         }
+        dispatch({ type: 'loading', payload: true })
         const { data } = await axios.post(`/user/${loginin ? 'login' : 'signup'}`,
             {
                 password,
@@ -38,6 +41,7 @@ const LogInScreen = () => {
     }
 
     const handleGoogleLogin = async (res) => {
+        dispatch({ type: 'loading', payload: true })
         const token = res.credential
         //const userData = jwtDecode(res.credential)
 
@@ -79,9 +83,13 @@ const LogInScreen = () => {
 
 
     return (
-        <div>
-            <h1>"LOGO"</h1>
-            {loading && <h1>"CARGANDO"</h1>}
+        <div className='login-container'>
+            <h1 className='logo'>Diet Mate</h1>
+            {loading &&
+                <>
+                    <Spinner />
+                    <LoadingHints />
+                </>}
             <div className={loading ? 'transparent' : ''}>
                 {<form onSubmit={login} className='login-form' >
                     <input type="text"

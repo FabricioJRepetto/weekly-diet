@@ -66,7 +66,8 @@ function App() {
                         </button>}
 
                     {!mealMenu && <WeekResume />}
-                </>}
+                </>
+            }
         </div>
     );
 }

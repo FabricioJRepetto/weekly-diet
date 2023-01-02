@@ -1,0 +1,47 @@
+.spinner-container {
+    position: relative;
+    width: 7em;
+    height: 7em;
+
+    overflow: visible;
+    /* border: 1px solid lime; */
+}
+
+.svg-img {
+    height: 100%;
+}
+
+.utensil {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    animation: spin 3s infinite ease-in-out;
+}
+
+.utensil div {
+    transform: translate(calc(-1.8em / 3));
+    width: 1.8em;
+    height: 2.5em;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(-45deg);
+    }
+
+    70% {
+        transform: rotate(1125deg);
+    }
+
+    100% {
+        transform: rotate(1035deg);
+    }
+}
+
+/* 
+360
+720  (+45 = 765) (-45=675)
+1080 (+45 = 1125) (-45 = 1035)
+*/

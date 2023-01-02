@@ -245,6 +245,12 @@ const BACK_URL = 'https://diet-backend.vercel.app',
         list: 'vegetal',
         color: '#df5200',
         group: 'B',
+        name: 'Puré de zapallo'
+    },
+    {
+        list: 'vegetal',
+        color: '#df5200',
+        group: 'B',
         name: 'Zapallo'
     }],
     vegC = [{
@@ -257,7 +263,19 @@ const BACK_URL = 'https://diet-backend.vercel.app',
         list: 'carbohydrate',
         color: '#6f5312',
         vegC: true,
+        name: 'Puré de papa'
+    },
+    {
+        list: 'carbohydrate',
+        color: '#6f5312',
+        vegC: true,
         name: 'Batata'
+    },
+    {
+        list: 'carbohydrate',
+        color: '#6f5312',
+        vegC: true,
+        name: 'Puré de batata'
     },
     {
         list: 'carbohydrate',
@@ -369,6 +387,11 @@ const BACK_URL = 'https://diet-backend.vercel.app',
             name: 'Hamburguesa',
             mix: true,
             lists: ['carbohydrate', 'protein']
+        },
+        {
+            name: 'Zapallitos rellenos',
+            mix: true,
+            lists: ['vegetal', 'protein']
         },
     ],
     everything = protein.concat(carbo, vegetal)
