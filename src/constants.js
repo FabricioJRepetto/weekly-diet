@@ -381,16 +381,25 @@ const BACK_URL = 'https://diet-backend.vercel.app',
         {
             name: 'Tortilla de papas',
             mix: true,
+            list: 'foods',
             lists: ['protein', 'carbohydrate']
         },
         {
             name: 'Hamburguesa',
             mix: true,
+            list: 'foods',
             lists: ['carbohydrate', 'protein']
+        },
+        {
+            name: 'Lasagna de zucchini',
+            mix: true,
+            list: 'foods',
+            lists: ['vegetal']
         },
         {
             name: 'Zapallitos rellenos',
             mix: true,
+            list: 'foods',
             lists: ['vegetal', 'protein']
         },
     ],

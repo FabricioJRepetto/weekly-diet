@@ -22,7 +22,6 @@ function App() {
                 } = defineWeek()
                 const { data } = await axios(`/history/fullhistory?today=${today}&start=${start}`)
                 dispatch({ type: 'save', payload: data })
-                console.log(data);
             })()
         } else {
             const token = getCookie('autoLogin')

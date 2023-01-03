@@ -10,11 +10,14 @@ import { Suggested } from './Suggested'
 import { defineWeek } from './helpers/defineWeek'
 
 import './style/MealMenu.css'
+import { Spinner } from './Spinner'
+import Loading from './Loading'
 
 const MealMenu = () => {
     const [ingredientList, setIngredientList] = useState(false)
     const [subMenu, setSubMenu] = useState(false)
     const [type, setType] = useState(false)
+    const [loading, setLoading] = useState(false)
     const {
         dispatch,
         state: {
@@ -47,6 +50,7 @@ const MealMenu = () => {
     }
 
     const save = async () => {
+        setLoading(true)
         let aux = {
             protein: [...protein],
             foods: [...foods],
@@ -92,6 +96,11 @@ const MealMenu = () => {
 
     return (
         <div className='mainmenu-container'>
+            {loading &&
+                <div className='loading-modal'>
+                    <Spinner />
+                    <h2>guardando<Loading /></h2>
+                </div>}
             <Plate size={'34vh'}
                 protein={protein}
                 carbohydrate={carbohydrate}
@@ -101,6 +110,13 @@ const MealMenu = () => {
             <Suggested />
 
             <section className='ingredients'>
+                {(foods && foods.length > 0) &&
+                    <div onClick={() => openSection('foods')}
+                        className='ingredients-cell ing-f'>
+                        <b>Comidas</b>
+                        <p>{foods.toString().replaceAll(',', ', ')}</p>
+                    </div>}
+
                 {protein.length > 0 &&
                     <div onClick={() => openSection('protein')}
                         className='ingredients-cell ing-p'>
@@ -108,12 +124,6 @@ const MealMenu = () => {
                         <p>{protein.toString().replaceAll(',', ', ')}</p>
                     </div>}
 
-                {(foods && foods.length > 0) &&
-                    <div onClick={() => openSection('foods')}
-                        className='ingredients-cell ing-p'>
-                        <b>Comidas</b>
-                        <p>{foods.toString().replaceAll(',', ', ')}</p>
-                    </div>}
 
                 {carbohydrate.length > 0 &&
                     <div onClick={() => openSection('carbohydrate')}

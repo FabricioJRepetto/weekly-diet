@@ -19,9 +19,8 @@ const IngredientList = ({ list, type, openList }) => {
 
     if (list === 'search') return (<></>)
 
-    const handleSelect = ({ name, list }) => {
+    const correctList = (list) => {
         let aux = []
-
         switch (list) {
             case 'protein':
                 aux = [...protein]
@@ -39,15 +38,39 @@ const IngredientList = ({ list, type, openList }) => {
                 aux = [...foods]
                 break;
         }
-        if (aux.includes(name)) {
+        return aux
+    }
+
+    const handleSelect = ({ name, list, mix = false, lists = false }) => {
+        let aux = correctList(list)
+
+        if (aux.includes(name)) { //? retirar de la lista
             aux = aux.filter(e => e !== name)
+
+            if (mix) {
+                lists.forEach(l => {
+                    let aux = correctList(l)
+                    aux = aux.filter(e => e !== `(${name})`)
+                    dispatch({ type: l, payload: aux })
+                })
+            }
+
             if (group.vegC.map(e => e.name).includes(name))
                 dispatch({
                     type: 'vegC',
                     payload: false
                 })
-        } else {
+        } else { //? agregar a la lista
             aux.push(name)
+
+            if (mix) {
+                lists.forEach(l => {
+                    let aux = correctList(l)
+                    aux.unshift(`(${name})`)
+                    dispatch({ type: l, payload: aux })
+                })
+            }
+
             if (group.vegC.map(e => e.name).includes(name))
                 dispatch({
                     type: 'vegC',
@@ -62,14 +85,38 @@ const IngredientList = ({ list, type, openList }) => {
     }
 
     const clearList = () => {
-        currentPlate[list].forEach(e => {
-            let ele = document.getElementById('ingOpt' + e)
-            ele.checked = false
-        });
+        let aux = []
+        if (list !== 'foods') {
+            //? si quiero borrar una lista donde hay "foods"
+            currentPlate[list].forEach(e => {
+                if (/^\(/.test(e)) {
+                    aux.push(e)
+                } else {
+                    let ele = document.getElementById('ingOpt' + e)
+                    ele.checked = false
+                }
+            });
+        } else {
+            //? si quiero borrar "foods" de todos lados
+            currentPlate[list].forEach(e => {
+                let ele = document.getElementById('ingOpt' + e)
+                ele.checked = false
+            });
+            Object.entries(currentPlate).forEach(e => {
+                if (Array.isArray(e[1])) {
+                    let aux = e[1].filter(ing => !/^\(/.test(ing))
+                    dispatch({
+                        type: e[0],
+                        payload: aux
+                    })
+                }
+            })
+        }
         dispatch({
             type: list,
-            payload: []
+            payload: aux
         })
+        openList(false)
     }
 
     return (
@@ -111,9 +158,7 @@ const IngredientList = ({ list, type, openList }) => {
                                 onClick={() => handleSelect(ing)} />
 
                             <div className='ingOption-text'>
-                                <p>
-                                    {ing.name}
-                                </p>
+                                <p>{ing.name}</p>
                             </div>
                         </div>
                     </label>
