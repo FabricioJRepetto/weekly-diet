@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { usePlate } from '../plate-context'
 import PlateCard from './PlateCard'
 
-
 const LastMeal = () => {
     const { state: { week } } = usePlate()
     const [message, setMessage] = useState(false)
@@ -34,7 +33,7 @@ const LastMeal = () => {
                     vegetalC: false
                 }))
             }
-            if (plate.c && plate.p) {
+            if ((plate.c && plate.p) || (!plate.c && !plate.p)) {
                 setMessage(() => 'Preparar proteínas y carbohidratos (1/4 de plato cada uno) y acompañar con vegetales (medio plato).')
                 SetPlate(() => ({
                     protein: [true],
@@ -50,12 +49,15 @@ const LastMeal = () => {
         // eslint-disable-next-line
     }, [])
 
-
     return (
         <div className='lastmeal-container'>
-            {Plate && <PlateCard key={'lastMeal'}
-                data={Plate}
-                details={false} />}
+            {Plate &&
+                <div className='lastmeal-plate'>
+                    <PlateCard key={'lastMeal'}
+                        size={'30vw'}
+                        data={Plate}
+                        details={false} />
+                </div>}
 
             <div className='lastmeal-text'>
                 <h3>Cena recomendada</h3>

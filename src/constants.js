@@ -368,11 +368,6 @@ const BACK_URL = 'https://diet-backend.vercel.app',
         list: 'protein',
         color: '#FFFFFF',
         name: 'Huevo'
-    },
-    {
-        list: 'protein',
-        color: '#FFFFFF',
-        name: 'Omelette'
     }],
     protein = red_meat.concat(chicken, fish, pig, egg),
     vegetal = vegA.concat(vegB),
@@ -383,6 +378,12 @@ const BACK_URL = 'https://diet-backend.vercel.app',
             mix: true,
             list: 'foods',
             lists: ['protein', 'carbohydrate']
+        },
+        {
+            name: 'Omelette con verduras',
+            mix: true,
+            list: 'foods',
+            lists: ['protein', 'vegetal']
         },
         {
             name: 'Hamburguesa',

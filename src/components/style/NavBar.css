@@ -1,19 +1,22 @@
 .navbar-container {
-    position: relative;
+    position: fixed;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1em;
     width: 100vw;
     max-width: 100vw;
     height: 3em;
+    color: #FFFFFF;
     background-color: #000000;
     overflow-x: clip;
     z-index: 90;
 }
 
 .navbar-container b {
-    padding-left: 1em;
+    padding-left: 1rem;
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
 }
 
 .navbar-menu {

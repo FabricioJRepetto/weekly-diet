@@ -16,7 +16,7 @@ export const NavBar = () => {
 
     return (
         <div className='navbar-container'>
-            <b>Dieta semanal</b>
+            <b>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>
                 {open
                     ? <BiArrowToRight className='icon i-white' />

@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { usePlate } from './plate-context';
 import MealMenu from './components/MealMenu';
-import WeekResume from './components/WeekResume';
+import WeekSummary from './components/WeekSummary';
 import LogInScreen from './components/LogInScreen';
 import { defineWeek } from './components/helpers/defineWeek';
 import { getCookie } from './components/helpers/cookies';
-import { NavBar } from './components/NavBar';
 
 import './App.css';
 
@@ -55,7 +54,6 @@ function App() {
             {!session
                 ? <LogInScreen />
                 : <>
-                    <NavBar />
                     {mealMenu && <MealMenu />}
                     {!mealMenu &&
                         <button className='ingredients-cell add-ing'
@@ -64,7 +62,7 @@ function App() {
                             Agregar comida +
                         </button>}
 
-                    {!mealMenu && <WeekResume />}
+                    {!mealMenu && <WeekSummary />}
                 </>
             }
         </div>

@@ -7,6 +7,7 @@ import { BACK_URL } from './constants';
 import { getCookie } from './components/helpers/cookies';
 
 import './index.css';
+import { NavBar } from './components/NavBar';
 
 //? agregar URL del back y headers a peticiones de axios
 axios.interceptors.request.use(function (config) {
@@ -24,6 +25,7 @@ axios.interceptors.request.use(function (config) {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <PlateProvider>
+        <NavBar />
         <App />
     </PlateProvider>
 );
