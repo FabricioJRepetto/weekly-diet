@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { group } from '../constants'
 import { usePlate } from '../plate-context'
+import { suggestions } from './helpers/suggestions'
 
 import './style/Suggested.css'
 
@@ -22,7 +23,15 @@ export const Suggested = () => {
     const [tip, setTip] = useState({})
 
     useEffect(() => {
-        week.today.length === 1 && suggestions()
+        if (week.today.length === 1) {
+            const {
+                message,
+                initials
+            } = suggestions(week.today)
+
+            setMessage(() => message)
+            setPromp(() => initials)
+        }
         // eslint-disable-next-line
     }, [])
 
@@ -64,30 +73,6 @@ export const Suggested = () => {
         }
         // eslint-disable-next-line
     }, [vegetal])
-
-
-    const suggestions = () => {
-        const plate = {
-            p: !!week.today[0].protein.length,
-            c: !!week.today[0].carbohydrate.length,
-            v: !!week.today[0].vegetal.length
-        }
-        let aux = ''
-
-        if (plate.p && !plate.c) {
-            setMessage(() => 'preparar medio plato de carbohidratos y acompañar con vegetales.')
-            aux += 'c'
-        }
-        if (plate.c && !plate.p) {
-            setMessage(() => 'preparar medio plato de proteínas y acompañar con vegetales.')
-            aux += 'p'
-        }
-        if (plate.c && plate.p) {
-            setMessage(() => 'preparar proteínas y carbohidratos (1/4 de plato cada uno) y acompañar con vegetales (medio plato).')
-            aux += 'pc'
-        }
-        setPromp(() => aux)
-    }
 
     const vegChecker = (arr, g) => {
         let vegGroup

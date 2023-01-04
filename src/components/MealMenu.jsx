@@ -8,10 +8,10 @@ import Plate from './Plate'
 import SearchIngredient from './SearchIngredient'
 import { Suggested } from './Suggested'
 import { defineWeek } from './helpers/defineWeek'
-
-import './style/MealMenu.css'
 import { Spinner } from './Spinner'
 import Loading from './Loading'
+
+import './style/MealMenu.css'
 
 const MealMenu = () => {
     const [ingredientList, setIngredientList] = useState(false)
