@@ -109,17 +109,17 @@ const MealMenu = () => {
 
             <Suggested />
 
-            <section className='ingredients'>
+            <section className='ingredients ing-main'>
                 {(foods && foods.length > 0) &&
                     <div onClick={() => openSection('foods')}
-                        className='ingredients-cell ing-f'>
+                        className='ingredients-cell ing-f card-style'>
                         <b>Comidas</b>
                         <p>{foods.toString().replaceAll(',', ', ')}</p>
                     </div>}
 
                 {protein.length > 0 &&
                     <div onClick={() => openSection('protein')}
-                        className='ingredients-cell ing-p'>
+                        className='ingredients-cell ing-p card-style'>
                         <b>Proteína</b>
                         <p>{protein.toString().replaceAll(',', ', ')}</p>
                     </div>}
@@ -127,14 +127,14 @@ const MealMenu = () => {
 
                 {carbohydrate.length > 0 &&
                     <div onClick={() => openSection('carbohydrate')}
-                        className='ingredients-cell ing-c'>
+                        className='ingredients-cell ing-c card-style'>
                         <b>Carbohidratos</b>
                         <p>{carbohydrate.toString().replaceAll(',', ', ')}</p>
                     </div>}
 
                 {vegetal.length > 0 &&
                     <div onClick={() => openSection('vegetal')}
-                        className='ingredients-cell ing-v'>
+                        className='ingredients-cell ing-v card-style'>
                         <b>Vegetales</b>
                         <p>{vegetal.toString().replaceAll(',', ', ')}</p>
                     </div>}
@@ -160,20 +160,20 @@ const MealMenu = () => {
 
                     {(!ingredientList && !subMenu) &&
                         <div className='ingredients'>
-                            <div className='ingredients-cell'
+                            <div className='ingredients-cell button-sec'
                                 onClick={() => selectSubMenu('protein')}>
                                 <p>Proteína 🥩</p>
                             </div>
-                            <div className='ingredients-cell'
+                            <div className='ingredients-cell button-sec'
                                 onClick={() => selectIngList('carbohydrate')}>
                                 <p>Carbohidratos 🌾</p>
                             </div>
-                            <div className='ingredients-cell'
+                            <div className='ingredients-cell button-sec'
                                 onClick={() => selectIngList('vegetal')}>
                                 <p>Vegetales 🥦</p>
                             </div>
                             <div className='divisor'></div>
-                            <div className='ingredients-cell'
+                            <div className='ingredients-cell button-sec'
                                 onClick={() => selectIngList('foods')}>
                                 <p>Mis Preparaciones ⭐</p>
                             </div>
@@ -182,23 +182,23 @@ const MealMenu = () => {
 
                     {(subMenu && !ingredientList) &&
                         <div className='ingredients'>
-                            <div className='ingredients-cell'
+                            <div className='ingredients-cell button-sec'
                                 onClick={() => setIngredientList('red_meat')}>
                                 <p>Carne roja 🥩</p>
                             </div>
-                            <div className='ingredients-cell'
+                            <div className='ingredients-cell button-sec'
                                 onClick={() => setIngredientList('chicken')}>
                                 <p>Pollo 🍗</p>
                             </div>
-                            <div className='ingredients-cell'
+                            <div className='ingredients-cell button-sec'
                                 onClick={() => setIngredientList('fish')}>
                                 <p>Pescado 🍤</p>
                             </div>
-                            <div className='ingredients-cell'
+                            <div className='ingredients-cell button-sec'
                                 onClick={() => setIngredientList('pig')}>
                                 <p>Cerdo 🥓</p>
                             </div>
-                            <div className='ingredients-cell'
+                            <div className='ingredients-cell button-sec'
                                 onClick={() => setIngredientList('egg')}>
                                 <p>Huevo 🥚</p>
                             </div>

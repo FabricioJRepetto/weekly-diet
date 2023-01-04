@@ -4,6 +4,7 @@ import LastMeal from './LastMeal'
 import { WeekDay } from './WeekDay'
 
 import './style/Week.css'
+import { Counter } from './Counter'
 
 const WeekSummary = () => {
     const {
@@ -12,11 +13,11 @@ const WeekSummary = () => {
 
     return (
         <div className='weeksummary-container'>
-            <div className='your-week'>
-                <h2>Tu semana:</h2>
-                <p>Permitidos: 0/5</p>
-                <p>Vegetales C: {week.vegetalC}/4</p>
-            </div>
+            {week.vegetalC && <div className='your-week card-style'>
+                <b>Tu semana:</b>
+                <div>Permitidos: {<Counter num={0} max={5} />}</div>
+                <div>Vegetales C: {<Counter num={week.vegetalC} max={4} />}</div>
+            </div>}
 
             {week.today?.length === 1 && <LastMeal />}
 

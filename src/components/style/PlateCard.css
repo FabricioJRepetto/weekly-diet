@@ -6,8 +6,6 @@
     height: 50vw;
     width: 50vw;
     transition: all .3s ease;
-
-    /* border: 1px solid orange; */
 }
 
 .platecard-plate-container {
@@ -15,6 +13,7 @@
     height: 50vw;
     width: 50vw;
     transition: all .2s ease;
+    z-index: -1;
 }
 
 .platecard-plate-container>* {
@@ -23,6 +22,7 @@
 
 .invisible {
     opacity: 0;
+    pointer-events: none;
 }
 
 .pos0 {

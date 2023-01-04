@@ -22,7 +22,7 @@ const LastMeal = () => {
     }, [])
 
     return (
-        <div className='lastmeal-container'>
+        <div className='lastmeal-container card-style2 fade-in'>
             {Plate &&
                 <div className='lastmeal-plate'>
                     <PlateCard key={'lastMeal'}

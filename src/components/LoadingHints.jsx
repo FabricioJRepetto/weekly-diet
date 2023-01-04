@@ -4,12 +4,12 @@ import './style/LoadingHints.css'
 
 const LoadingHints = () => {
     const inter = useRef(null)
-    const [text, setText] = useState(1)
+    const [text, setText] = useState(0)
 
     useEffect(() => {
+        setText(() => 1)
         inter.current = setInterval(() => {
             setText(current => {
-                console.log('hola');
                 if (current === 8) return 0
                 else return current + 1
             })

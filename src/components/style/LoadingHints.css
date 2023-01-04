@@ -1,6 +1,7 @@
 .hints-outer-container {
     position: relative;
     height: 2rem;
+    width: 100%;
 }
 
 .hints-container {

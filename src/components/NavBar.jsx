@@ -7,15 +7,20 @@ import './style/NavBar.css'
 
 export const NavBar = () => {
     const [open, setOpen] = useState(false)
-    const { dispatch } = usePlate();
+    const { dispatch, state: { session } } = usePlate();
 
     const logout = () => {
+        setOpen(false)
         deleteCookie('autoLogin')
         dispatch({ type: 'logout' })
     }
 
+    const test = () => {
+        setOpen(!open)
+    }
+
     return (
-        <div className='navbar-container'>
+        <div className={`navbar-container ${!session ? 'no-navbar' : ''}`}>
             <b>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>
                 {open
@@ -23,6 +28,8 @@ export const NavBar = () => {
                     : <BiMenu className='icon i-white' />
                 }
             </button>
+            <div className={`navmenu-closer ${open ? 'navmenu-closer-on' : ''}`}
+                onClick={test}></div>
             <div className={`navbar-menu ${open && 'navbar-menu-open'}`}>
                 <div>
                     <p>{'[Historal]'}</p>

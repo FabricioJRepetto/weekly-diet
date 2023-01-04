@@ -9,7 +9,7 @@ import axios from 'axios'
 import '../components/style/PlateCard.css'
 
 const PlateCard = ({ data, setShow, showing, i, details = true, size = false }) => {
-    const laputa = () => {
+    const propotionsMaker = () => {
         let p = !!protein.length
             ? !!protein.length && !!carbohydrate.length
                 ? 1
@@ -46,7 +46,7 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false }) 
         _id
     } = data,
         [preview, setPreview] = useState(true),
-        proportions = useRef(laputa()),
+        proportions = useRef(propotionsMaker()),
         { dispatch } = usePlate(),
         [isOpenDelete, openDelete, closeDelete] = useModal()
 
@@ -67,8 +67,7 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false }) 
         })
     }
 
-    const deleteHandler = (e) => {
-        e.stopPropagation()
+    const deleteHandler = () => {
         openDelete()
     }
 
@@ -97,16 +96,6 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false }) 
             } : {}}
             onClick={() => details ? clickHandler() : undefined}>
 
-            <div className={`platecard-plate-container pos${i} ${preview ? '' : 'repos' + i}`}
-                style={size ? {
-                    height: size, width: size
-                } : {}}>
-                <Plate size={size || '100%'}
-                    protein={protein}
-                    carbohydrate={carbohydrate}
-                    vegetal={vegetal}
-                    vegC={vegetalC} />
-            </div>
             <div className={`platecard-details ${preview ? 'invisible' : ''}`}>
                 {proportions.current &&
                     <div className={`platecard-head ${i === 1 ? 'head-reverse' : ''}`}>
@@ -150,6 +139,17 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false }) 
                     <p className='button-opt' onClick={edit}>editar</p>
                     <p className='button-opt b-o-delete' onClick={deleteHandler}>borrar</p>
                 </div>
+            </div>
+
+            <div className={`platecard-plate-container pos${i} ${preview ? '' : 'repos' + i}`}
+                style={size ? {
+                    height: size, width: size
+                } : {}}>
+                <Plate size={size || '100%'}
+                    protein={protein}
+                    carbohydrate={carbohydrate}
+                    vegetal={vegetal}
+                    vegC={vegetalC} />
             </div>
 
             <Modal isOpen={isOpenDelete}

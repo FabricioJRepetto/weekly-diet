@@ -17,7 +17,7 @@ export const WeekDay = ({ data }) => {
     }
 
     return (
-        <div className='day-container'>
+        <div className='day-container card-style fade-in'>
             <b>{`${day.current} ${data.length > 1 ? (!!data[2] ? '(desbalanceado)' : '(balanceado)') : ''}`}</b>
             <div>
                 {data.map((e, i) =>

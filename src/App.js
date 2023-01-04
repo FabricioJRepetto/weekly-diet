@@ -53,7 +53,7 @@ function App() {
         <div className="App">
             {!session
                 ? <LogInScreen />
-                : <>
+                : <div className='main'>
                     {mealMenu && <MealMenu />}
                     {!mealMenu &&
                         <button className='ingredients-cell add-ing'
@@ -63,7 +63,7 @@ function App() {
                         </button>}
 
                     {!mealMenu && <WeekSummary />}
-                </>
+                </div>
             }
         </div>
     );
