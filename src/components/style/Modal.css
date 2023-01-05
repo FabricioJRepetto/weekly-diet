@@ -1,7 +1,7 @@
 .modal {
     color: white;
     position: fixed;
-    z-index: 90;
+    z-index: 100;
     top: 0;
     left: 0;
     width: 100%;
@@ -29,6 +29,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     background-color: rgb(16, 16, 16);
+    z-index: +1;
 }
 
 .modal-close {

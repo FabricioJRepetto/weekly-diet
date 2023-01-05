@@ -1,14 +1,10 @@
 import React, { useRef, useState } from 'react'
 import Plate from './Plate'
 import { usePlate } from '../plate-context'
-import Modal from './helpers/Modal'
-import { useModal } from './helpers/useModal'
-import { defineWeek } from './helpers/defineWeek'
-import axios from 'axios'
 
 import '../components/style/PlateCard.css'
 
-const PlateCard = ({ data, setShow, showing, i, details = true, size = false }) => {
+const PlateCard = ({ data, setShow, showing, i, details = true, size = false, openDelete }) => {
     const propotionsMaker = () => {
         let p = !!protein.length
             ? !!protein.length && !!carbohydrate.length
@@ -47,8 +43,8 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false }) 
     } = data,
         [preview, setPreview] = useState(true),
         proportions = useRef(propotionsMaker()),
-        { dispatch } = usePlate(),
-        [isOpenDelete, openDelete, closeDelete] = useModal()
+        { dispatch } = usePlate()
+    // [isOpenDelete, openDelete, closeDelete] = useModal()
 
     const edit = (e) => {
         e.stopPropagation()
@@ -68,20 +64,7 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false }) 
     }
 
     const deleteHandler = () => {
-        openDelete()
-    }
-
-    const deleteConfirmed = async () => {
-        closeDelete()
-        const {
-            today,
-            start
-        } = defineWeek()
-        const { data } = await axios.delete(`/history?today=${today}&start=${start}&meal_id=${_id}`)
-        console.log(data);
-        if (!data.error) {
-            dispatch({ type: 'save', payload: data })
-        }
+        openDelete(_id)
     }
 
     const clickHandler = () => {
@@ -152,16 +135,6 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false }) 
                     vegC={vegetalC} />
             </div>
 
-            <Modal isOpen={isOpenDelete}
-                closeModal={closeDelete}>
-                <>
-                    <p>¿Seguro que deseas eliminar este plato?</p>
-                    <>
-                        <button onClick={deleteConfirmed}>eliminar</button>
-                        <button onClick={closeDelete}>cancelar</button>
-                    </>
-                </>
-            </Modal>
         </div>
     )
 }

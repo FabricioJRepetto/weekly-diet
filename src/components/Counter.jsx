@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import { BiCheckSquare, BiCheckbox } from 'react-icons/bi';
 
 export const Counter = ({ num, max }) => {
-    console.log(num, max);
     const blueprint = useRef('t'.repeat(num) + 'f'.repeat(max - num))
 
     return (

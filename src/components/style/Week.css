@@ -57,3 +57,18 @@
     display: flex;
     /* overflow-x: hidden; */
 }
+
+.card-deletemenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-deletemenu p {
+    margin-bottom: 2rem;
+}
+
+.card-deletemenu div>button {
+    margin: 0 .5em;
+}

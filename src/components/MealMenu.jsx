@@ -47,6 +47,7 @@ const MealMenu = () => {
 
     const close = () => {
         dispatch({ type: 'mealMenu', payload: false })
+        dispatch({ type: 'reset' })
     }
 
     const save = async () => {
@@ -81,7 +82,6 @@ const MealMenu = () => {
 
         dispatch({ type: 'save', payload: leData })
         close()
-        dispatch({ type: 'reset' })
     }
 
     const selectSubMenu = (arg) => {

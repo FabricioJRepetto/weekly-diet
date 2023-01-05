@@ -164,6 +164,16 @@
     animation: ghostright .2s forwards ease-out;
 }
 
+.card-deletemenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    z-index: +2;
+}
+
 @keyframes ghostleft {
     from {
         left: 0%;

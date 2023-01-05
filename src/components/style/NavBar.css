@@ -1,7 +1,7 @@
 .navbar-container {
     position: fixed;
     top: 0;
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
     width: 100vw;
@@ -14,8 +14,8 @@
     animation: fadein 1s ease-in forwards;
 }
 
-.no-navbar {
-    display: none;
+.navbar {
+    display: flex;
 }
 
 .navbar-container b {

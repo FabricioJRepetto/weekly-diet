@@ -20,7 +20,7 @@ export const NavBar = () => {
     }
 
     return (
-        <div className={`navbar-container ${!session ? 'no-navbar' : ''}`}>
+        <div className={`navbar-container ${session ? 'navbar' : ''}`}>
             <b>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>
                 {open
@@ -33,7 +33,8 @@ export const NavBar = () => {
             <div className={`navbar-menu ${open && 'navbar-menu-open'}`}>
                 <div>
                     <p>{'[Historal]'}</p>
-                    <p>{'[Agregar Control]'}</p>
+                    <p>{'[Mis preparaciones]'}</p>
+                    <p>{'[Agregar control]'}</p>
                     <p>{'[Configuración]'}</p>
                 </div>
                 <p onClick={logout}>

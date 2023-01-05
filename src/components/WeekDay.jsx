@@ -5,7 +5,7 @@ import './style/Week.css'
 
 //! RECORDAR: data[2] tiene una descripción de 
 //! por qué el plato está desbalanceado
-export const WeekDay = ({ data }) => {
+export const WeekDay = ({ data, openDelete }) => {
     const [show, setShow] = useState(false)
     const day = useRef(new Date(data[0].date).toLocaleDateString("es-AR", { weekday: "long" }))
 
@@ -23,7 +23,8 @@ export const WeekDay = ({ data }) => {
                 {data.map((e, i) =>
                     i < 2 && <PlateCard key={e._id} data={e} i={i}
                         setShow={() => toogleShow(e._id)}
-                        showing={!show || show === e._id} />
+                        showing={!show || show === e._id}
+                        openDelete={openDelete} />
                 )}
             </div>
         </div>

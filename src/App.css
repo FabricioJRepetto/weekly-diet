@@ -24,6 +24,7 @@
 }
 
 .button-opt {
+    z-index: +1;
     font-weight: 600;
 }
 
