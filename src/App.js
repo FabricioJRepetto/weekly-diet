@@ -8,9 +8,11 @@ import LogInScreen from './components/LogInScreen';
 import { defineWeek } from './components/helpers/defineWeek';
 import { getCookie } from './components/helpers/cookies';
 import { CustomFoods } from './components/CustomFoods';
+import { Checkpoint } from "./components/Checkpoint";
+import { Config } from "./components/Config";
+import AllWeeks from './components/AllWeeks';
 
 import './App.css';
-
 function App() {
     const navigate = useNavigate()
     const { dispatch, state: { session } } = usePlate();
@@ -62,9 +64,9 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/mealMenu" element={<MealMenu />} />
                         <Route path="/customFoods" element={<CustomFoods />} />
-                        {/* <Route path="/history" element={</>} /> */}
-                        {/* <Route path="/control" element={</>} /> */}
-                        {/* <Route path="/config" element={</>} /> */}
+                        <Route path="/history" element={<AllWeeks />} />
+                        <Route path="/checkpoint" element={<Checkpoint />} />
+                        <Route path="/config" element={<Config />} />
                     </Routes>
                 </div>}
         </div>

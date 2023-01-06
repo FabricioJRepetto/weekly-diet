@@ -35,10 +35,10 @@ export const NavBar = () => {
                 onClick={() => setOpen(!open)}></div>
             <div className={`navbar-menu ${open && 'navbar-menu-open'}`}>
                 <div>
-                    <p>{'[WIP] Historal'}</p>
+                    <p onClick={() => go('/history')}>Historal</p>
                     <p onClick={() => go('/customFoods')}>Mis preparaciones</p>
-                    <p>{'[WIP] Agregar control'}</p>
-                    <p>{'[WIP] Configuración'}</p>
+                    <p onClick={() => go('/checkpoint')}>Agregar control</p>
+                    <p onClick={() => go('/config')}>Configuración</p>
                 </div>
                 <p onClick={logout}>
                     <BiLogOut className='icon i-margin' />

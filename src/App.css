@@ -53,6 +53,18 @@
     color: #FFFFFF;
 }
 
+.i-grey {
+    color: #7f7f7f;
+}
+
+.i-green {
+    color: var(--veg);
+}
+
+.i-red {
+    color: var(--prot);
+}
+
 .card-style {
     padding: 1em;
     border-radius: 1em;
