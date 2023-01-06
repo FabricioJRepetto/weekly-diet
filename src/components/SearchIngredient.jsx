@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { group } from '../constants'
+// import { group } from '../constants'
 import { usePlate } from '../plate-context'
 import { BiSearch, BiX } from 'react-icons/bi';
 
@@ -7,15 +7,9 @@ import './style/SearchIngredient.css'
 
 const SearchIngredient = ({ changeList }) => {
     const {
-        vegC,
-        everything
-    } = group
-    const [filtered, setFiltered] = useState(everything)
-    const [deployed, setDeployed] = useState(false)
-
-    const {
         dispatch,
         state: {
+            group,
             currentPlate,
             currentPlate: {
                 protein,
@@ -24,6 +18,12 @@ const SearchIngredient = ({ changeList }) => {
             }
         }
     } = usePlate()
+    const {
+        vegC,
+        everything
+    } = group
+    const [filtered, setFiltered] = useState(everything)
+    const [deployed, setDeployed] = useState(false)
 
     const find = (query) => {
         if (query) {
@@ -100,29 +100,29 @@ const SearchIngredient = ({ changeList }) => {
                     : <button className='icon-button' onClick={deploy}>
                         <BiSearch className='icon' />
                     </button>}
-
             </div>
 
-            {deployed && <div className='search-results ingList'>{
-                filtered.map(e =>
-                    <label key={e.name}
-                        className='ingOpt-correction'
-                        htmlFor={'ingOpt' + e.name}>
-                        <div className={`ingOption ${currentPlate[e.list].includes(e.name) ? 'selectedOpt' : ''}`}
-                            style={{ borderRight: `5px solid ${e.color}` }}>
-                            <input type="checkbox"
-                                name={'ingOpt' + e.name}
-                                id={'ingOpt' + e.name}
-                                defaultChecked={currentPlate[e.list].includes(e.name)}
-                                onClick={() => handleSelect(e.name, e.list)} />
+            {deployed &&
+                <div className='search-results ingList'>{
+                    filtered.map(e =>
+                        <label key={e.name}
+                            className='ingOpt-correction'
+                            htmlFor={'ingOpt' + e.name}>
+                            <div className={`ingOption ${currentPlate[e.list].includes(e.name) ? 'selectedOpt' : ''}`}
+                                style={{ borderRight: `5px solid ${e.color}` }}>
+                                <input type="checkbox"
+                                    name={'ingOpt' + e.name}
+                                    id={'ingOpt' + e.name}
+                                    defaultChecked={currentPlate[e.list].includes(e.name)}
+                                    onClick={() => handleSelect(e.name, e.list)} />
 
-                            <div className='ingOption-text'>
-                                <p>{e.name}</p>
+                                <div className='ingOption-text'>
+                                    <p>{e.name}</p>
+                                </div>
                             </div>
-                        </div>
-                    </label>
-                )
-            }</div>}
+                        </label>
+                    )
+                }</div>}
         </div>
     )
 }

@@ -31,6 +31,7 @@ const WeekSummary = () => {
         }
         closeDelete()
     }
+
     return (
         <div className='weeksummary-container'>
             {week.vegetalC && <div className='your-week card-style'>

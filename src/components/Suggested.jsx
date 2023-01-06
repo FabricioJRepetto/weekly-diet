@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { group } from '../constants'
+// import { group } from '../constants'
 import { usePlate } from '../plate-context'
 import { suggestions } from './helpers/suggestions'
 
@@ -15,6 +15,7 @@ export const Suggested = () => {
                 vegetal,
                 vegetalC
             },
+            group,
             week
         }
     } = usePlate()

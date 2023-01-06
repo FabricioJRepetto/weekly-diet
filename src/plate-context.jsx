@@ -46,7 +46,17 @@ function plateReducer(state, action) {
             return {
                 ...state,
                 history: action.payload.history,
-                week: action.payload.week
+                week: action.payload.week,
+                group: action.payload.group
+            }
+        }
+        case 'saveFoods': {
+            return {
+                ...state,
+                group: {
+                    ...state.group,
+                    foods: action.payload
+                }
             }
         }
         case 'edit': {
@@ -135,7 +145,8 @@ function PlateProvider({ children }) {
         id: false,
         history: [],
         week: [],
-        mealMenu: false
+        mealMenu: false,
+        group: {}
     })
     const value = { state, dispatch }
 

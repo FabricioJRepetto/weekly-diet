@@ -44,7 +44,6 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false, op
         [preview, setPreview] = useState(true),
         proportions = useRef(propotionsMaker()),
         { dispatch } = usePlate()
-    // [isOpenDelete, openDelete, closeDelete] = useModal()
 
     const edit = (e) => {
         e.stopPropagation()

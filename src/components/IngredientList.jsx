@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
 import { usePlate } from '../plate-context'
-import { group } from '../constants.js'
+// import { group } from '../constants.js'
+import CreateFood from './CreateFood';
 
 import '../components/style/IngredientList.css'
 
 const IngredientList = ({ list, type, openList }) => {
     const [veg, setVeg] = useState('vegA')
-    const { dispatch,
+
+    const [createFood, setCreateFood] = useState(false)
+    const {
+        dispatch,
         state: {
+            group,
             currentPlate,
             currentPlate: {
                 protein,
@@ -119,6 +124,12 @@ const IngredientList = ({ list, type, openList }) => {
         openList(false)
     }
 
+    if (createFood) {
+        return (
+            <CreateFood close={() => setCreateFood(false)} />
+        )
+    }
+
     return (
         <div className="ingredient-list-container">
             {list === 'vegetal' &&
@@ -145,6 +156,14 @@ const IngredientList = ({ list, type, openList }) => {
                             </div>
                         </div>
                     </label>}
+
+                {list === 'foods' &&
+                    <div className='ingredients-cell add-ing'
+                        onClick={() => setCreateFood(true)}>
+                        <p>Crear nueva preparación ⭐</p>
+                    </div>
+                }
+
                 {group[list].map(ing =>
                     <label key={ing.name}
                         htmlFor={'ingOpt' + ing.name}

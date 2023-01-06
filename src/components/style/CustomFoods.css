@@ -1,0 +1,19 @@
+.customfood-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin: .5em 0; */
+}
+
+.customfood-cell p {
+    margin: 0 0 0 1em;
+    width: 65%;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.customfood-cell div>* {
+    margin: 0 1em;
+}
