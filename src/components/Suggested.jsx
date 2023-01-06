@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import { group } from '../constants'
 import { usePlate } from '../plate-context'
 import { suggestions } from './helpers/suggestions'
 
@@ -24,7 +23,7 @@ export const Suggested = () => {
     const [tip, setTip] = useState({})
 
     useEffect(() => {
-        if (week.today.length === 1) {
+        if (week?.today?.length === 1) {
             const {
                 message,
                 initials

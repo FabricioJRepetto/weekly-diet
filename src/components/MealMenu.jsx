@@ -10,6 +10,7 @@ import { Suggested } from './Suggested'
 import { defineWeek } from './helpers/defineWeek'
 import { Spinner } from './Spinner'
 import Loading from './Loading'
+import { useNavigate } from 'react-router-dom'
 
 import './style/MealMenu.css'
 
@@ -30,6 +31,7 @@ const MealMenu = () => {
                 edit
             }
         } } = usePlate()
+    const navigate = useNavigate()
     const [isOpenType, openType, closeType] = useModal();
 
     const closeTypeHandler = () => {
@@ -46,7 +48,7 @@ const MealMenu = () => {
     }
 
     const close = () => {
-        dispatch({ type: 'mealMenu', payload: false })
+        navigate('/')
         dispatch({ type: 'reset' })
     }
 

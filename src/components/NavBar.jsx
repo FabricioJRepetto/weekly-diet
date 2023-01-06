@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { usePlate } from '../plate-context'
 import { deleteCookie } from './helpers/cookies'
 import { BiLogOut, BiMenu, BiArrowToRight } from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom'
 
 import './style/NavBar.css'
 
 export const NavBar = () => {
+    const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const { dispatch, state: { session } } = usePlate();
 
@@ -15,13 +17,14 @@ export const NavBar = () => {
         dispatch({ type: 'logout' })
     }
 
-    const test = () => {
-        setOpen(!open)
+    const go = (rout) => {
+        setOpen(false)
+        navigate(rout)
     }
 
     return (
         <div className={`navbar-container ${session ? 'navbar' : ''}`}>
-            <b>Diet mate</b>
+            <b onClick={() => go('/')}>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>
                 {open
                     ? <BiArrowToRight className='icon i-white' />
@@ -29,13 +32,13 @@ export const NavBar = () => {
                 }
             </button>
             <div className={`navmenu-closer ${open ? 'navmenu-closer-on' : ''}`}
-                onClick={test}></div>
+                onClick={() => setOpen(!open)}></div>
             <div className={`navbar-menu ${open && 'navbar-menu-open'}`}>
                 <div>
-                    <p>{'[Historal]'}</p>
-                    <p>{'[Mis preparaciones]'}</p>
-                    <p>{'[Agregar control]'}</p>
-                    <p>{'[Configuración]'}</p>
+                    <p>{'[WIP] Historal'}</p>
+                    <p onClick={() => go('/customFoods')}>Mis preparaciones</p>
+                    <p>{'[WIP] Agregar control'}</p>
+                    <p>{'[WIP] Configuración'}</p>
                 </div>
                 <p onClick={logout}>
                     <BiLogOut className='icon i-margin' />

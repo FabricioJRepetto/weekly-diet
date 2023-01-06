@@ -1,6 +1,53 @@
+.create-food-outer-container {
+    width: 100%;
+}
+
+.create-food-container {
+    width: 100%;
+}
+
+.create-food-container input {
+    width: 95%;
+    height: 2em;
+    padding-left: .5em;
+    margin-bottom: .5em;
+    border-radius: .5em;
+    border: none;
+}
+
+.create-food-container b {
+    width: 100%;
+    height: 1rem;
+    color: var(--prot);
+}
+
+.create-food-ingredients {
+    position: relative;
+}
+
+.create-food-ing-container {
+    display: flex;
+    flex-direction: column;
+    height: 18vh;
+    padding: .5em 0;
+    margin: 1em 0;
+    overflow-y: auto;
+}
+
+.create-food-ing {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 90%;
+}
+
 .search-results-mini {
-    height: 15vh;
-    margin-top: 1em;
+    position: absolute;
+    top: 2em;
+    height: 18vh;
+    width: 100%;
+    margin: 1em 0;
     padding: .5em 0;
     overflow-y: auto;
+    background-color: rgb(32, 32, 32);
 }

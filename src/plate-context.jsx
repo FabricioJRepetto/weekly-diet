@@ -26,8 +26,8 @@ function plateReducer(state, action) {
                 loading: false,
                 id: false,
                 history: [],
-                week: [],
-                mealMenu: false
+                week: []
+                // mealMenu: false
             }
         }
         case 'loading': {
@@ -36,12 +36,12 @@ function plateReducer(state, action) {
                 loading: action.payload
             }
         }
-        case 'mealMenu': {
-            return {
-                ...state,
-                mealMenu: action.payload
-            }
-        }
+        // case 'mealMenu': {
+        //     return {
+        //         ...state,
+        //         mealMenu: action.payload
+        //     }
+        // }
         case 'save': {
             return {
                 ...state,
@@ -62,7 +62,6 @@ function plateReducer(state, action) {
         case 'edit': {
             return {
                 ...state,
-                mealMenu: true,
                 currentPlate: action.payload
             }
         }
@@ -145,7 +144,7 @@ function PlateProvider({ children }) {
         id: false,
         history: [],
         week: [],
-        mealMenu: false,
+        // mealMenu: false,
         group: {}
     })
     const value = { state, dispatch }

@@ -8,10 +8,12 @@ import Modal from "./helpers/Modal";
 import { useModal } from "./helpers/useModal";
 import { defineWeek } from './helpers/defineWeek'
 import { Spinner } from './Spinner'
+import { useNavigate } from 'react-router-dom'
 
 import './style/Week.css'
 
 const WeekSummary = () => {
+    const navigate = useNavigate()
     const {
         dispatch,
         state: { week }
@@ -34,6 +36,7 @@ const WeekSummary = () => {
 
     return (
         <div className='weeksummary-container'>
+
             {week.vegetalC && <div className='your-week card-style'>
                 <b>Tu semana:</b>
                 <div>Permitidos: {<Counter num={0} max={5} />}</div>
@@ -41,6 +44,13 @@ const WeekSummary = () => {
             </div>}
 
             {week.today?.length === 1 && <LastMeal />}
+
+            <button className='ingredients-cell add-ing'
+                disabled={week?.today?.length > 1}
+                onClick={() => navigate('/mealMenu')}
+            >
+                Agregar comida +
+            </button>
 
             <section className='week-container'>
                 {week.monday && <WeekDay data={week.monday} openDelete={openDelete} />}

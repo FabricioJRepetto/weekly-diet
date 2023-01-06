@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-// import { group } from '../constants';
 import { usePlate } from '../plate-context';
 import Loading from './Loading';
 import { Spinner } from './Spinner';
+import { BiX } from 'react-icons/bi';
 
 import './style/CreateFood.css'
 
@@ -14,7 +14,7 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
     } = group
     const [loading, setLoading] = useState(false)
     const [filtered, setFiltered] = useState([])
-    const [customFood, setCustomFood] = useState(edit.name || false)
+    const [customFood, setCustomFood] = useState(edit.name || '')
     const [selected, setSelected] = useState(edit.ingredients || [])
     const [error1, setError1] = useState('')
     const [error2, setError2] = useState('')
@@ -76,7 +76,7 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
                 aux = everything.filter(e => re.test(e.name))
             setFiltered(() => aux)
         } else {
-            setFiltered(() => '')
+            setFiltered(() => [])
         }
     }
 
@@ -86,43 +86,58 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
                 flag = aux.map(e => e.name).includes(ing.name)
 
             if (flag) return aux.filter(e => e.name !== ing.name)
-            else return [...aux, ing]
+            else {
+                document.getElementById('search-input').value = ''
+                setFiltered(() => [])
+                return [...aux, ing]
+            }
         })
     }
 
     return (
-        <div className="IngredientList">
+        <div className="create-food-outer-container">
             {loading
                 ? <>
                     <Spinner />
                     <>Guardando<Loading /></>
                 </>
-                : <>
+                : <div className='create-food-container'>
                     <input type="text" placeholder='Nombre'
                         value={customFood}
                         onChange={e => setCustomFood(e.target.value)} />
-                    <p>{error1 || ''}</p>
-                    {!!selected.length && selected.map(e =>
-                        <div key={e.name} onClick={() => addIng(e)}>{`${e.name} (${e.list})`}</div>
-                    )}
-                    <div>
+                    <b>{error1 || ' '}</b>
+
+                    <div className='create-food-ingredients'>
                         <input type="text"
                             id={'search-input'}
                             placeholder='Agregar ingrediente'
+                            autoComplete='off'
                             onChange={(e) => find(e.target.value)} />
-                        <p>{error2 || ''}</p>
+                        <b>{error2 || ' '}</b>
 
-                        <div className='search-results-mini ingList'>{
-                            filtered.length > 0 && filtered.map((e, i) =>
+                        <div className='create-food-ing-container'>
+                            {!!selected.length &&
+                                selected.map(e =>
+                                    <div key={e.name}
+                                        onClick={() => addIng(e)}
+                                        className='create-food-ing'>
+                                        {e.name}
+                                        <BiX className='icon' />
+                                    </div>
+                                )}
+                        </div>
+
+                        {filtered.length > 0 && <div className='search-results-mini ingList'>{
+                            filtered.map((e, i) =>
                                 <div key={e.name + i}
-                                    onClick={() => addIng(e)}>{e.name + ' ' + e.list}</div>
+                                    onClick={() => addIng(e)}>{e.name}</div>
                             )
-                        }</div>
+                        }</div>}
                     </div>
 
                     <button className='button' onClick={saveFood}>guardar</button>
                     <button className='button button-sec' onClick={close}>volver</button>
-                </>}
+                </div>}
         </div>
     )
 }

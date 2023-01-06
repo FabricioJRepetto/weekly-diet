@@ -21,7 +21,7 @@ const Modal = ({ children, isOpen, closeModal }) => {
 
     return (
         <article
-            className={`modal${isOpen ? " is-open" : ""}`}
+            className={`modal ${isOpen ? "is-open" : ""}`}
             onMouseDown={handleOnMouseDown}
             onMouseUp={handleOnMouseUp}
             id="modal-article"

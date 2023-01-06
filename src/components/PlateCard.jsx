@@ -3,6 +3,7 @@ import Plate from './Plate'
 import { usePlate } from '../plate-context'
 
 import '../components/style/PlateCard.css'
+import { useNavigate } from 'react-router-dom'
 
 const PlateCard = ({ data, setShow, showing, i, details = true, size = false, openDelete }) => {
     const propotionsMaker = () => {
@@ -41,6 +42,7 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false, op
         date,
         _id
     } = data,
+        navigate = useNavigate(),
         [preview, setPreview] = useState(true),
         proportions = useRef(propotionsMaker()),
         { dispatch } = usePlate()
@@ -60,6 +62,7 @@ const PlateCard = ({ data, setShow, showing, i, details = true, size = false, op
                 vegetalC
             }
         })
+        navigate('/mealMenu')
     }
 
     const deleteHandler = () => {
