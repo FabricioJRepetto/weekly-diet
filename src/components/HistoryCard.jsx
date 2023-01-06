@@ -21,79 +21,95 @@ export const HistoryCard = ({ data }) => {
     } = data,
         currentWeek = (new Date() >= new Date(start) && new Date() <= new Date(end))
     return (
-        <div className='card-style'>
-            <h3>Semana: {start} al {end}</h3>
-            {currentWeek && <p>semana actual</p>}
+        <div className={`history-card-container card-style`}>
+            <p>Semana: <b>{start.slice(0, -5)}</b>{currentWeek && ' (semana actual)'}</p>
 
-            {monday
-                ? <>{
-                    monday.length > 1
-                        ? !monday[2]
-                            ? <BiCheckCircle className='icon i-margin i-green' />
-                            : <BiXCircle className='icon i-margin i-red' />
-                        : <BiHelpCircle className='icon i-margin i-grey' />}
-                </>
-                : <BiHelpCircle className='icon i-margin i-grey' />}
 
-            {tuesday
-                ? <>{
-                    tuesday.length > 1
-                        ? !tuesday[2]
-                            ? <BiCheckCircle className='icon i-margin i-green' />
-                            : <BiXCircle className='icon i-margin i-red' />
-                        : <BiHelpCircle className='icon i-margin i-grey' />}
-                </>
-                : <BiHelpCircle className='icon i-margin i-grey' />}
+            <div className='history-card-days'>
+                <div>L
+                    {monday
+                        ? <>{
+                            monday.length > 1
+                                ? !monday[2]
+                                    ? <BiCheckCircle className='icon i-green' />
+                                    : <BiXCircle className='icon i-red' />
+                                : <BiHelpCircle className='icon i-grey' />}
+                        </>
+                        : <BiHelpCircle className='icon i-grey' />}
+                </div>
 
-            {wednesday
-                ? <>{
-                    wednesday.length > 1
-                        ? !wednesday[2]
-                            ? <BiCheckCircle className='icon i-margin i-green' />
-                            : <BiXCircle className='icon i-margin i-red' />
-                        : <BiHelpCircle className='icon i-margin i-grey' />}
-                </>
-                : <BiHelpCircle className='icon i-margin i-grey' />}
+                <div>M
+                    {tuesday
+                        ? <>{
+                            tuesday.length > 1
+                                ? !tuesday[2]
+                                    ? <BiCheckCircle className='icon i-green' />
+                                    : <BiXCircle className='icon i-red' />
+                                : <BiHelpCircle className='icon i-grey' />}
+                        </>
+                        : <BiHelpCircle className='icon i-grey' />}
+                </div>
 
-            {thursday
-                ? <>{
-                    thursday.length > 1
-                        ? !thursday[2]
-                            ? <BiCheckCircle className='icon i-margin i-green' />
-                            : <BiXCircle className='icon i-margin i-red' />
-                        : <BiHelpCircle className='icon i-margin i-grey' />}
-                </>
-                : <BiHelpCircle className='icon i-margin i-grey' />}
+                <div>X
+                    {wednesday
+                        ? <>{
+                            wednesday.length > 1
+                                ? !wednesday[2]
+                                    ? <BiCheckCircle className='icon i-green' />
+                                    : <BiXCircle className='icon i-red' />
+                                : <BiHelpCircle className='icon i-grey' />}
+                        </>
+                        : <BiHelpCircle className='icon i-grey' />}
+                </div>
 
-            {friday
-                ? <>{
-                    friday.length > 1
-                        ? !friday[2]
-                            ? <BiCheckCircle className='icon i-margin i-green' />
-                            : <BiXCircle className='icon i-margin i-red' />
-                        : <BiHelpCircle className='icon i-margin i-grey' />}
-                </>
-                : <BiHelpCircle className='icon i-margin i-grey' />}
+                <div>J
+                    {thursday
+                        ? <>{
+                            thursday.length > 1
+                                ? !thursday[2]
+                                    ? <BiCheckCircle className='icon i-green' />
+                                    : <BiXCircle className='icon i-red' />
+                                : <BiHelpCircle className='icon i-grey' />}
+                        </>
+                        : <BiHelpCircle className='icon i-grey' />}
+                </div>
 
-            {saturday
-                ? <>{
-                    saturday.length > 1
-                        ? !saturday[2]
-                            ? <BiCheckCircle className='icon i-margin i-green' />
-                            : <BiXCircle className='icon i-margin i-red' />
-                        : <BiHelpCircle className='icon i-margin i-grey' />}
-                </>
-                : <BiHelpCircle className='icon i-margin i-grey' />}
+                <div>V
+                    {friday
+                        ? <>{
+                            friday.length > 1
+                                ? !friday[2]
+                                    ? <BiCheckCircle className='icon i-green' />
+                                    : <BiXCircle className='icon i-red' />
+                                : <BiHelpCircle className='icon i-grey' />}
+                        </>
+                        : <BiHelpCircle className='icon i-grey' />}
+                </div>
 
-            {sunday
-                ? <>{
-                    sunday.length > 1
-                        ? !sunday[2]
-                            ? <BiCheckCircle className='icon i-margin i-green' />
-                            : <BiXCircle className='icon i-margin i-red' />
-                        : <BiHelpCircle className='icon i-margin i-grey' />}
-                </>
-                : <BiHelpCircle className='icon i-margin i-grey' />}
+                <div>S
+                    {saturday
+                        ? <>{
+                            saturday.length > 1
+                                ? !saturday[2]
+                                    ? <BiCheckCircle className='icon i-green' />
+                                    : <BiXCircle className='icon i-red' />
+                                : <BiHelpCircle className='icon i-grey' />}
+                        </>
+                        : <BiHelpCircle className='icon i-grey' />}
+                </div>
+
+                <div>D
+                    {sunday
+                        ? <>{
+                            sunday.length > 1
+                                ? !sunday[2]
+                                    ? <BiCheckCircle className='icon i-green' />
+                                    : <BiXCircle className='icon i-red' />
+                                : <BiHelpCircle className='icon i-grey' />}
+                        </>
+                        : <BiHelpCircle className='icon i-grey' />}
+                </div>
+            </div>
 
 
             <p>Vegetales C: {vegetalC}</p>

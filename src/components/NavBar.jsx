@@ -24,7 +24,7 @@ export const NavBar = () => {
 
     return (
         <div className={`navbar-container ${session ? 'navbar' : ''}`}>
-            <b onClick={() => go('/')}>Diet mate</b>
+            <b className='navlogo' onClick={() => go('/')}>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>
                 {open
                     ? <BiArrowToRight className='icon i-white' />
@@ -37,8 +37,8 @@ export const NavBar = () => {
                 <div>
                     <p onClick={() => go('/history')}>Historal</p>
                     <p onClick={() => go('/customFoods')}>Mis preparaciones</p>
-                    <p onClick={() => go('/checkpoint')}>Agregar control</p>
-                    <p onClick={() => go('/config')}>Configuración</p>
+                    <p className='nav-disabled' onClick={() => undefined}>Controles</p>
+                    <p className='nav-disabled' onClick={() => undefined}>Configuración</p>
                 </div>
                 <p onClick={logout}>
                     <BiLogOut className='icon i-margin' />

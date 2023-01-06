@@ -28,6 +28,10 @@
     font-weight: 600;
 }
 
+.button-opt:disabled {
+    color: #606060;
+}
+
 .b-o-delete {
     color: var(--prot);
 }
@@ -85,7 +89,7 @@
 }
 
 .fade-in {
-    animation: fadein 1s ease-in forwards;
+    animation: fadein .3s ease-in forwards;
 }
 
 @keyframes fadein {

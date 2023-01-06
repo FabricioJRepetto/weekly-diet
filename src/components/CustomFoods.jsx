@@ -25,8 +25,6 @@ export const CustomFoods = () => {
         })()
     }, [])
 
-    if (loading) return <Spinner />
-
     const deleteConfirmed = async () => {
         const { data } = await axios.delete(`/foods?food_id=${propDelete}`)
         if (!data.error) {
@@ -37,23 +35,28 @@ export const CustomFoods = () => {
     }
 
     return (
-        <div>
-            <div className='ingredients-cell add-ing'
-                onClick={openNew}>
-                <p>Crear nueva preparación ⭐</p>
-            </div>
-            {foods
-                ? foods.map(e =>
-                    <div key={e._id} className='customfood-cell card-style'>
-                        <p>{e.name}</p>
-
-                        <div>
-                            <BiEdit className='icon' onClick={() => openEdit(e)} />
-                            <BiTrash className='icon' onClick={() => openDelete(e._id)} />
-                        </div>
+        <div className='fade-in'>
+            <h2>Preparaciones</h2>
+            {loading
+                ? <Spinner />
+                : <>
+                    <div className='ingredients-cell add-ing'
+                        onClick={openNew}>
+                        <p>Crear nueva preparación ⭐</p>
                     </div>
-                )
-                : 'No tienes preparaciones guardadas'}
+                    {foods
+                        ? foods.map(e =>
+                            <div key={e._id} className='customfood-cell card-style'>
+                                <p>{e.name}</p>
+
+                                <div>
+                                    <BiEdit className='icon' onClick={() => openEdit(e)} />
+                                    <BiTrash className='icon' onClick={() => openDelete(e._id)} />
+                                </div>
+                            </div>
+                        )
+                        : 'No tienes preparaciones guardadas'}
+                </>}
 
             <Modal isOpen={isOpenDelete} closeModal={closeDelete}>
                 <div className='card-deletemenu'>

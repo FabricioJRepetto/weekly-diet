@@ -18,7 +18,7 @@
     display: flex;
 }
 
-.navbar-container b {
+.navlogo {
     padding-left: 1rem;
     font-family: 'Caveat', cursive;
     font-size: 2rem;
@@ -41,6 +41,10 @@
 
 .navbar-menu p {
     padding-left: 2em;
+}
+
+.nav-disabled {
+    color: #606060;
 }
 
 .navbar-menu-open {

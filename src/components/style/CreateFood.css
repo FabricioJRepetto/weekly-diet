@@ -4,6 +4,7 @@
 
 .create-food-container {
     width: 100%;
+    opacity: 0;
 }
 
 .create-food-container input {
@@ -37,17 +38,30 @@
 .create-food-ing {
     display: flex;
     justify-content: space-between;
-    margin: 0 auto;
+    margin: .25em auto;
     width: 90%;
 }
 
 .search-results-mini {
     position: absolute;
-    top: 2em;
-    height: 18vh;
-    width: 100%;
+    top: 0.2em;
+    left: 50%;
+    transform: translate(-50%);
+    height: 20vh;
+    width: 95%;
     margin: 1em 0;
     padding: .5em 0;
+    border-radius: 0 0 .5em .5em;
     overflow-y: auto;
     background-color: rgb(32, 32, 32);
+}
+
+.search-results-mini div {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+    /* background-color: rgb(87, 32, 32); */
 }

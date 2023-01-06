@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { usePlate } from '../plate-context';
 import Loading from './Loading';
 import { Spinner } from './Spinner';
-import { BiX } from 'react-icons/bi';
+import { IoAddCircleSharp, IoCloseCircleOutline } from "react-icons/io5";
 
 import './style/CreateFood.css'
 
@@ -122,7 +122,7 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
                                         onClick={() => addIng(e)}
                                         className='create-food-ing'>
                                         {e.name}
-                                        <BiX className='icon' />
+                                        <IoCloseCircleOutline className='icon' />
                                     </div>
                                 )}
                         </div>
@@ -130,7 +130,7 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
                         {filtered.length > 0 && <div className='search-results-mini ingList'>{
                             filtered.map((e, i) =>
                                 <div key={e.name + i}
-                                    onClick={() => addIng(e)}>{e.name}</div>
+                                    onClick={() => addIng(e)}>{e.name} <IoAddCircleSharp /></div>
                             )
                         }</div>}
                     </div>

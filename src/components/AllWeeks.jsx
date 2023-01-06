@@ -3,6 +3,8 @@ import axios from 'axios'
 import { Spinner } from './Spinner'
 import { HistoryCard } from './HistoryCard'
 
+import './style/AllWeeks.css'
+
 const AllWeeks = () => {
     const [data, setData] = useState(false)
     const [loading, setLoading] = useState(true)
@@ -18,12 +20,10 @@ const AllWeeks = () => {
 
     return (
         <div>
-            <h2>
-                Historial
-            </h2>
+            <h2>Historial</h2>
             {loading
                 ? <Spinner />
-                : <div>
+                : <div className='weeks-container fade-in'>
                     {!!data.response.length && data.response.map(e => (
                         <HistoryCard data={e} key={e.dates.start} />
                     ))}

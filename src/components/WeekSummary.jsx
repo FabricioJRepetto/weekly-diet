@@ -35,7 +35,7 @@ const WeekSummary = () => {
     }
 
     return (
-        <div className='weeksummary-container'>
+        <div className='weeksummary-container fade-in'>
 
             {week.vegetalC && <div className='your-week card-style'>
                 <b>Tu semana:</b>
