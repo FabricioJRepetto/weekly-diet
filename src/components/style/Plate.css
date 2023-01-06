@@ -172,3 +172,12 @@
     color: #000000;
     z-index: 20;
 }
+
+@media (min-width: 600px) {
+    /* .plate-container {
+        max-width: 30vw;
+        min-width: 500px;
+        max-height: 30vw;
+        min-height: 500px;
+    } */
+}

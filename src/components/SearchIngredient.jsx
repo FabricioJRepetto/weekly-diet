@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import { group } from '../constants'
 import { usePlate } from '../plate-context'
 import { BiSearch, BiX } from 'react-icons/bi';
 
@@ -9,7 +8,10 @@ const SearchIngredient = ({ changeList }) => {
     const {
         dispatch,
         state: {
-            group,
+            group: {
+                vegC,
+                everything
+            },
             currentPlate,
             currentPlate: {
                 protein,
@@ -18,12 +20,10 @@ const SearchIngredient = ({ changeList }) => {
             }
         }
     } = usePlate()
-    const {
-        vegC,
-        everything
-    } = group
+
     const [filtered, setFiltered] = useState(everything)
     const [deployed, setDeployed] = useState(false)
+
 
     const find = (query) => {
         if (query) {
