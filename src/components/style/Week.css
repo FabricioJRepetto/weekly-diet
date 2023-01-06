@@ -19,11 +19,14 @@
 
 .lastmeal-container {
     height: 40vw;
+    max-height: 12em;
     display: flex;
     align-content: center;
+    justify-content: space-evenly;
 }
 
 .lastmeal-plate {
+    height: 90%;
     margin: auto 0;
 }
 

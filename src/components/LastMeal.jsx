@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { usePlate } from '../plate-context'
 import { suggestions } from './helpers/suggestions'
-import PlateCard from './PlateCard'
+import Plate from './Plate'
+
 
 const LastMeal = () => {
     const { state: { week } } = usePlate()
     const [message, setMessage] = useState(false)
-    const [Plate, SetPlate] = useState(false)
+    const [data, setData] = useState(false)
 
     useEffect(() => {
         if (!message) {
@@ -16,19 +17,19 @@ const LastMeal = () => {
             } = suggestions(week.today)
 
             setMessage(() => message)
-            SetPlate(() => platePreview)
+            setData(() => platePreview)
         }
         // eslint-disable-next-line
     }, [])
 
     return (
         <div className='lastmeal-container card-style2 fade-in'>
-            {Plate &&
+            {data &&
                 <div className='lastmeal-plate'>
-                    <PlateCard key={'lastMeal'}
-                        size={'30vw'}
-                        data={Plate}
-                        details={false} />
+                    <Plate protein={data.protein}
+                        carbohydrate={data.carbohydrate}
+                        vegetal={data.vegetal}
+                        vegC={data.vegetalC} />
                 </div>}
 
             <div className='lastmeal-text'>
@@ -40,3 +41,11 @@ const LastMeal = () => {
 }
 
 export default LastMeal
+
+            // {Plate &&
+            //     <div className='lastmeal-plate'>
+            //         <PlateCard key={'lastMeal'}
+            //             size={'30vw'}
+            //             data={Plate}
+            //             details={false} />
+            //     </div>}
