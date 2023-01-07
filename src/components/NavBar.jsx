@@ -37,7 +37,7 @@ export const NavBar = () => {
                 <div>
                     <p onClick={() => go('/history')}>Historal</p>
                     <p onClick={() => go('/customFoods')}>Mis preparaciones</p>
-                    <p className='nav-disabled' onClick={() => undefined}>Controles</p>
+                    <p onClick={() => go('/checkpoint')}>Controles</p>
                     <p className='nav-disabled' onClick={() => undefined}>Configuración</p>
                 </div>
                 <p onClick={logout}>

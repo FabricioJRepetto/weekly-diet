@@ -1,0 +1,128 @@
+.daycard-outer-container {
+    width: calc(100% - 2.5em);
+    max-width: 1200px;
+    aspect-ratio: 3/1;
+}
+
+.daycard-inner-container {
+    height: 100%;
+    display: flex;
+    border: 1px dashed rgb(59, 195, 249);
+}
+
+.daycard-inner-container>div {
+    position: relative;
+    height: 100%;
+    width: 50%;
+    border: 1px solid rgb(245, 210, 55);
+}
+
+/** ////////////DETALLES//////////// **/
+.daycard-details {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.daycard-head {
+    display: flex;
+    height: 80%;
+    width: 100%;
+}
+
+.head-reverse {
+    flex-direction: row-reverse;
+}
+
+/** /////////////barra porcentajes///////////// **/
+.daycard-proportions {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: .6em;
+    border-radius: .3em;
+    overflow: hidden;
+    background-color: rgb(63, 63, 63);
+}
+
+.daycard-proportions div {
+    width: 1em;
+}
+
+/** /////////////ingredientes///////////// **/
+.daycard-ingredients {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.daycard-ing {
+    width: calc(100% - 1em);
+    display: flex;
+    flex-direction: column;
+    margin-left: .5em;
+}
+
+.daycard-ing b {
+    text-align: left;
+    margin: 0;
+    font-size: .8em;
+}
+
+.daycard-ing p {
+    text-align: left;
+    padding-left: .5em;
+    margin: 0;
+    overflow: visible;
+}
+
+.ing-reverse b,
+.ing-reverse p {
+    text-align: right;
+}
+
+.ing-reverse p {
+    padding: 0 .5em 0 0;
+}
+
+.ing-veg {
+    justify-content: flex-end;
+}
+
+/** /////////////extras///////////// **/
+.daycard-options {
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.daycard-options p {
+    margin: 0;
+}
+
+.daycard-legend {
+    width: fit-content;
+    height: fit-content;
+    font-size: .8em;
+}
+
+.legend-vegc {
+    color: var(--carb);
+}
+
+.legend-badplate {
+    color: var(--prot);
+}
+
+/** ///////////// PLATO ///////////// **/
+
+.daycard-plate {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: dotted 1px lime;
+}
