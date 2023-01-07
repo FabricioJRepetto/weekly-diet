@@ -384,3 +384,20 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7a7a7a;
+    width: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+}
