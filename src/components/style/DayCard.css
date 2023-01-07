@@ -14,10 +14,25 @@
 
 .mealcard-container {
     position: relative;
-    height: 100%;
+    height: calc(100% - 1em);
     width: 50%;
     transition: opacity .2s ease, width .2s ease;
 }
+
+.daycard-missing-meal {
+    margin: auto;
+    text-align: center;
+    color: grey;
+    padding: 1em;
+    opacity: 1;
+    transition: opacity .4s .4s ease-in;
+}
+
+.dc-mm-off {
+    opacity: 0;
+    transition: opacity 0s;
+}
+
 
 /** ////////////DETALLES//////////// **/
 .daycard-details {
@@ -109,6 +124,10 @@
     margin: 0;
 }
 
+.underline p {
+    text-decoration: underline;
+}
+
 .daycard-legend {
     width: fit-content;
     height: fit-content;
@@ -148,7 +167,7 @@
 }
 
 .plate-opacity {
-    opacity: .25;
+    opacity: .1;
 }
 
 .plate-pos0 {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { IoAlertCircleSharp, IoLeafSharp } from "react-icons/io5";
 
 import "../components/style/Plate.css"
 
@@ -36,17 +37,13 @@ const Plate = ({ protein, carbohydrate, vegetal, vegC, size }) => {
                 </div>}
 
             {vegC &&
-                <div className='vegC-mark'>
-                    <b>
-                        Veg. C
-                    </b>
+                <div className='mark'>
+                    <IoLeafSharp className='i-medium i-orange' />
                 </div>}
 
             {(vegetal.length < 1 || (protein.length < 1 && carbohydrate.length < 1)) &&
-                <div className='badplate-mark'>
-                    <b>
-                        !
-                    </b>
+                <div className='mark badplate'>
+                    <IoAlertCircleSharp className='icon i-red' />
                 </div>}
         </div>
     )

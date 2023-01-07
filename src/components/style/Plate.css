@@ -150,30 +150,20 @@
     height: 200%;
 }
 
-.vegC-mark {
+.mark {
     position: absolute;
     bottom: 5%;
     left: 10%;
-    width: fit-content;
-    height: fit-content;
-    padding: .25em .5em;
-    border-radius: .5em;
-    background-color: var(--carb);
-    color: #000000;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
     z-index: 20;
 }
 
-.badplate-mark {
-    position: absolute;
-    bottom: 5%;
+.badplate {
+    left: unset;
     right: 10%;
-    width: fit-content;
-    height: fit-content;
-    padding: .25em .5em;
-    border-radius: .5em;
-    background-color: var(--prot);
-    color: #000000;
-    z-index: 20;
+    background-color: unset;
 }
 
 @media (min-width: 600px) {

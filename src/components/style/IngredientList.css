@@ -9,7 +9,7 @@
 .ingList {
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow-y: scroll;
     gap: 1em;
     max-height: 80vh;
     margin-top: 2em;
