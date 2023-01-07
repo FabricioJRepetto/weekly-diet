@@ -8,9 +8,9 @@ import { useModal } from "./helpers/useModal";
 import { defineWeek } from './helpers/defineWeek'
 import { Spinner } from './Spinner'
 import { useNavigate } from 'react-router-dom'
+import { DayCard } from './DayCard'
 
 import './style/Week.css'
-import { DayCard } from './DayCard'
 
 const WeekSummary = () => {
     const navigate = useNavigate()

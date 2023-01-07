@@ -3,7 +3,6 @@ import { usePlate } from '../plate-context'
 import { suggestions } from './helpers/suggestions'
 import Plate from './Plate'
 
-
 const LastMeal = () => {
     const { state: { week } } = usePlate()
     const [message, setMessage] = useState(false)
@@ -41,11 +40,3 @@ const LastMeal = () => {
 }
 
 export default LastMeal
-
-            // {Plate &&
-            //     <div className='lastmeal-plate'>
-            //         <PlateCard key={'lastMeal'}
-            //             size={'30vw'}
-            //             data={Plate}
-            //             details={false} />
-            //     </div>}
