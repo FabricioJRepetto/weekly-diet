@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { usePlate } from '../plate-context'
 import LastMeal from './LastMeal'
 import axios from 'axios'
-import { WeekDay } from './WeekDay'
 import { Counter } from './Counter'
 import Modal from "./helpers/Modal";
 import { useModal } from "./helpers/useModal";
@@ -11,6 +10,7 @@ import { Spinner } from './Spinner'
 import { useNavigate } from 'react-router-dom'
 
 import './style/Week.css'
+import { DayCard } from './DayCard'
 
 const WeekSummary = () => {
     const navigate = useNavigate()
@@ -53,13 +53,27 @@ const WeekSummary = () => {
             </button>
 
             <section className='week-container'>
-                {week.monday && <WeekDay data={week.monday} openDelete={openDelete} />}
-                {week.tuesday && <WeekDay data={week.tuesday} openDelete={openDelete} />}
-                {week.wednesday && <WeekDay data={week.wednesday} openDelete={openDelete} />}
-                {week.thursday && <WeekDay data={week.thursday} openDelete={openDelete} />}
-                {week.friday && <WeekDay data={week.friday} openDelete={openDelete} />}
-                {week.saturday && <WeekDay data={week.saturday} openDelete={openDelete} />}
-                {week.sunday && <WeekDay data={week.sunday} openDelete={openDelete} />}
+                {week.monday &&
+                    <DayCard data={week.monday}
+                        openDelete={openDelete} />}
+                {week.tuesday &&
+                    <DayCard data={week.tuesday}
+                        openDelete={openDelete} />}
+                {week.wednesday &&
+                    <DayCard data={week.wednesday}
+                        openDelete={openDelete} />}
+                {week.thursday &&
+                    <DayCard data={week.thursday}
+                        openDelete={openDelete} />}
+                {week.friday &&
+                    <DayCard data={week.friday}
+                        openDelete={openDelete} />}
+                {week.saturday &&
+                    <DayCard data={week.saturday}
+                        openDelete={openDelete} />}
+                {week.sunday &&
+                    <DayCard data={week.sunday}
+                        openDelete={openDelete} />}
             </section>
 
             <Modal isOpen={isOpenDelete} closeModal={closeDelete}>
