@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { MealCard } from './MealCard'
+
 import './style/DayCard.css'
 
-export const DayCard = ({ data, openDelete }) => {
+export const DayCard = ({ data, openDelete, menu = true }) => {
 
     const [show, setShow] = useState(false)
     const day = useRef(new Date(data[0].date).toLocaleDateString("es-AR", { weekday: "long" }))
@@ -20,6 +21,7 @@ export const DayCard = ({ data, openDelete }) => {
             <div className="daycard-inner-container">
                 {data.map((e, i) => (
                     i < 2 && <MealCard i={i} data={e} key={e._id}
+                        menu={menu}
                         openDelete={openDelete}
                         setShow={() => toogleShow(e._id)}
                         showing={!show || show === e._id} />

@@ -8,7 +8,8 @@ function plateReducer(state, action) {
             return {
                 ...state,
                 session: true,
-                id: action.payload,
+                user_id: action.payload.id,
+                user_name: action.payload.email,
                 loading: false
             }
         }
@@ -24,7 +25,8 @@ function plateReducer(state, action) {
                 },
                 session: false,
                 loading: true,
-                id: false,
+                user_id: null,
+                user_name: null,
                 history: [],
                 week: [],
                 group: {}
@@ -135,7 +137,8 @@ function PlateProvider({ children }) {
         },
         session: false,
         loading: true,
-        id: false,
+        user_id: null,
+        user_name: null,
         history: [],
         week: [],
         group: {}

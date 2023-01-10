@@ -12,33 +12,6 @@ const { REACT_APP_GOOGLE_CLIENT_ID } = process.env
 const LogInScreen = () => {
     const { dispatch, state: { loading } } = usePlate()
     const [message, setmessage] = useState('')
-    // const [loginin, setLoginin] = useState(true)
-    // const [email, setEmail] = useState('')
-    // const [password, setPassword] = useState('')
-    // const [repeatPw, setRepeatPw] = useState('')
-
-    // const login = async (e) => {
-    //     e.preventDefault()
-    //     if (!loginin && password !== repeatPw) {
-    //         setmessage(() => 'las contraseñas no coinciden')
-    //         return
-    //     }
-    //     dispatch({ type: 'loading', payload: true })
-    //     const { data } = await axios.post(`/user/${loginin ? 'login' : 'signup'}`,
-    //         {
-    //             password,
-    //             email
-    //         }
-    //     )
-    //     if (data.error) setmessage(() => data.error)
-    //     else {
-    //         setmessage(() => 'Bienvenido!')
-    //         setCookie('autoLogin', data.token, 7)
-    //         setTimeout(() => {
-    //             dispatch({ type: 'login', payload: data.user_id })
-    //         }, 2000);
-    //     }
-    // }
 
     const handleGoogleLogin = async (res) => {
         dispatch({ type: 'loading', payload: true })
@@ -51,7 +24,7 @@ const LogInScreen = () => {
             setCookie('autoLogin', data.token, 7)
             dispatch({
                 type: 'login',
-                payload: data.id
+                payload: data
             })
         } else {
             setmessage(data.message)
@@ -91,24 +64,6 @@ const LogInScreen = () => {
                     <LoadingHints />
                 </>}
             <div className={loading ? 'transparent' : ''}>
-                {/* {<form onSubmit={login} className='login-form' >
-                    <input type="text"
-                        autoComplete='off'
-                        onChange={(e) => setEmail(e.target.value)} />
-                    <input type="password"
-                        autoComplete='off'
-                        onChange={(e) => setPassword(e.target.value)} />
-                    {!loginin &&
-                        <input type="password"
-                            autoComplete='off'
-                            onChange={(e) => setRepeatPw(e.target.value)} />}
-                    <button>{loginin ? 'iniciar sesion' : 'crear cuenta'}</button>
-                </form>}
-                <br />
-                <b onClick={() => setLoginin(!loginin)}>{!loginin ? '...o iniciar sesion' : '...o crear cuenta'}</b>
-                <br />
-                <br />
-                <p>o inicia con google</p> */}
 
                 {message && <b>{message}</b>}
                 <div id='googleButtonDiv'></div>

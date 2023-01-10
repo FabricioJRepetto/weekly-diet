@@ -3,26 +3,26 @@ import { useNavigate } from 'react-router-dom'
 import { usePlate } from '../plate-context'
 import Plate from './Plate'
 
-export const MealCard = ({ data, i, openDelete, setShow, showing }) => {
+export const MealCard = ({ data, i, openDelete, setShow, showing, menu }) => {
     const propotionsMaker = () => {
         let p = !!protein.length
             ? !!protein.length && !!carbohydrate.length
                 ? 1
-                : 2
+                : 1.65
             : 0,
             c = !!carbohydrate.length
                 ? !!carbohydrate.length && !!protein.length
                     ? 1
-                    : 2
+                    : 1.65
                 : 0,
             v = !!vegetal.length
-                ? 2
+                ? 1
                 : 0
 
         return {
-            p: { height: `${25 * p}%` },
-            c: { height: `${25 * c}%` },
-            v: { height: `${25 * v}%` },
+            p: { height: `${Math.ceil(30 * p)}%` },
+            c: { height: `${Math.ceil(30 * c)}%` },
+            v: { height: `${(p && c ? 40 : 50) * v}%` },
             boolean: {
                 p: !!p,
                 c: !!c,
@@ -85,17 +85,17 @@ export const MealCard = ({ data, i, openDelete, setShow, showing }) => {
                         <div className='daycard-ingredients'>
                             {proportions.current.boolean.p &&
                                 <div className={`daycard-ing ${i === 1 ? 'ing-reverse' : ''}`} style={proportions.current.p}>
-                                    <b style={{ color: 'var(--prot)' }}>Proteínas</b>
+                                    {/* <b style={{ color: 'var(--prot)' }}>Proteínas</b> */}
                                     <p>{protein.toString().replaceAll(',', ', ')}</p>
                                 </div>}
                             {proportions.current.boolean.c &&
-                                <div className={`daycard-ing ${i === 1 ? 'ing-reverse' : ''}`} style={proportions.current.c}>
-                                    <b style={{ color: 'var(--carb)' }}>Carbohidratos</b>
+                                <div className={`daycard-ing ing-carb ${i === 1 ? 'ing-reverse' : ''}`} style={proportions.current.c}>
+                                    {/* <b style={{ color: 'var(--carb)' }}>Carbohidratos</b> */}
                                     <p>{carbohydrate.toString().replaceAll(',', ', ')}</p>
                                 </div>}
                             {proportions.current.boolean.v &&
                                 <div className={`daycard-ing ing-veg ${i === 1 ? 'ing-reverse' : ''}`} style={proportions.current.v}>
-                                    <b style={{ color: 'var(--veg)' }}>Vegetales</b>
+                                    {/* <b style={{ color: 'var(--veg)' }}>Vegetales</b> */}
                                     <p>{vegetal.toString().replaceAll(',', ', ')}</p>
                                 </div>}
                         </div>
@@ -112,10 +112,10 @@ export const MealCard = ({ data, i, openDelete, setShow, showing }) => {
                         </p>}
                 </div>
 
-                <div className='daycard-options underline'>
+                {menu && <div className='daycard-options'>
                     <p className='button-opt' onClick={edit}>editar</p>
                     <p className='button-opt b-o-delete' onClick={deleteHandler}>borrar</p>
-                </div>
+                </div>}
             </div>
 
             <div className={`daycard-plate ${preview ? '' : 'plate-opacity plate-pos' + i}`}>

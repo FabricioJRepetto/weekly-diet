@@ -1,3 +1,16 @@
+.cp-cards-container {
+    padding: 1em;
+}
+
+.control-form input {
+    width: 95%;
+    height: 2em;
+    padding-left: .5em;
+    margin-bottom: .5em;
+    border-radius: .5em;
+    border: none;
+}
+
 .history-card-days div {
     display: flex;
     flex-direction: column;
@@ -7,8 +20,129 @@
     text-align: center;
 }
 
+.card-date {
+    margin-top: 0;
+}
+
 .history-card-days {
     width: 100%;
+    margin-bottom: 1em;
     display: flex;
     justify-content: center;
+}
+
+.history-card-days p {
+    margin: 0;
+}
+
+.history-card-details-section {
+    height: 1.8rem;
+    margin: 0;
+    padding: 0;
+    border-radius: .5em;
+    background: radial-gradient(at 0% top, #c3eaff09, #61d2ff00 70%);
+    border-top: 1px solid #FFFFFF25;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.history-card-details-head {
+    margin: .25em 0 .5em 0;
+    padding: 0 1em;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 2em);
+}
+
+.history-card-details-head p {
+    margin: 0;
+}
+
+.history-success-rate {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: .5em;
+    padding: .2em 0;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: .5em;
+    background: #ffffff09;
+    /* border: 1px solid forestgreen; */
+}
+
+.history-success-rate b,
+.history-success-rate p {
+    margin: 0;
+}
+
+.history-success-rate p {
+    font-size: .8rem;
+}
+
+.history-success-rate div {
+    padding-left: .75em;
+    width: max-content;
+    text-align: left;
+}
+
+.history-details-stats {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: .5em;
+}
+
+.history-details-stats span p {
+    margin: 0;
+    font-size: .8rem;
+}
+
+.scaledown {
+    scale: .95;
+}
+
+.history-card-section {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    height: 1.8rem;
+    overflow: hidden;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.history-card-section>div {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 3em);
+    padding-left: 1.3em;
+    font-weight: 400;
+}
+
+.history-card-section>div:last-child {
+    margin-bottom: .5em;
+}
+
+.history-card-section p {
+    margin: 0;
+}
+
+.history-card-section>div p:first-child {
+    font-weight: 200;
+}
+
+.history-card-control-head {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: .25em 0;
+    font-weight: 600;
+}
+
+.cpOpen {
+    height: fit-content;
+}
+
+.allWeeksOpen {
+    height: fit-content;
 }

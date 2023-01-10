@@ -368,6 +368,7 @@ input:focus {
     --prot: #F7A4A4;
     --carb: #FEBE8C;
     --veg: #B6E2A1;
+    --info: #73ccea;
 }
 
 body {
@@ -400,4 +401,15 @@ code {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #404040;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
 }

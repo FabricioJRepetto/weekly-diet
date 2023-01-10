@@ -45,6 +45,17 @@
     padding-left: 2em;
 }
 
+.navbar-menu i {
+    font-size: .9rem;
+    padding-left: 2em;
+    color: #606060;
+    display: block;
+    width: calc(100% - 4em);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .nav-disabled {
     color: #606060;
 }

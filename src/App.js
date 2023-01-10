@@ -6,7 +6,7 @@ import MealMenu from './components/MealMenu';
 import Home from './components/Home';
 import LogInScreen from './components/LogInScreen';
 import { defineWeek } from './components/helpers/defineWeek';
-import { getCookie } from './components/helpers/cookies';
+import { deleteCookie, getCookie } from './components/helpers/cookies';
 import { CustomFoods } from './components/CustomFoods';
 import { Checkpoint } from "./components/Checkpoint";
 import { Config } from "./components/Config";
@@ -35,10 +35,11 @@ function App() {
                     if (!data.error) {
                         dispatch({
                             type: 'login',
-                            payload: data.id
+                            payload: data
                         })
                         navigate('/')
                     } else {
+                        deleteCookie('autoLogin')
                         dispatch({
                             type: 'loading',
                             payload: false

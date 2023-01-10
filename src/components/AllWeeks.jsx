@@ -12,7 +12,6 @@ const AllWeeks = () => {
     useEffect(() => {
         (async () => {
             const { data } = await axios(`/history/allweeks`)
-            console.log(data);
             if (!data.error) setData(() => data)
             setLoading(false)
         })()
@@ -24,9 +23,10 @@ const AllWeeks = () => {
             {loading
                 ? <Spinner />
                 : <div className='weeks-container fade-in'>
-                    {!!data.response.length && data.response.map(e => (
-                        <HistoryCard data={e} key={e.dates.start} />
-                    ))}
+                    {!!data.response.length &&
+                        data.response.map((e, i) => (
+                            <HistoryCard data={e} key={Date.now() + i} />
+                        ))}
                 </div>
             }
         </div>

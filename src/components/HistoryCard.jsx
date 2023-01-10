@@ -1,13 +1,18 @@
-import React from 'react'
-import { BiCheckCircle, BiXCircle, BiHelpCircle } from 'react-icons/bi';
+import React, { useState, useRef, useEffect } from 'react'
+import { BiCheckCircle, BiXCircle, BiHelpCircle, BiChevronDown, BiDumbbell } from 'react-icons/bi'
+import { IoLeafSharp } from "react-icons/io5";
+import { FaHamburger, FaChartPie } from "react-icons/fa";
+
+import { RiSearchEyeLine } from "react-icons/ri";
+import { DayCard } from './DayCard'
 
 import './style/HistoryCard.css'
+import { ControlCard } from './ControlCard';
 
 export const HistoryCard = ({ data }) => {
     const {
         dates: {
-            start,
-            end
+            start
         },
         monday,
         tuesday,
@@ -17,13 +22,50 @@ export const HistoryCard = ({ data }) => {
         saturday,
         sunday,
         vegetalC,
+        cheatFood,
+        workOut,
         checkpoint
-    } = data,
-        currentWeek = (new Date() >= new Date(start) && new Date() <= new Date(end))
+    } = data
+
+    const [cpOpen, setCpOpen] = useState(false),
+        [allWeeksOpen, setAllWeeksOpen] = useState(false),
+        average = useRef(null),
+        dateString = useRef(new Date(start).toLocaleDateString("es-AR", { year: 'numeric', month: 'long', day: 'numeric' }))
+
+    useEffect(() => {
+        if (!average.current) average.current = averageGetter()
+        // eslint-disable-next-line
+    }, [])
+
+    const averageGetter = () => {
+        let avrg = 0,
+            missing = 0;
+
+        [
+            monday,
+            tuesday,
+            wednesday,
+            thursday,
+            friday,
+            saturday,
+            sunday
+        ].forEach(day => {
+            if (day) {
+                if (day.length === 2) {
+                    avrg++
+                }
+            } else missing++
+        })
+        console.log('··· computadoreando resultados *bip bop* ···');
+        return {
+            success: Math.round(avrg / (7 - missing) * 100),
+            missing
+        }
+    }
+
     return (
         <div className={`history-card-container card-style`}>
-            <p>Semana: <b>{start.slice(0, -5)}</b>{currentWeek && ' (semana actual)'}</p>
-
+            <p className='card-date'>Semana: <b>{dateString.current}</b></p>
 
             <div className='history-card-days'>
                 <div>L
@@ -35,7 +77,7 @@ export const HistoryCard = ({ data }) => {
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
                         </>
-                        : <BiHelpCircle className='icon i-grey' />}
+                        : <p>·</p>}
                 </div>
 
                 <div>M
@@ -47,7 +89,7 @@ export const HistoryCard = ({ data }) => {
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
                         </>
-                        : <BiHelpCircle className='icon i-grey' />}
+                        : <p>·</p>}
                 </div>
 
                 <div>X
@@ -59,7 +101,7 @@ export const HistoryCard = ({ data }) => {
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
                         </>
-                        : <BiHelpCircle className='icon i-grey' />}
+                        : <p>·</p>}
                 </div>
 
                 <div>J
@@ -71,7 +113,7 @@ export const HistoryCard = ({ data }) => {
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
                         </>
-                        : <BiHelpCircle className='icon i-grey' />}
+                        : <p>·</p>}
                 </div>
 
                 <div>V
@@ -83,7 +125,7 @@ export const HistoryCard = ({ data }) => {
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
                         </>
-                        : <BiHelpCircle className='icon i-grey' />}
+                        : <p>·</p>}
                 </div>
 
                 <div>S
@@ -95,7 +137,7 @@ export const HistoryCard = ({ data }) => {
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
                         </>
-                        : <BiHelpCircle className='icon i-grey' />}
+                        : <p>·</p>}
                 </div>
 
                 <div>D
@@ -107,17 +149,64 @@ export const HistoryCard = ({ data }) => {
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
                         </>
-                        : <BiHelpCircle className='icon i-grey' />}
+                        : <p>·</p>}
                 </div>
             </div>
 
+            <div className={`history-card-details-section ${allWeeksOpen ? 'allWeeksOpen' : ''}`}>
+                <span className='history-card-details-head'
+                    onClick={() => setAllWeeksOpen(!allWeeksOpen)}>
+                    <p><RiSearchEyeLine className='icon i-margin-r ' /> Ver detalles</p>
+                    <BiChevronDown className={`icon i-grey ${allWeeksOpen ? 'i-arrow-close' : ''}`} />
+                </span>
+                {allWeeksOpen &&
+                    <>
+                        <div className='history-success-rate'>
+                            <FaChartPie className={`i-large i-margin-r ${average.current.success > 75 ? 'i-green' : average.current.success < 50 ? 'i-red' : ''}`} />
+                            <div>
+                                <b>{average.current.success || '0'}% éxito</b>
+                                <p>{average.current.missing} días sin registro</p>
+                            </div>
+                        </div>
+                        <div className="history-details-stats">
+                            <span>
+                                <b><IoLeafSharp className='i-margin-t i-margin-r i-orange' /> {vegetalC}</b>
+                                <p>vegetales C</p>
+                            </span>
+                            <span>
+                                <b><FaHamburger className='i-margin-t i-margin-r i-red' /> {cheatFood || 0}</b>
+                                <p>permitidos</p>
+                            </span>
+                            <span>
+                                <b><BiDumbbell className=' i-medium i-margin-r i-blue' /> {workOut || 0}</b>
+                                <p>actividad</p>
+                            </span>
+                        </div>
+                        {[
+                            monday,
+                            tuesday,
+                            wednesday,
+                            thursday,
+                            friday,
+                            saturday,
+                            sunday
+                        ].map(day => (
+                            day &&
+                            <div className='scaledown'>
+                                <DayCard key={day[0].date} data={day}
+                                    menu={false} />
+                            </div>
+                        ))}
+                    </>
+                }
+            </div>
 
-            <p>Vegetales C: {vegetalC}</p>
-            {checkpoint && <>
-                <p>Peso: </p>
-                <p>% musculo: </p>
-                <p>% grasa: </p>
-            </>}
-        </div>
+            {checkpoint &&
+                <ControlCard data={checkpoint}
+                    showDate={false}
+                    open={cpOpen}
+                    setOpen={setCpOpen} />
+            }
+        </div >
     )
 }

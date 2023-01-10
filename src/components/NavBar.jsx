@@ -9,7 +9,7 @@ import './style/NavBar.css'
 export const NavBar = () => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
-    const { dispatch, state: { session } } = usePlate();
+    const { dispatch, state: { session, user_name } } = usePlate();
 
     const logout = () => {
         setOpen(false)
@@ -36,14 +36,19 @@ export const NavBar = () => {
             <div className={`navbar-menu ${open && 'navbar-menu-open'}`}>
                 <div>
                     <p onClick={() => go('/history')}>Historal</p>
+                    <p onClick={() => go('/checkpoint')}>Controles</p>
                     <p onClick={() => go('/customFoods')}>Mis preparaciones</p>
-                    <p className='nav-disabled' onClick={() => undefined}>Controles</p>
                     <p className='nav-disabled' onClick={() => undefined}>Configuración</p>
                 </div>
-                <p onClick={logout}>
-                    <BiLogOut className='icon i-margin' />
-                    Cerrar sesión
-                </p>
+
+                <div>
+                    <i>usuario:</i>
+                    <i>{user_name}</i>
+                    <p onClick={logout}>
+                        <BiLogOut className='icon i-margin-r' />
+                        Cerrar sesión
+                    </p>
+                </div>
             </div>
         </div>
     )
