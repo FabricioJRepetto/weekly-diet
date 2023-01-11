@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Spinner } from './Spinner'
 import { HistoryCard } from './HistoryCard'
+import { PDF } from './PDF'
+import { BiDownload, BiFile, BiChevronDown } from "react-icons/bi";
 
 import './style/AllWeeks.css'
-import { PDFtest } from './PDFtest'
 
 const AllWeeks = () => {
     const [data, setData] = useState(false)
@@ -16,6 +17,7 @@ const AllWeeks = () => {
 
     useEffect(() => {
         (async () => {
+            console.log('consultando historial');
             const { data } = await axios(`/history/allweeks`)
             if (!data.error) setData(() => data)
             setLoading(false)
@@ -23,8 +25,7 @@ const AllWeeks = () => {
     }, [])
 
     const selectHandle = (obj, id) => {
-        // data = [{ weekDays }]
-        console.log(obj, id);
+        if (payload) setPayload(false)
 
         if (preSave[id]) {
             setSelected(pre => {
@@ -34,6 +35,9 @@ const AllWeeks = () => {
             setPreSave(pre => {
                 let aux = { ...pre }
                 delete aux[id]
+                const payload = Object.values(aux)
+                console.log(payload);
+                setPayload(() => !!payload.length ? payload : false)
                 return aux
             })
         } else {
@@ -45,31 +49,55 @@ const AllWeeks = () => {
             setPreSave(pre => {
                 let aux = { ...pre }
                 aux[id] = obj
+                setPayload(() => Object.values(aux))
                 return aux
             })
         }
     }
 
-    const createPayload = () => {
-        let aux = Object.values(preSave)
-        console.log(aux);
-        setPayload(() => aux)
+    const handleModeButton = () => {
+        setSelectMode(!selectMode)
+        if (payload) setPayload(false)
+        if (preSave) setPreSave(false)
+        if (selected) setSelected([])
     }
+
     return (
         <div>
             <h2>Historial</h2>
 
             {!loading &&
-                <>
-                    {selectMode && <button onClick={createPayload} className='button'>Generar PDF</button>}
-                    <button className={`button ${selectMode ? 'button-sec' : ''}`}
-                        onClick={() => setSelectMode(!selectMode)}>
-                        {selectMode ? 'cancelar' : 'Generar PDF'}
-                    </button>
-                </>
-            }
-            {selectMode && <p>Selecciona las semanas que deseas incluir</p>}
-            {/* {payload && <PDFtest data={payload} />} */}
+                <div className={`pdf-menu-container card-style2 ${selectMode ? 'pdf-open' : ''}`}>
+                    <span className='history-card-details-head'
+                        onClick={handleModeButton}>
+                        <p><BiFile className='icon i-margin-r' /> Descargar historial</p>
+                        <BiChevronDown className={`icon i-grey ${selectMode ? 'i-arrow-close' : ''}`} />
+                    </span>
+
+                    <div>
+                        <p>Para descargar una copia del historial selecciona las semanas que deseas incluir en el archivo</p>
+                        <div className='pdf-selected-list'>{
+                            selected.map(e => <span key={e}>{e}</span>)
+                        }</div>
+
+                        <div className='pdf-menu-buttons'>
+                            {/* <button onClick={createPayload}
+                                disabled={!preSave || selected.length < 1}
+                                className='button'>
+                                Generar PDF
+                            </button> */}
+
+                            {payload
+                                ? <PDF data={payload} />
+                                : <button disabled className='button'><BiDownload className='icon i-margin-r' /> descargar</button>}
+
+                            <button className={`button button-sec`}
+                                onClick={handleModeButton}>cancelar
+                            </button>
+                        </div>
+                    </div>
+
+                </div>}
 
             {loading
                 ? <Spinner />
@@ -79,7 +107,7 @@ const AllWeeks = () => {
                             <HistoryCard data={e} key={Date.now() + i}
                                 selectMode={selectMode}
                                 selected={selected.includes(e.dates.start)}
-                                select={() => selectHandle({ weekDays: e.weekDays }, e.dates.start)} />
+                                select={() => selectHandle({ dates: e.dates, weekDays: e.weekDays }, e.dates.start)} />
                         ))}
                 </div>
             }

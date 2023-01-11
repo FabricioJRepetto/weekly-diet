@@ -55,11 +55,6 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
         }
     }
 
-    // const selectHandler = () => {
-    //     select()
-    //     setSelected(() => !selected)
-    // }
-
     return (
         <div className={`history-card-container card-style`}>
 

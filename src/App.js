@@ -12,9 +12,6 @@ import { Checkpoint } from "./components/Checkpoint";
 import { Config } from "./components/Config";
 import AllWeeks from './components/AllWeeks';
 
-import { PDFtest } from './components/PDFtest';
-import { PDFViewer } from '@react-pdf/renderer';
-
 import './App.css';
 
 function App() {
@@ -72,9 +69,6 @@ function App() {
                         <Route path="/history" element={<AllWeeks />} />
                         <Route path="/checkpoint" element={<Checkpoint />} />
                         <Route path="/config" element={<Config />} />
-
-                        <Route path="/pdf" element={<PDFtest />} />
-
                     </Routes>
                 </div>}
         </div>

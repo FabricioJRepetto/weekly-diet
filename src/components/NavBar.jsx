@@ -38,7 +38,7 @@ export const NavBar = () => {
                     <p onClick={() => go('/history')}>Historal</p>
                     <p onClick={() => go('/checkpoint')}>Controles</p>
                     <p onClick={() => go('/customFoods')}>Mis preparaciones</p>
-                    <p onClick={() => go('/pdf')}>PDF</p>
+                    {/* <p onClick={() => go('/pdf')}>PDF</p> */}
                     <p className='nav-disabled' onClick={() => undefined}>Configuración</p>
                 </div>
 
