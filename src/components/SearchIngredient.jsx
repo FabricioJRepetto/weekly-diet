@@ -63,20 +63,12 @@ const SearchIngredient = ({ changeList }) => {
                 aux = [...vegetal]
                 break;
         }
+        // si el ingrediente ya está en el plato
         if (aux.includes(ing)) {
             aux = aux.filter(e => e !== ing)
-            if (vegC.map(e => e.name).includes(ing))
-                dispatch({
-                    type: 'vegC',
-                    payload: false
-                })
         } else {
+            // si el ingrediente NO está en el plato
             aux.push(ing)
-            if (vegC.map(e => e.name).includes(ing))
-                dispatch({
-                    type: 'vegC',
-                    payload: true
-                })
         }
 
         dispatch({

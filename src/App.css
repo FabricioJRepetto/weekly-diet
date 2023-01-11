@@ -30,6 +30,24 @@
     color: #808080;
 }
 
+.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 50%;
+    min-width: fit-content;
+    width: 8em;
+    min-height: 2em;
+    border-radius: .5em;
+    background-color: #00000020;
+    color: #FFFFFF;
+    padding: .1em .5em;
+}
+
+.checkbox p {
+    margin: 0 .5em 0 0;
+}
+
 .button-opt {
     z-index: +1;
     font-weight: 600;

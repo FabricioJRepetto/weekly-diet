@@ -38,12 +38,6 @@ function plateReducer(state, action) {
                 loading: action.payload
             }
         }
-        case 'pdfDataLoad': {
-            return {
-                ...state,
-                PDF_data: action.payload
-            }
-        }
         case 'save': {
             return {
                 ...state,
@@ -90,20 +84,44 @@ function plateReducer(state, action) {
             }
         }
         case 'foods': {
+            //! CHECKEO DE VEG C
+            let vegetC = false
+            //foods
+            action.payload.forEach(food => {
+                const { vegC } = state.group.foods.find(obj => obj.name === food)
+                !!vegC && (vegetC = true)
+            });
+            //carbs
+            !vegetC && state.group.vegC.forEach(e => {
+                if (state.currentPlate.carbohydrate.includes(e.name)) vegetC = true
+            });
             return {
                 ...state,
                 currentPlate: {
                     ...state.currentPlate,
-                    foods: action.payload
+                    foods: action.payload,
+                    vegetalC: vegetC
                 }
             }
         }
         case 'carbohydrate': {
+            //! CHECKEO DE VEG C
+            let vegetC = false
+            //carbs
+            state.group.vegC.forEach(e => {
+                if (action.payload.includes(e.name)) vegetC = true
+            });
+            //foods
+            !vegetC && state.currentPlate.foods.forEach(food => {
+                const { vegC } = state.group.foods.find(obj => obj.name === food)
+                !!vegC && (vegetC = true)
+            });
             return {
                 ...state,
                 currentPlate: {
                     ...state.currentPlate,
-                    carbohydrate: action.payload
+                    carbohydrate: action.payload,
+                    vegetalC: vegetC
                 }
             }
         }

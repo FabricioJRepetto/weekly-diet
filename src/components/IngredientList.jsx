@@ -46,7 +46,7 @@ const IngredientList = ({ list, type, openList }) => {
         return aux
     }
 
-    const handleSelect = ({ name, list, mix = false, lists = false }) => {
+    const handleSelect = ({ name, list, mix = false, lists = false, vegC = false }) => {
         let aux = correctList(list)
 
         if (aux.includes(name)) { //? retirar de la lista
@@ -59,12 +59,12 @@ const IngredientList = ({ list, type, openList }) => {
                     dispatch({ type: l, payload: aux })
                 })
             }
-
-            if (group.vegC.map(e => e.name).includes(name))
-                dispatch({
-                    type: 'vegC',
-                    payload: false
-                })
+            //! CHECKEO DE VEG C
+            // if (group.vegC.map(e => e.name).includes(name) || (mix && vegC))
+            //     dispatch({
+            //         type: 'vegC',
+            //         payload: false
+            //     })
         } else { //? agregar a la lista
             aux.push(name)
 
@@ -75,12 +75,12 @@ const IngredientList = ({ list, type, openList }) => {
                     dispatch({ type: l, payload: aux })
                 })
             }
-
-            if (group.vegC.map(e => e.name).includes(name))
-                dispatch({
-                    type: 'vegC',
-                    payload: true
-                })
+            //! CHECKEO DE VEG C
+            // if (group.vegC.map(e => e.name).includes(name) || (mix && vegC))
+            //     dispatch({
+            //         type: 'vegC',
+            //         payload: true
+            //     })
         }
 
         dispatch({
