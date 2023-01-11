@@ -18,7 +18,7 @@
     align-items: center;
 }
 
-.button-sec {
+.sec {
     border: 1px solid #808080;
     background-color: #00000050;
     color: #FFFFFF;
@@ -76,6 +76,15 @@
     transition: rotate .2s ease-in, translate .2s ease-in;
 }
 
+.i-margin-t {
+    /* transform: translateY(15%); */
+    translate: 0% 5%;
+}
+
+.i-margin-r {
+    margin-right: .5em;
+}
+
 .i-arrow-close {
     rotate: x 180deg;
     translate: 0% 30%;
@@ -87,14 +96,6 @@
 
 .i-large {
     transform: translate(10%) scale(1.7);
-}
-
-.i-margin-t {
-    transform: translateY(15%);
-}
-
-.i-margin-r {
-    margin-right: .5em;
 }
 
 .i-wheat {

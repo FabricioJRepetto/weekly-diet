@@ -136,7 +136,7 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
                     </div>
 
                     <button className='button' onClick={saveFood}>guardar</button>
-                    <button className='button button-sec' onClick={close}>volver</button>
+                    <button className='button sec' onClick={close}>volver</button>
                 </div>}
         </div>
     )

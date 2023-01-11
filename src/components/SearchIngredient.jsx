@@ -9,7 +9,6 @@ const SearchIngredient = ({ changeList }) => {
         dispatch,
         state: {
             group: {
-                vegC,
                 everything
             },
             currentPlate,

@@ -38,6 +38,7 @@ export const MealCard = ({ data, i, openDelete, setShow, showing, menu }) => {
         vegetal,
         vegetalC,
         date,
+        mealType,
         _id
     } = data,
         proportions = useRef(propotionsMaker()),
@@ -56,7 +57,8 @@ export const MealCard = ({ data, i, openDelete, setShow, showing, menu }) => {
             type: 'edit', payload: {
                 edit: {
                     id: _id,
-                    date
+                    date,
+                    mealType
                 },
                 protein,
                 foods,

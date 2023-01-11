@@ -76,3 +76,26 @@
 .card-deletemenu div>button {
     margin: 0 .5em;
 }
+
+.register-type-modal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.register-type-modal>div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-items: center;
+    gap: .5em;
+}
+
+.register-type-modal>div:last-child {
+    margin-top: 1em;
+}
+
+.register-type-modal button {
+    max-width: none;
+    min-width: 100%;
+}

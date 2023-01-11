@@ -10,7 +10,7 @@ import { Suggested } from './Suggested'
 import { defineWeek } from './helpers/defineWeek'
 import { Spinner } from './Spinner'
 import Loading from './Loading'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import './style/MealMenu.css'
 
@@ -32,7 +32,16 @@ const MealMenu = () => {
             }
         } } = usePlate()
     const navigate = useNavigate()
-    const [isOpenType, openType, closeType] = useModal();
+    const [params] = useSearchParams()
+    const [isOpenType, openType, closeType] = useModal()
+    const [isOpenMealType, openMealType, closeMealType] = useModal();
+    const [mealType, setMealType] = useState(params.get('mealType') || edit.mealType)
+    const mealNames = {
+        breakfast: 'Desayuno',
+        afternoonsnack: 'Merienda',
+        lunch: 'Almuerzo',
+        dinner: 'Cena',
+    }
 
     const closeTypeHandler = () => {
         closeType()
@@ -53,8 +62,14 @@ const MealMenu = () => {
     }
 
     const save = async () => {
+        console.log(mealType);
+        if (!mealType) {
+            openMealType()
+            return
+        }
         setLoading(true)
         let aux = {
+            mealType,
             protein: [...protein],
             foods: [...foods],
             carbohydrate: [...carbohydrate],
@@ -96,6 +111,11 @@ const MealMenu = () => {
         setIngredientList(arg)
     }
 
+    const mealTypeHandler = () => {
+        closeMealType()
+        save()
+    }
+
     return (
         <div className='mainmenu-container'>
             {loading &&
@@ -103,6 +123,9 @@ const MealMenu = () => {
                     <Spinner />
                     <h2>guardando<Loading /></h2>
                 </div>}
+
+            <b className='mealmenu-title'>{mealNames[mealType] || ''}{edit ? <i> (editando)</i> : ''}</b>
+
             <Plate size={'34vh'}
                 protein={protein}
                 carbohydrate={carbohydrate}
@@ -149,7 +172,7 @@ const MealMenu = () => {
 
             <div className='ingredients forButtons'>
                 <button className='ingredients-cell button' onClick={save}>guardar</button>
-                <button className='ingredients-cell button button-sec' onClick={close}>salir</button>
+                <button className='ingredients-cell button sec' onClick={close}>salir</button>
             </div>
 
             <Modal
@@ -162,20 +185,20 @@ const MealMenu = () => {
 
                     {(!ingredientList && !subMenu) &&
                         <div className='ingredients'>
-                            <div className='ingredients-cell button-sec'
+                            <div className='ingredients-cell sec'
                                 onClick={() => selectSubMenu('protein')}>
                                 <p>Proteína 🥩</p>
                             </div>
-                            <div className='ingredients-cell button-sec'
+                            <div className='ingredients-cell sec'
                                 onClick={() => selectIngList('carbohydrate')}>
                                 <p>Carbohidratos 🌾</p>
                             </div>
-                            <div className='ingredients-cell button-sec'
+                            <div className='ingredients-cell sec'
                                 onClick={() => selectIngList('vegetal')}>
                                 <p>Vegetales 🥦</p>
                             </div>
                             <div className='divisor'></div>
-                            <div className='ingredients-cell button-sec'
+                            <div className='ingredients-cell sec'
                                 onClick={() => selectIngList('foods')}>
                                 <p>Mis Preparaciones ⭐</p>
                             </div>
@@ -184,23 +207,23 @@ const MealMenu = () => {
 
                     {(subMenu && !ingredientList) &&
                         <div className='ingredients'>
-                            <div className='ingredients-cell button-sec'
+                            <div className='ingredients-cell sec'
                                 onClick={() => setIngredientList('red_meat')}>
                                 <p>Carne roja 🥩</p>
                             </div>
-                            <div className='ingredients-cell button-sec'
+                            <div className='ingredients-cell sec'
                                 onClick={() => setIngredientList('chicken')}>
                                 <p>Pollo 🍗</p>
                             </div>
-                            <div className='ingredients-cell button-sec'
+                            <div className='ingredients-cell sec'
                                 onClick={() => setIngredientList('fish')}>
                                 <p>Pescado 🍤</p>
                             </div>
-                            <div className='ingredients-cell button-sec'
+                            <div className='ingredients-cell sec'
                                 onClick={() => setIngredientList('pig')}>
                                 <p>Cerdo 🥓</p>
                             </div>
-                            <div className='ingredients-cell button-sec'
+                            <div className='ingredients-cell sec'
                                 onClick={() => setIngredientList('egg')}>
                                 <p>Huevo 🥚</p>
                             </div>
@@ -213,6 +236,24 @@ const MealMenu = () => {
                             list={ingredientList}
                             type={type}
                             openList={setIngredientList} />}
+                </div>
+            </Modal>
+
+            <Modal isOpen={isOpenMealType} closeModal={closeMealType}>
+                <div className='mealType-modal'>
+                    <p>Esta comida no tiene un tipo asignado.</p>
+                    <p>Por favor selecciona el que corresponda:</p>
+                    <select id='mealTypeSelectInput'
+                        onChange={(e) => setMealType(e.target.value)}>
+                        <option value="">Elige una opción</option>
+                        <option value={'breakfast'} >desayuno</option>
+                        <option value={'lunch'} >almuerzo</option>
+                        <option value={'afternoonsnack'} >merienda</option>
+                        <option value={'dinner'} >cena</option>
+                    </select>
+
+                    <button onClick={mealTypeHandler}
+                        className='button'>confirmar</button>
                 </div>
             </Modal>
         </div>

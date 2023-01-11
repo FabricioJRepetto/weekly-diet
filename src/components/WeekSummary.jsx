@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { usePlate } from '../plate-context'
 import LastMeal from './LastMeal'
 import axios from 'axios'
@@ -10,6 +10,10 @@ import { Spinner } from './Spinner'
 import { useNavigate } from 'react-router-dom'
 import { DayCard } from './DayCard'
 
+import { FaHamburger } from "react-icons/fa";
+import { BiDumbbell } from 'react-icons/bi'
+
+
 import './style/Week.css'
 
 const WeekSummary = () => {
@@ -19,6 +23,7 @@ const WeekSummary = () => {
         state: { week }
     } = usePlate()
     const [isOpenDelete, openDelete, closeDelete, prop] = useModal();
+    const [isOpenMenu, openMenu, closeMenu] = useModal();
     const [loading, setLoading] = useState(false)
 
     const deleteConfirmed = async () => {
@@ -40,7 +45,7 @@ const WeekSummary = () => {
 
                 <div className='your-week card-style'>
                     <b>Tu semana:</b>
-                    {week && <div>Permitidos: {<Counter num={0} max={5} />}</div>}
+                    <div>Permitidos: {<Counter num={0} max={5} />}</div>
                     <div>Vegetales C: {<Counter num={week.vegetalC} max={4} />}</div>
                 </div>
 
@@ -48,9 +53,8 @@ const WeekSummary = () => {
 
                 <button className='ingredients-cell add-ing'
                     disabled={week?.today?.length > 1}
-                    onClick={() => navigate('/mealMenu')}
-                >
-                    Agregar comida +
+                    onClick={openMenu}>
+                    Agregar registro
                 </button>
 
                 <section className='week-container'>
@@ -85,9 +89,25 @@ const WeekSummary = () => {
                                 <p>¿Seguro que deseas eliminar este plato?</p>
                                 <div>
                                     <button className='button' onClick={() => deleteConfirmed()}>eliminar</button>
-                                    <button className='button button-sec' onClick={closeDelete}>cancelar</button>
+                                    <button className='button sec' onClick={closeDelete}>cancelar</button>
                                 </div>
                             </>}
+                    </div>
+                </Modal>
+
+                <Modal isOpen={isOpenMenu} closeModal={closeMenu}>
+                    <div className='register-type-modal'>
+                        <div>
+                            <button className='button' onClick={() => navigate('/mealMenu?mealType=breakfast')}>Desayuno</button>
+                            <button className='button' onClick={() => navigate('/mealMenu?mealType=afternoonsnack')}>Merienda</button>
+                            <button className='button' onClick={() => navigate('/mealMenu?mealType=lunch')}>Almuerzo</button>
+                            <button className='button' onClick={() => navigate('/mealMenu?mealType=dinner')}>Cena</button>
+                        </div>
+
+                        <div>
+                            <button className='button sec'><BiDumbbell className='icon i-margin-r i-margin-t i-blue' />Ejercicio</button>
+                            <button className='button sec'><FaHamburger className='i-margin-t i-margin-r i-red' />Permitido</button>
+                        </div>
                     </div>
                 </Modal>
             </div>}

@@ -112,7 +112,7 @@ const AllWeeks = () => {
                                 ? <PDF data={payload} />
                                 : <button disabled className='button'><BiDownload className='icon i-margin-r' /> descargar</button>}
 
-                            <button className={`button button-sec`}
+                            <button className={`button sec`}
                                 onClick={handleModeButton}>cancelar
                             </button>
                         </div>

@@ -134,9 +134,9 @@ const IngredientList = ({ list, type, openList }) => {
         <div className="ingredient-list-container">
             {list === 'vegetal' &&
                 <div className='vegetal-group-button'>
-                    <button className={`button ${veg === 'vegA' ? '' : 'button-sec'}`}
+                    <button className={`button ${veg === 'vegA' ? '' : 'sec'}`}
                         onClick={() => setVeg('vegA')}>Vegetales A</button>
-                    <button className={`button ${veg === 'vegB' ? '' : 'button-sec'}`}
+                    <button className={`button ${veg === 'vegB' ? '' : 'sec'}`}
                         onClick={() => setVeg('vegB')}>Vegetales B</button>
                 </div>}
 
@@ -186,7 +186,7 @@ const IngredientList = ({ list, type, openList }) => {
 
             <div className='ingList-buttons'>
                 <button className='button' onClick={() => openList(false)}>volver</button>
-                <button className='button button-sec' onClick={clearList}>quitar todo</button>
+                <button className='button sec' onClick={clearList}>quitar todo</button>
             </div>
         </div>
     )

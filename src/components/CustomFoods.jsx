@@ -67,7 +67,7 @@ export const CustomFoods = () => {
                                 onClick={() => deleteConfirmed()}>
                                 eliminar
                             </button>
-                            <button className='button button-sec'
+                            <button className='button sec'
                                 onClick={closeDelete}>
                                 cancelar
                             </button>

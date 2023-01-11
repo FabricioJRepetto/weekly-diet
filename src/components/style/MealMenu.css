@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.mealmenu-title {
+    margin: -0.5em;
+}
+
 .ingredients {
     display: flex;
     flex-direction: column;
@@ -111,4 +115,10 @@
     align-items: center;
     background-color: #00000080;
     z-index: 100;
+}
+
+.mealType-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
