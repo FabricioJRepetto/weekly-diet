@@ -164,7 +164,7 @@ function PlateProvider({ children }) {
         user_id: null,
         user_name: null,
         history: [],
-        week: [],
+        week: {},
         group: {}
     })
     const value = { state, dispatch }

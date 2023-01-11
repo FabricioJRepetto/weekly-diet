@@ -26,7 +26,7 @@ function App() {
                     start
                 } = defineWeek()
                 const { data } = await axios(`/history/fullhistory?today=${today}&start=${start}`)
-                // console.log(data);
+                console.log(data);
                 dispatch({ type: 'save', payload: data })
             })()
         } else {

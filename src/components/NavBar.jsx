@@ -23,7 +23,7 @@ export const NavBar = () => {
     }
 
     return (
-        <div className={`navbar-container ${session ? 'navbar' : ''}`}>
+        <div className={`navbar-container fade-in ${session ? 'navbar' : ''}`}>
             <b className='navlogo' onClick={() => go('/')}>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>
                 {open

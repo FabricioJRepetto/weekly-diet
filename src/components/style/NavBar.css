@@ -11,7 +11,6 @@
     background-color: rgb(25, 25, 25);
     overflow-x: clip;
     z-index: 90;
-    animation: fadein 1s ease-in forwards;
 }
 
 .navbar {
