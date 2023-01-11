@@ -38,6 +38,12 @@ function plateReducer(state, action) {
                 loading: action.payload
             }
         }
+        case 'pdfDataLoad': {
+            return {
+                ...state,
+                PDF_data: action.payload
+            }
+        }
         case 'save': {
             return {
                 ...state,

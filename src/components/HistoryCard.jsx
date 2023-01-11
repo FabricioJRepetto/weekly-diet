@@ -1,15 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { BiCheckCircle, BiXCircle, BiHelpCircle, BiChevronDown, BiDumbbell } from 'react-icons/bi'
+import { BiCheckCircle, BiXCircle, BiHelpCircle, BiChevronDown, BiDumbbell, BiCheckSquare, BiCheckbox } from 'react-icons/bi'
 import { IoLeafSharp } from "react-icons/io5";
 import { FaHamburger, FaChartPie } from "react-icons/fa";
-
+import { ControlCard } from './ControlCard';
 import { RiSearchEyeLine } from "react-icons/ri";
 import { DayCard } from './DayCard'
 
 import './style/HistoryCard.css'
-import { ControlCard } from './ControlCard';
 
-export const HistoryCard = ({ data }) => {
+export const HistoryCard = ({ data, selectMode, select, selected }) => {
     const {
         dates: {
             start
@@ -21,6 +20,7 @@ export const HistoryCard = ({ data }) => {
         friday,
         saturday,
         sunday,
+        weekDays,
         vegetalC,
         cheatFood,
         workOut,
@@ -29,6 +29,7 @@ export const HistoryCard = ({ data }) => {
 
     const [cpOpen, setCpOpen] = useState(false),
         [allWeeksOpen, setAllWeeksOpen] = useState(false),
+        // [selected, setSelected] = useState(false),
         average = useRef(null),
         dateString = useRef(new Date(start).toLocaleDateString("es-AR", { year: 'numeric', month: 'long', day: 'numeric' }))
 
@@ -41,30 +42,38 @@ export const HistoryCard = ({ data }) => {
         let avrg = 0,
             missing = 0;
 
-        [
-            monday,
-            tuesday,
-            wednesday,
-            thursday,
-            friday,
-            saturday,
-            sunday
-        ].forEach(day => {
+        weekDays.forEach(day => {
             if (day) {
                 if (day.length === 2) {
                     avrg++
                 }
             } else missing++
         })
-        console.log('··· computadoreando resultados *bip bop* ···');
         return {
             success: Math.round(avrg / (7 - missing) * 100),
             missing
         }
     }
 
+    // const selectHandler = () => {
+    //     select()
+    //     setSelected(() => !selected)
+    // }
+
     return (
         <div className={`history-card-container card-style`}>
+
+            {selectMode &&
+                <div onClick={select}
+                    className={`history-select-mode ${selected ? 'history-select-mode-on' : ''}`}>
+                    <div>
+                        {selected
+                            ? <BiCheckSquare className='i-large i-blue' />
+                            : <BiCheckbox className='i-large' />}
+                    </div>
+                </div>
+            }
+
             <p className='card-date'>Semana: <b>{dateString.current}</b></p>
 
             <div className='history-card-days'>
@@ -182,18 +191,10 @@ export const HistoryCard = ({ data }) => {
                                 <p>actividad</p>
                             </span>
                         </div>
-                        {[
-                            monday,
-                            tuesday,
-                            wednesday,
-                            thursday,
-                            friday,
-                            saturday,
-                            sunday
-                        ].map(day => (
+                        {weekDays.map(day => (
                             day &&
-                            <div className='scaledown'>
-                                <DayCard key={day[0].date} data={day}
+                            <div className='scaledown' key={day[0].date}>
+                                <DayCard data={day}
                                     menu={false} />
                             </div>
                         ))}

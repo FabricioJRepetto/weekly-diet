@@ -1,3 +1,29 @@
+.history-card-container {
+    position: relative;
+}
+
+.history-select-mode {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid rgba(135, 207, 235, 0);
+    border-radius: 1em;
+    transition: all .2s ease;
+}
+
+.history-select-mode div {
+    position: absolute;
+    top: .9em;
+    right: 1.1em;
+}
+
+.history-select-mode-on {
+    border: 1px solid var(--info);
+    background: linear-gradient(150deg, #00bbff15 00%, #0098cf10 90%);
+}
+
 .cp-cards-container {
     padding: 1em;
 }
