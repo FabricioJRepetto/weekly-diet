@@ -1,7 +1,9 @@
 .daycard-outer-container {
+    position: relative;
     width: calc(100% - 2.5em);
     max-width: 1200px;
     aspect-ratio: 2/1;
+    overflow: hidden;
 }
 
 .daycard-inner-container {
@@ -10,6 +12,7 @@
     display: flex;
     align-content: center;
     overflow: hidden;
+    /* border: 1px solid salmon; */
 }
 
 .mealcard-container {
@@ -193,4 +196,78 @@
     .daycard-outer-container {
         aspect-ratio: 3/1;
     }
+}
+
+/** ////// SEGUNDA SECCIÓN ////// */
+
+.daycard-sections-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: calc(200% + 1em);
+    gap: 1em;
+    /* overflow: hidden; */
+    transition: transform .5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section-two {
+    transform: translate(calc(-50% - .5em));
+}
+
+.testingcard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    height: calc(100% - 1em);
+    width: 100%;
+
+    /* pointer-events: none; */
+    user-select: none;
+    border: 1px solid lime;
+}
+
+.testingcard p {
+    margin: 0;
+}
+
+.testingcard>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/*? ////// INDICADORES ////// */
+
+.daycard-section-indicator {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    justify-items: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+
+    height: 1em;
+    width: 3em;
+
+    /* border: 1px solid red; */
+}
+
+.daycard-section-indicator div {
+    height: 0;
+    border-radius: 3px;
+    border: 3px #dadada solid;
+    transition: width .3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.indicator-on {
+    width: 1em;
+}
+
+.indicator-off {
+    width: 0em;
 }

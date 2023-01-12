@@ -105,7 +105,7 @@ const WeekSummary = () => {
                         </div>
 
                         <div>
-                            <button className='button sec'><BiDumbbell className='icon i-margin-r i-margin-t i-blue' />Ejercicio</button>
+                            <button className='button sec'><BiDumbbell className='icon i-margin-r i-margin-t i-blue' />Actividad</button>
                             <button className='button sec'><FaHamburger className='i-margin-t i-margin-r i-red' />Permitido</button>
                         </div>
                     </div>
