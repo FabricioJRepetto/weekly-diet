@@ -11,6 +11,8 @@ export const DayCard = ({ data, openDelete, menu = true }) => {
     const xmove = useRef(false)
     const day = useRef(new Date(data[0].date).toLocaleDateString("es-AR", { weekday: "long" }))
 
+    console.log(data);
+
     const toogleShow = (n) => {
         // console.log('X', xmove.current);
         if (xmove.current < 75) {
@@ -25,9 +27,8 @@ export const DayCard = ({ data, openDelete, menu = true }) => {
         return false
     }
 
-    const handleDown = (X) => {
-        xpos.current = X
-    }
+    const handleDown = (X) => xpos.current = X
+
     const handleUp = (X) => {
         const result = xpos.current - X,
             threshold = 75
