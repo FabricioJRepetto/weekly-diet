@@ -8,32 +8,47 @@ export const DayCard = ({ data, openDelete, menu = true }) => {
     const [show, setShow] = useState(false)
     const [section, setSection] = useState(false)
     const xpos = useRef(false)
+    const xmove = useRef(false)
     const day = useRef(new Date(data[0].date).toLocaleDateString("es-AR", { weekday: "long" }))
 
     const toogleShow = (n) => {
-        setShow(current => {
-            if (current === n) return false
-            else return n
-        })
+        // console.log('X', xmove.current);
+        if (xmove.current < 75) {
+            xmove.current = 0
+            setShow(current => {
+                if (current === n) return false
+                else return n
+            })
+            return true
+        }
+        xmove.current = 0
+        return false
     }
 
-    const handleDrag = (e) => {
-        if (e.clientX === 0) {
-            xpos.current = false
-            return
-        }
-        console.log("X: " + e.clientX)
-        if (!xpos.current) {
-            xpos.current = e.clientX
-        } else {
-            !section && (xpos.current + 10 > e.clientX) && setSection(true)
-            section && (xpos.current + 10 < e.clientX) && setSection(false)
-        }
+    const handleDown = (X) => {
+        xpos.current = X
+    }
+    const handleUp = (X) => {
+        const result = xpos.current - X,
+            threshold = 75
+        xmove.current = result
 
+        if (!section && result >= threshold) {
+            setSection(() => true)
+        }
+        if (section && result <= -threshold) {
+            setSection(() => false)
+        }
+        xpos.current = false
     }
 
     return (
-        <div className='daycard-outer-container card-style' onDrag={handleDrag}>
+        <div className='daycard-outer-container card-style'
+            onMouseDown={(e) => handleDown(e.clientX)}
+            onMouseUp={(e) => handleUp(e.clientX)}
+            onTouchStart={(e) => handleDown(e.changedTouches[0].clientX)}
+            onTouchEnd={(e) => handleUp(e.changedTouches[0].clientX)}>
+
             <b onClick={() => setSection(() => !section)}>{`${day.current} ${data.length > 1 ? (!!data[2] ? '(desbalanceado)' : '(balanceado)') : ''}`}</b>
 
             <div className={`daycard-sections-container ${section ? 'section-two' : ''}`}>

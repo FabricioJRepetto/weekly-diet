@@ -47,8 +47,8 @@ export const MealCard = ({ data, i, openDelete, setShow, showing, menu }) => {
         [preview, setPreview] = useState(true)
 
     const viewChange = () => {
-        setShow()
-        setPreview(!preview)
+        const aux = setShow()
+        aux && setPreview(!preview)
     }
 
     const edit = (e) => {
@@ -69,9 +69,11 @@ export const MealCard = ({ data, i, openDelete, setShow, showing, menu }) => {
         })
         navigate('/mealMenu')
     }
+
     const deleteHandler = () => {
         openDelete(_id)
     }
+
     return (
         <div className={`mealcard-container ${preview ? '' : 'mealcard-expanded'} ${showing ? '' : 'card-banish'}`}
             onClick={viewChange}>

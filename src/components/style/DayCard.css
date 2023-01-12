@@ -4,6 +4,7 @@
     max-width: 1200px;
     aspect-ratio: 2/1;
     overflow: hidden;
+    user-select: none;
 }
 
 .daycard-inner-container {
@@ -221,10 +222,8 @@
 
     height: calc(100% - 1em);
     width: 100%;
-
-    /* pointer-events: none; */
     user-select: none;
-    border: 1px solid lime;
+    /* border: 1px solid lime; */
 }
 
 .testingcard p {
