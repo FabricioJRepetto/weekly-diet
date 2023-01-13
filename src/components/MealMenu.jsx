@@ -62,7 +62,7 @@ const MealMenu = () => {
     }
 
     const save = async () => {
-        console.log(mealType);
+        //! VOLVER esto no sirve si quito la edicion en dias pasados
         if (!mealType) {
             openMealType()
             return
@@ -84,20 +84,31 @@ const MealMenu = () => {
         } = defineWeek()
 
         if (edit) {
-            const { data } = await axios.put(`/history`,
+            // const { data } = await axios.put(`/history`,
+            //     {
+            //         meal: aux,
+            //         meal_id: edit.id,
+            //         start,
+            //         today
+            //     })
+            const { data } = await axios.put(`/history/v2`,
                 {
                     meal: aux,
-                    meal_id: edit.id,
+                    day_id: '63c067d83716623685a56dd3',
                     start,
                     today
                 })
-            !data.error && (leData = data)
+            console.log(data);
+            // !data.error && (leData = data)
         } else {
-            const { data } = await axios.post(`/history?today=${today}&start=${start}`, { meal: aux })
-            !data.error && (leData = data)
-        }
+            const { data } = await axios.post(`/history/v2?today=${today}&start=${start}`, { meal: aux })
+            console.log(data);
+            if (!data.error) {
+                dispatch({ type: 'save', payload: data })
+            }
 
-        dispatch({ type: 'save', payload: leData })
+        }
+        setLoading(false)
         close()
     }
 

@@ -5,6 +5,7 @@ import { BiLogOut, BiMenu, BiArrowToRight } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 
 import './style/NavBar.css'
+import axios from 'axios'
 
 export const NavBar = () => {
     const navigate = useNavigate()
@@ -20,6 +21,15 @@ export const NavBar = () => {
     const go = (rout) => {
         setOpen(false)
         navigate(rout)
+    }
+
+    const migrateDataToV2 = async () => {
+        const { data: old } = await axios('/history/migrate')
+        console.log(old);
+        if (old) {
+            const { data } = await axios.post('/history/migrate2', { old: old.oldDays })
+            console.log(data);
+        }
     }
 
     return (
@@ -38,11 +48,14 @@ export const NavBar = () => {
                     <p onClick={() => go('/history')}>Historal</p>
                     <p onClick={() => go('/checkpoint')}>Controles</p>
                     <p onClick={() => go('/customFoods')}>Mis preparaciones</p>
-                    {/* <p onClick={() => go('/pdf')}>PDF</p> */}
                     <p className='nav-disabled' onClick={() => undefined}>Configuración</p>
                 </div>
 
                 <div>
+                    <p onClick={() => go('/testing')}>Testing</p>
+                    {/*<p onClick={migrateDataToV2}>migrar datos a V2</p>*/}
+                    <br />
+
                     <i>usuario:</i>
                     <i>{user_name}</i>
                     <p onClick={logout}>
