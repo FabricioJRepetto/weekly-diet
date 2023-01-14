@@ -1,8 +1,8 @@
 export const suggestions = (today) => {
     const plate = {
-        p: !!today[0].protein.length,
-        c: !!today[0].carbohydrate.length,
-        v: !!today[0].vegetal.length
+        p: !!today.lunch.protein.length,
+        c: !!today.lunch.carbohydrate.length,
+        v: !!today.lunch.vegetal.length
     }
     let message = '',
         initials = '',

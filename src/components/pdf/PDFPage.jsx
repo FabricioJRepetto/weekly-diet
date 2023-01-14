@@ -3,7 +3,6 @@ import { Page, View, StyleSheet, Font } from '@react-pdf/renderer';
 import { HeaderRow } from './HeaderRow';
 import { MealsColumn } from './MealsColumn';
 import { DayColumn } from './DayColumn';
-import { FooterRow } from './FooterRow';
 
 Font.register({
     family: 'Quicksand',
@@ -71,17 +70,16 @@ const styles = StyleSheet.create({
 });
 
 export const PDFPage = ({ data, date }) => {
-    // console.log(data);
+    // console.log(data, date);
     return (
         <Page size="A4" orientation='landscape' wrap={false} style={styles.page}>
             <HeaderRow date={date} />
             <View style={styles.body}>
                 <MealsColumn />
-                {data.map((d, i) =>
+                {Object.values(data).map((d, i) =>
                     <DayColumn data={d} key={Date.now() + i} />)
                 }
             </View>
-            <FooterRow data={false} />
         </Page>
     )
 }

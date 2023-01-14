@@ -3,16 +3,29 @@ import { MealCard } from './MealCard'
 import './style/DayCard.css'
 import { BiDumbbell } from 'react-icons/bi';
 import { FaHamburger } from "react-icons/fa";
+import { TiThumbsDown, TiThumbsUp } from "react-icons/ti";
 
 export const DayCard = ({ data, openDelete, menu = true }) => {
     const [show, setShow] = useState(false)
     const [section, setSection] = useState(false)
     const xpos = useRef(false)
     const xmove = useRef(false)
-    const day = useRef(new Date(data[0].date).toLocaleDateString("es-AR", { weekday: "long" }))
+    const day = useRef(new Date(data.date).toLocaleDateString("es-AR", { weekday: "long" }))
+
+    // console.log(data)
+    const {
+        lunch,
+        dinner,
+        breakfast,
+        afternoonsnack,
+        balanced,
+        workOut,
+        cheatFood,
+        date,
+        _id
+    } = data
 
     const toogleShow = (n) => {
-        // console.log('X', xmove.current);
         if (xmove.current < 75) {
             xmove.current = 0
             setShow(current => {
@@ -42,45 +55,62 @@ export const DayCard = ({ data, openDelete, menu = true }) => {
     }
 
     return (
-        <div className='daycard-outer-container card-style'
+        <div className={`daycard-outer-container card-style ${(!lunch.empty && !dinner.empty) &&
+            (balanced
+                ? 'card-style-good'
+                : 'card-style-bad')}`}
             onMouseDown={(e) => handleDown(e.clientX)}
             onMouseUp={(e) => handleUp(e.clientX)}
             onTouchStart={(e) => handleDown(e.changedTouches[0].clientX)}
             onTouchEnd={(e) => handleUp(e.changedTouches[0].clientX)}>
 
-            <b onClick={() => setSection(() => !section)}>{`${day.current} ${data.length > 1 ? (!!data[2] ? '(desbalanceado)' : '(balanceado)') : ''}`}</b>
+            <b onClick={() => setSection(() => !section)}>
+                {day.current}
+                {(!lunch.empty && !dinner.empty) &&
+                    (balanced
+                        ? <TiThumbsUp className='icon i-margin-l i-green' />
+                        : <TiThumbsDown className='icon i-margin-l i-red' />)}
+            </b>
 
             <div className={`daycard-sections-container ${section ? 'section-two' : ''}`}>
                 <div className="daycard-inner-container">
-                    {data.map((e, i) => (
-                        i < 2 && <MealCard i={i} data={e} key={e._id}
+                    {!lunch.empty
+                        ? <MealCard i={0} key={_id + 'lunch'}
+                            data={{ ...lunch, _id }}
+                            extraData={{ _id, date, mealType: 'lunch' }}
                             menu={menu}
                             openDelete={openDelete}
-                            setShow={() => toogleShow(e._id)}
-                            showing={!show || show === e._id} />
-                    ))}
-                    {data.length === 1 &&
-                        <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
-                            <p>segunda comida no registrada</p>
+                            setShow={() => toogleShow('lunch')}
+                            showing={!show || show === 'lunch'} />
+                        : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
+                            <p>Almuerzo no registrado</p>
+                        </div>}
+                    {!dinner.empty
+                        ? <MealCard i={1} key={_id + 'dinner'}
+                            data={dinner}
+                            extraData={{ _id, date, mealType: 'dinner' }}
+                            menu={menu}
+                            openDelete={openDelete}
+                            setShow={() => toogleShow('dinner')}
+                            showing={!show || show === 'dinner'} />
+                        : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
+                            <p>Cena no registrada</p>
                         </div>}
                 </div>
 
                 <div className="daycard-inner-container testingcard">
-                    <p><b>Desayuno:</b> blablabla, blablabla, blablabla, blablabla, blabla, blablabla + blabla</p>
-                    <p><b>Merienda:</b> blablabla, blablabla, blablabla, blablabla, blablabla, blabla, blablabla + blabla</p>
-                    <br />
+                    <p><b>Desayuno:</b>{!breakfast.empty ? breakfast.toString() : '--'}</p>
+                    <p><b>Merienda:</b>{!afternoonsnack.empty ? afternoonsnack.toString() : '--'}</p>
                     <div>
-                        <p>
+                        {!!workOut.length && <p>
                             <BiDumbbell />
-                            <b>Actividad:</b>
-                            5
-                        </p>
+                            <b>Actividad</b>
+                        </p>}
 
-                        <p>
+                        {!!cheatFood.length && <p>
                             <FaHamburger />
-                            <b>Permitidos:</b>
-                            2/5
-                        </p>
+                            <b>Permitido</b>
+                        </p>}
                     </div>
                 </div>
             </div>

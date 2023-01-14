@@ -77,37 +77,32 @@ const MealMenu = () => {
             vegetalC,
             date: edit ? edit.date : new Date().toLocaleDateString('en')
         }
-        let leData = null
+
         const {
             today,
             start
         } = defineWeek()
 
         if (edit) {
-            // const { data } = await axios.put(`/history`,
-            //     {
-            //         meal: aux,
-            //         meal_id: edit.id,
-            //         start,
-            //         today
-            //     })
             const { data } = await axios.put(`/history/v2`,
                 {
                     meal: aux,
-                    day_id: '63c067d83716623685a56dd3',
+                    day_id: edit.day_id,
                     start,
                     today
                 })
             console.log(data);
-            // !data.error && (leData = data)
+            if (!data.error) {
+                dispatch({ type: 'save', payload: data })
+            }
         } else {
             const { data } = await axios.post(`/history/v2?today=${today}&start=${start}`, { meal: aux })
             console.log(data);
             if (!data.error) {
                 dispatch({ type: 'save', payload: data })
             }
-
         }
+
         setLoading(false)
         close()
     }
@@ -182,7 +177,14 @@ const MealMenu = () => {
             </section>
 
             <div className='ingredients forButtons'>
-                <button className='ingredients-cell button' onClick={save}>guardar</button>
+                <button onClick={save}
+                    className='ingredients-cell button'
+                    disabled={
+                        foods.length < 1 &&
+                        protein.length < 1 &&
+                        carbohydrate.length < 1 &&
+                        vegetal.length < 1
+                    } >guardar</button>
                 <button className='ingredients-cell button sec' onClick={close}>salir</button>
             </div>
 

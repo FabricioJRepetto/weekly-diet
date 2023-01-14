@@ -64,7 +64,6 @@ const LogInScreen = () => {
                     <LoadingHints />
                 </>}
             <div className={loading ? 'transparent' : ''}>
-
                 {message && <b>{message}</b>}
                 <div id='googleButtonDiv'></div>
             </div>

@@ -85,6 +85,10 @@
     margin-right: .5em;
 }
 
+.i-margin-l {
+    margin-left: .5em;
+}
+
 .i-arrow-close {
     rotate: x 180deg;
     translate: 0% 30%;
@@ -133,6 +137,16 @@
     border-top: 1px solid #FFFFFF25;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
     margin: 0.1em .25em;
+}
+
+.card-style-good {
+    background: radial-gradient(at 0% top, #2dffca09, #61d2ff00 70%);
+    border-top: 1px solid #58bf6d30;
+}
+
+.card-style-bad {
+    background: radial-gradient(at 0% top, #ff854c09, #61d2ff00 70%);
+    border-top: 1px solid #ef6c6c30;
 }
 
 .card-style2 {

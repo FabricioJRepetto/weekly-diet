@@ -23,6 +23,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         textAlign: 'center',
         borderBottom: '1px solid #000000'
+    },
+    footerCell: {
+        width: '100%',
+        height: '1cm',
+        justifyContent: 'center',
+        fontFamily: 'Quicksand',
+        fontWeight: 700,
+        textAlign: 'center',
+        borderBottom: '1px solid #000000',
+        // borderRight: '1px solid #000000'
     }
 });
 
@@ -39,6 +49,13 @@ export const MealsColumn = () => (
         </View>
         <View style={styles.bigCell}>
             <Text>Cena</Text>
+        </View>
+
+        <View style={styles.footerCell}>
+            <Text>Actividad</Text>
+        </View>
+        <View style={styles.footerCell}>
+            <Text>Permitidos</Text>
         </View>
     </View>
 );

@@ -13,17 +13,18 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
         dates: {
             start
         },
-        monday,
-        tuesday,
-        wednesday,
-        thursday,
-        friday,
-        saturday,
-        sunday,
+        // monday,
+        // tuesday,
+        // wednesday,
+        // thursday,
+        // friday,
+        // saturday,
+        // sunday,
+        days,
         weekDays,
         vegetalC,
-        cheatFood,
-        workOut,
+        cheatFoods,
+        workOuts,
         checkpoint
     } = data
 
@@ -42,13 +43,15 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
         let avrg = 0,
             missing = 0;
 
-        weekDays.forEach(day => {
-            if (day) {
-                if (day.length === 2) {
-                    avrg++
-                }
-            } else missing++
-        })
+        for (const key in weekDays) {
+            if (Object.hasOwnProperty.call(weekDays, key)) {
+                const day = weekDays[key];
+
+                if (day) {
+                    if (day.balanced) avrg++
+                } else missing++
+            }
+        }
         return {
             success: Math.round(avrg / (7 - missing) * 100),
             missing
@@ -73,10 +76,10 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
 
             <div className='history-card-days'>
                 <div>L
-                    {monday
+                    {weekDays.monday
                         ? <>{
-                            monday.length > 1
-                                ? !monday[2]
+                            !weekDays.monday.lunch.empty && !weekDays.monday.lunch.empty
+                                ? weekDays.monday.balanced
                                     ? <BiCheckCircle className='icon i-green' />
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
@@ -85,10 +88,10 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
                 </div>
 
                 <div>M
-                    {tuesday
+                    {weekDays.tuesday
                         ? <>{
-                            tuesday.length > 1
-                                ? !tuesday[2]
+                            !weekDays.tuesday.lunch.empty && !weekDays.tuesday.lunch.empty
+                                ? weekDays.tuesday.balanced
                                     ? <BiCheckCircle className='icon i-green' />
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
@@ -97,10 +100,10 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
                 </div>
 
                 <div>X
-                    {wednesday
+                    {weekDays.wednesday
                         ? <>{
-                            wednesday.length > 1
-                                ? !wednesday[2]
+                            !weekDays.wednesday.lunch.empty && !weekDays.wednesday.lunch.empty
+                                ? weekDays.wednesday.balanced
                                     ? <BiCheckCircle className='icon i-green' />
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
@@ -109,10 +112,10 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
                 </div>
 
                 <div>J
-                    {thursday
+                    {weekDays.thursday
                         ? <>{
-                            thursday.length > 1
-                                ? !thursday[2]
+                            !weekDays.thursday.lunch.empty && !weekDays.thursday.lunch.empty
+                                ? weekDays.thursday.balanced
                                     ? <BiCheckCircle className='icon i-green' />
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
@@ -121,10 +124,10 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
                 </div>
 
                 <div>V
-                    {friday
+                    {weekDays.friday
                         ? <>{
-                            friday.length > 1
-                                ? !friday[2]
+                            !weekDays.friday.lunch.empty && !weekDays.friday.lunch.empty
+                                ? weekDays.friday.balanced
                                     ? <BiCheckCircle className='icon i-green' />
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
@@ -133,10 +136,10 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
                 </div>
 
                 <div>S
-                    {saturday
+                    {weekDays.saturday
                         ? <>{
-                            saturday.length > 1
-                                ? !saturday[2]
+                            !weekDays.saturday.lunch.empty && !weekDays.saturday.lunch.empty
+                                ? weekDays.saturday.balanced
                                     ? <BiCheckCircle className='icon i-green' />
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
@@ -145,10 +148,10 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
                 </div>
 
                 <div>D
-                    {sunday
+                    {weekDays.sunday
                         ? <>{
-                            sunday.length > 1
-                                ? !sunday[2]
+                            !weekDays.sunday.lunch.empty && !weekDays.sunday.lunch.empty
+                                ? weekDays.sunday.balanced
                                     ? <BiCheckCircle className='icon i-green' />
                                     : <BiXCircle className='icon i-red' />
                                 : <BiHelpCircle className='icon i-grey' />}
@@ -178,17 +181,17 @@ export const HistoryCard = ({ data, selectMode, select, selected }) => {
                                 <p>vegetales C</p>
                             </span>
                             <span>
-                                <b><FaHamburger className='i-margin-t i-margin-r i-red' /> {cheatFood || 0}</b>
+                                <b><FaHamburger className='i-margin-t i-margin-r i-red' /> {cheatFoods || 0}</b>
                                 <p>permitidos</p>
                             </span>
                             <span>
-                                <b><BiDumbbell className=' i-medium i-margin-r i-blue' /> {workOut || 0}</b>
+                                <b><BiDumbbell className=' i-medium i-margin-r i-blue' /> {workOuts || 0}</b>
                                 <p>actividad</p>
                             </span>
                         </div>
-                        {weekDays.map(day => (
-                            day &&
-                            <div className='scaledown' key={day[0].date}>
+                        {days.map(day => (
+                            !day.empty &&
+                            <div className='scaledown' key={day.date}>
                                 <DayCard data={day}
                                     menu={false} />
                             </div>

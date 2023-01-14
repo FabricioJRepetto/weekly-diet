@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { usePlate } from '../plate-context'
 import Plate from './Plate'
 
-export const MealCard = ({ data, i, openDelete, setShow, showing, menu }) => {
+export const MealCard = ({ data, extraData, i, openDelete, setShow, showing, menu }) => {
     const propotionsMaker = () => {
         let p = !!protein.length
             ? !!protein.length && !!carbohydrate.length
@@ -37,10 +37,12 @@ export const MealCard = ({ data, i, openDelete, setShow, showing, menu }) => {
         carbohydrate,
         vegetal,
         vegetalC,
-        date,
-        mealType,
-        _id
     } = data,
+        {
+            date,
+            mealType,
+            _id
+        } = extraData,
         proportions = useRef(propotionsMaker()),
         { dispatch } = usePlate(),
         navigate = useNavigate(),
@@ -56,7 +58,7 @@ export const MealCard = ({ data, i, openDelete, setShow, showing, menu }) => {
         dispatch({
             type: 'edit', payload: {
                 edit: {
-                    id: _id,
+                    day_id: _id,
                     date,
                     mealType
                 },
@@ -71,7 +73,8 @@ export const MealCard = ({ data, i, openDelete, setShow, showing, menu }) => {
     }
 
     const deleteHandler = () => {
-        openDelete(_id)
+        // console.log(_id, mealType);
+        openDelete({ _id, mealType })
     }
 
     return (

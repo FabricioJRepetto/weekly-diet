@@ -31,59 +31,89 @@ const styles = StyleSheet.create({
         fontFamily: 'Quicksand',
         fontWeight: 700,
         color: '#FEBE8C'
+    },
+    emptyCell: {
+        width: '100%',
+        height: '1cm',
+        justifyContent: 'center',
+        textAlign: 'center',
+        borderBottom: '1px solid #000000'
     }
 });
 
 export const DayColumn = ({ data }) => {
-    const vegetalesC = [
-        'Papa',
-        'Puré de papa',
-        'Batata',
-        'Puré de batata',
-        'Choclo',
-        'Mandioca'
-    ]
+    console.log(data);
 
-    const stringer = (n) => {
-        const e = data[n],
-            food = e.foods.join(', '),
-            prot = e.protein.filter(e => !/\(/g.test(e)).join(', '),
-            carb = e.carbohydrate.filter(e => !/\(/g.test(e)).join(', '),
-            veg = e.vegetal.filter(e => !/\(/g.test(e)).join(', '),
-            string = `${food ? food + ',' : ''} ${prot ? prot + ',' : ''} ${carb ? carb + ',' : ''} ${veg ? veg : ''}`.replace(',', ', ');
+    const {
+        afternoonsnack,
+        breakfast,
+        lunch,
+        dinner,
+        workOut,
+        cheatFood
+    } = data || false
 
-        let vegC = false
+    const stringer = (e) => {
+        if (e) {
+            const food = e.foods.join(', '),
+                prot = e.protein.filter(e => !/\(/g.test(e)).join(', '),
+                carb = e.carbohydrate.filter(e => !/\(/g.test(e)).join(', '),
+                veg = e.vegetal.filter(e => !/\(/g.test(e)).join(', '),
+                string = `${food ? food + ',' : ''} ${prot ? prot + ',' : ''} ${carb ? carb + ',' : ''} ${veg ? veg : ''}`.replace(',', ', ');
 
-        e.carbohydrate.forEach(e => {
-            if (vegetalesC.includes(e)) vegC = true
-        });
+            let vegC = e?.vegetalC
 
+            return {
+                m: string || '',
+                vegC: vegC || false
+            }
+        }
         return {
-            m: string,
-            vegC
+            m: '',
+            vegC: false
         }
     }
 
-    const lunch = data[0] ? stringer(0) : false
-    const dinner = data[1] ? stringer(1) : false
+    const simpleStringer = (e) => {
+        if (e) {
+            const string = e.join(', ');
+
+            return string || ''
+        }
+        return ''
+    }
+
+    const Bstring = stringer(breakfast)
+    const Lstring = stringer(lunch)
+    const Astring = stringer(afternoonsnack)
+    const Dstring = stringer(dinner)
+    const Wstring = simpleStringer(workOut)
+    const Cstring = simpleStringer(cheatFood)
 
     return (
         <View style={styles.dayColumn}>
             <View style={styles.smallCell}>
-                <Text style={styles.vegc}>{'[DATA.VEGC]'}</Text>
-                <Text>{'[DATA.DESAYUNO]'}</Text>
+                <Text style={styles.vegc}>{Bstring.vegC ? 'Veg.C' : ''}</Text>
+                <Text>{Bstring.m}</Text>
             </View>
             <View style={styles.bigCell}>
-                <Text style={styles.vegc}>{lunch && (lunch.vegC ? 'Veg. C' : '')}</Text>
-                <Text>{lunch ? lunch.m : ''}</Text>
+                <Text style={styles.vegc}>{Lstring.vegC ? 'Veg. C' : ''}</Text>
+                <Text>{Lstring.m}</Text>
             </View>
             <View style={styles.smallCell}>
-                <Text style={styles.vegc}>{'[DATA.VEGC]'}</Text>
-                <Text>{'[DATA.MERIENDA]'}</Text>
+                <Text style={styles.vegc}>{Astring.vegC ? 'Veg.C' : ''}</Text>
+                <Text>{Astring.m}</Text>
             </View>
             <View style={styles.bigCell}>
-                <Text style={styles.vegc}>{dinner && (dinner.vegC ? 'Veg. C' : '')}</Text>
-                <Text>{dinner ? dinner.m : ''}</Text>
+                <Text style={styles.vegc}>{Dstring.vegC ? 'Veg. C' : ''}</Text>
+                <Text>{Dstring.m}</Text>
+            </View>
+
+            <View style={styles.emptyCell}>
+                <Text>{Wstring}</Text>
+            </View>
+            <View style={styles.emptyCell}>
+                <Text>{Cstring}</Text>
             </View>
         </View>
     )

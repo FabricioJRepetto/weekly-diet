@@ -18,7 +18,7 @@ const AllWeeks = () => {
 
     useEffect(() => {
         (async () => {
-            const { data } = await axios(`/history/allweeks`)
+            const { data } = await axios(`/history/allweeks/V2`)
             if (!data.error) setData(() => data)
             console.log(data);
             setLoading(false)

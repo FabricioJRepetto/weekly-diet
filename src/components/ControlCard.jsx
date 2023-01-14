@@ -1,5 +1,5 @@
 import React from 'react'
-import { BiBarChartSquare, BiChevronDown } from 'react-icons/bi'
+import { BiChevronDown, BiFlag } from 'react-icons/bi'
 
 export const ControlCard = ({ data, showDate = true, showOpen = true, open = false, setOpen = false }) => {
     const {
@@ -15,7 +15,7 @@ export const ControlCard = ({ data, showDate = true, showOpen = true, open = fal
         <div className={`history-card-section card-style3 ${open ? 'cpOpen' : ''}`}
             onClick={() => setOpen(!open)}>
             <span className='history-card-control-head'>
-                <p><BiBarChartSquare className='icon i-margin-r i-blue' /> Control {showDate && date}</p>
+                <p><BiFlag className='icon i-margin-r i-blue' /> Control {showDate && date}</p>
                 {showOpen && <BiChevronDown className={`icon i-grey ${open ? 'i-arrow-close' : ''}`} />}
             </span>
 

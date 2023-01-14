@@ -13,7 +13,6 @@ import { Config } from "./components/Config";
 import AllWeeks from './components/AllWeeks';
 
 import './App.css';
-import Test from './components/Test';
 
 function App() {
     const navigate = useNavigate()
@@ -26,8 +25,8 @@ function App() {
                     today,
                     start
                 } = defineWeek()
-                const { data } = await axios(`/history/fullhistory?today=${today}&start=${start}`)
-                console.log(data);
+                const { data } = await axios(`/history/fullhistory/v2?today=${today}&start=${start}`)
+                // console.log(data);
                 dispatch({ type: 'save', payload: data })
             })()
         } else {
@@ -71,7 +70,6 @@ function App() {
                         <Route path="/history" element={<AllWeeks />} />
                         <Route path="/checkpoint" element={<Checkpoint />} />
                         <Route path="/config" element={<Config />} />
-                        <Route path="/testing" element={<Test />} />
                     </Routes>
                 </div>}
         </div>
