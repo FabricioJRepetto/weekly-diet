@@ -9,10 +9,11 @@ import { defineWeek } from './helpers/defineWeek'
 import { Spinner } from './Spinner'
 import { useNavigate } from 'react-router-dom'
 import { DayCard } from './DayCard'
-
+import Loading from './Loading'
 import { FaHamburger } from "react-icons/fa";
+import { IoAddCircleSharp } from "react-icons/io5";
 import { BiDumbbell } from 'react-icons/bi'
-
+import { WorkoutSelector } from './style/WorkoutSelector'
 
 import './style/Week.css'
 
@@ -20,11 +21,12 @@ const WeekSummary = () => {
     const navigate = useNavigate()
     const {
         dispatch,
-        state: { week }
+        state: { week, group: { workouts } }
     } = usePlate()
-    console.log(week);
+    // console.log(week);
     const [isOpenDelete, openDelete, closeDelete, prop] = useModal();
-    const [isOpenMenu, openMenu, closeMenu] = useModal();
+    const [isOpenMenu, openMenu, closeMenu, menuProp] = useModal();
+    const [workout, setWorkout] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const deleteConfirmed = async () => {
@@ -39,12 +41,18 @@ const WeekSummary = () => {
             dispatch({ type: 'save', payload: data })
         }
         closeDelete()
+        setLoading(() => false)
     }
 
     const disabledButton = (arg) => {
         if (!week.today) return false
         const aux = week.today.mealsRegistered.includes(arg)
         return aux
+    }
+
+    const editWorkOut = (date, workouts) => {
+        setWorkout(() => true)
+        openMenu({ date, data: workouts })
     }
 
     return (
@@ -58,18 +66,25 @@ const WeekSummary = () => {
                         <div>Permitidos: {<Counter num={week.cheatFoods} max={5} />}</div>
                     </div>
 
-                    {!!week?.days.length && (!week.today?.lunch.empty && week.today?.dinner.empty) && <LastMeal />}
+                    {week.today && (!week.today?.lunch.empty && week.today?.dinner.empty) && <LastMeal />}
 
                     <button className='ingredients-cell add-ing'
                         disabled={week?.today?.length > 1}
-                        onClick={openMenu}>
-                        Agregar registro
+                        onClick={() => openMenu(
+                            {
+                                date: new Date().toLocaleDateString('en'),
+                                data: week.today?.workOut
+                            }
+                        )}>
+                        <p><IoAddCircleSharp className='i-medium i-margin-r i-margin-t i-black' />
+                            Agregar registro</p>
                     </button>
 
                     <section className='week-container'>
                         {week?.days && week.days.map(day => (
                             !day.empty && <DayCard key={day._id} data={day}
-                                openDelete={openDelete} />
+                                openDelete={openDelete}
+                                editWorkOut={editWorkOut} />
                         ))}
                     </section>
 
@@ -87,35 +102,53 @@ const WeekSummary = () => {
                         </div>
                     </Modal>
 
-                    <Modal isOpen={isOpenMenu} closeModal={closeMenu}>
+                    <Modal isOpen={isOpenMenu}
+                        closeModal={() => {
+                            closeMenu()
+                            setWorkout(() => false)
+                        }}>
                         <div className='register-type-modal'>
-                            <div>
-                                <button
-                                    disabled={
-                                        disabledButton('breakfast')
-                                    }
-                                    className='button' onClick={() => navigate('/mealMenu?mealType=breakfast')}>Desayuno</button>
-                                <button
-                                    disabled={
-                                        disabledButton('afternoonsnack')
-                                    }
-                                    className='button' onClick={() => navigate('/mealMenu?mealType=afternoonsnack')}>Merienda</button>
-                                <button
-                                    disabled={
-                                        disabledButton('lunch')
-                                    }
-                                    className='button' onClick={() => navigate('/mealMenu?mealType=lunch')}>Almuerzo</button>
-                                <button
-                                    disabled={
-                                        disabledButton('dinner')
-                                    }
-                                    className='button' onClick={() => navigate('/mealMenu?mealType=dinner')}>Cena</button>
-                            </div>
+                            {loading &&
+                                <div className='loading-modal'>
+                                    <Spinner />
+                                    <h2>guardando<Loading /></h2>
+                                </div>}
 
-                            <div>
-                                <button className='button sec'><BiDumbbell className='icon i-margin-r i-margin-t i-blue' />Actividad</button>
-                                <button className='button sec'><FaHamburger className='i-margin-t i-margin-r i-red' />Permitido</button>
-                            </div>
+                            {!workout
+                                ? <>
+                                    <div className='r-t-modal-grid'>
+                                        <button disabled={disabledButton('breakfast')}
+                                            className='button' onClick={() => navigate('/breakfastMenu?mealType=breakfast')}>Desayuno</button>
+                                        <button disabled={disabledButton('afternoonsnack')}
+                                            className='button' onClick={() => navigate('/breakfastMenu?mealType=afternoonsnack')}>Merienda</button>
+                                        <button disabled={disabledButton('lunch')}
+                                            className='button' onClick={() => navigate('/mealMenu?mealType=lunch')}>Almuerzo</button>
+                                        <button disabled={disabledButton('dinner')}
+                                            className='button' onClick={() => navigate('/mealMenu?mealType=dinner')}>Cena</button>
+                                    </div>
+
+                                    <div className='r-t-modal-grid r-t-modal-extras'>
+                                        <button onClick={() => setWorkout(true)}
+                                            className='button sec'>
+                                            <BiDumbbell className='icon i-margin-r i-margin-t i-blue' />
+                                            Actividad
+                                        </button>
+
+                                        <button className='button sec' disabled>
+                                            <FaHamburger className='i-margin-t i-margin-r i-red' />
+                                            Permitido
+                                        </button>
+                                    </div>
+                                </>
+                                : <WorkoutSelector data={workouts}
+                                    edit={menuProp}
+                                    loading={setLoading}
+                                    back={() => setWorkout(() => false)}
+                                    close={() => {
+                                        closeMenu()
+                                        setWorkout(() => false)
+                                    }} />
+                            }
                         </div>
                     </Modal>
                 </div>}

@@ -122,3 +122,13 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.breakfastPreview {
+    position: relative;
+    height: 500px;
+    max-height: 34vh;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: #FFFFFF;
+    margin: 0 auto;
+}

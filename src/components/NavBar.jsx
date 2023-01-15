@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { usePlate } from '../plate-context'
 import { deleteCookie } from './helpers/cookies'
 import { BiLogOut, BiMenu, BiArrowToRight } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 
 import './style/NavBar.css'
-import axios from 'axios'
 
 export const NavBar = () => {
     const navigate = useNavigate()
@@ -52,9 +52,8 @@ export const NavBar = () => {
                 </div>
 
                 <div>
-                    <p onClick={() => go('/testing')}>Testing</p>
-                    {/*<p onClick={migrateDataToV2}>migrar datos a V2</p>*/}
-                    <br />
+                    {/* <p onClick={() => go('/testing')}>Testing</p> */}
+                    <p onClick={migrateDataToV2}>migrar datos a V2</p>
 
                     <i>usuario:</i>
                     <i>{user_name}</i>

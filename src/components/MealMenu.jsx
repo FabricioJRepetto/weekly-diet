@@ -27,6 +27,7 @@ const MealMenu = () => {
                 foods,
                 carbohydrate,
                 vegetal,
+                fruit,
                 vegetalC,
                 edit
             }
@@ -37,8 +38,6 @@ const MealMenu = () => {
     const [isOpenMealType, openMealType, closeMealType] = useModal();
     const [mealType, setMealType] = useState(params.get('mealType') || edit.mealType)
     const mealNames = {
-        breakfast: 'Desayuno',
-        afternoonsnack: 'Merienda',
         lunch: 'Almuerzo',
         dinner: 'Cena',
     }
@@ -74,6 +73,7 @@ const MealMenu = () => {
             foods: [...foods],
             carbohydrate: [...carbohydrate],
             vegetal: [...vegetal],
+            fruit: [...fruit],
             vegetalC,
             date: edit ? edit.date : new Date().toLocaleDateString('en')
         }
@@ -91,13 +91,11 @@ const MealMenu = () => {
                     start,
                     today
                 })
-            console.log(data);
             if (!data.error) {
                 dispatch({ type: 'save', payload: data })
             }
         } else {
             const { data } = await axios.post(`/history/v2?today=${today}&start=${start}`, { meal: aux })
-            console.log(data);
             if (!data.error) {
                 dispatch({ type: 'save', payload: data })
             }
@@ -145,14 +143,14 @@ const MealMenu = () => {
                     <div onClick={() => openSection('foods')}
                         className='ingredients-cell ing-f card-style'>
                         <b>Comidas</b>
-                        <p>{foods.toString().replaceAll(',', ', ')}</p>
+                        <p>{foods.join(', ')}</p>
                     </div>}
 
                 {protein.length > 0 &&
                     <div onClick={() => openSection('protein')}
                         className='ingredients-cell ing-p card-style'>
                         <b>Proteína</b>
-                        <p>{protein.toString().replaceAll(',', ', ')}</p>
+                        <p>{protein.join(', ')}</p>
                     </div>}
 
 
@@ -160,14 +158,21 @@ const MealMenu = () => {
                     <div onClick={() => openSection('carbohydrate')}
                         className='ingredients-cell ing-c card-style'>
                         <b>Carbohidratos</b>
-                        <p>{carbohydrate.toString().replaceAll(',', ', ')}</p>
+                        <p>{carbohydrate.join(', ')}</p>
                     </div>}
 
                 {vegetal.length > 0 &&
                     <div onClick={() => openSection('vegetal')}
                         className='ingredients-cell ing-v card-style'>
                         <b>Vegetales</b>
-                        <p>{vegetal.toString().replaceAll(',', ', ')}</p>
+                        <p>{vegetal.join(', ')}</p>
+                    </div>}
+
+                {fruit.length > 0 &&
+                    <div onClick={() => openSection('fruit')}
+                        className='ingredients-cell ing-v card-style'>
+                        <b>Frutas</b>
+                        <p>{fruit.join(', ')}</p>
                     </div>}
 
                 <div onClick={openType}
@@ -209,6 +214,10 @@ const MealMenu = () => {
                             <div className='ingredients-cell sec'
                                 onClick={() => selectIngList('vegetal')}>
                                 <p>Vegetales 🥦</p>
+                            </div>
+                            <div className='ingredients-cell sec'
+                                onClick={() => selectIngList('fruit')}>
+                                <p>Frutas 🍎</p>
                             </div>
                             <div className='divisor'></div>
                             <div className='ingredients-cell sec'

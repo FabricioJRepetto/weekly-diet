@@ -21,6 +21,8 @@ function plateReducer(state, action) {
                     foods: [],
                     carbohydrate: [],
                     vegetal: [],
+                    fruit: [],
+                    breakfast: [],
                     vegetalC: false
                 },
                 session: false,
@@ -28,7 +30,7 @@ function plateReducer(state, action) {
                 user_id: null,
                 user_name: null,
                 history: [],
-                week: [],
+                week: false,
                 group: {}
             }
         }
@@ -70,6 +72,8 @@ function plateReducer(state, action) {
                     foods: [],
                     carbohydrate: [],
                     vegetal: [],
+                    fruit: [],
+                    breakfast: [],
                     vegetalC: false
                 }
             }
@@ -143,6 +147,24 @@ function plateReducer(state, action) {
                 }
             }
         }
+        case 'fruit': {
+            return {
+                ...state,
+                currentPlate: {
+                    ...state.currentPlate,
+                    fruit: action.payload
+                }
+            }
+        }
+        case 'breakfast': {
+            return {
+                ...state,
+                currentPlate: {
+                    ...state.currentPlate,
+                    breakfast: action.payload
+                }
+            }
+        }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
         }
@@ -157,6 +179,8 @@ function PlateProvider({ children }) {
             foods: [],
             carbohydrate: [],
             vegetal: [],
+            fruit: [],
+            breakfast: [],
             vegetalC: false
         },
         session: false,
@@ -164,7 +188,7 @@ function PlateProvider({ children }) {
         user_id: null,
         user_name: null,
         history: [],
-        week: {},
+        week: false,
         group: {}
     })
     const value = { state, dispatch }

@@ -21,6 +21,8 @@
     padding-left: 1rem;
     font-family: 'Caveat', cursive;
     font-size: 2rem;
+    user-select: none;
+    color: #f5bb51;
 }
 
 .navbar-menu {

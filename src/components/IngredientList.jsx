@@ -18,7 +18,9 @@ const IngredientList = ({ list, type, openList }) => {
                 protein,
                 foods,
                 carbohydrate,
-                vegetal
+                vegetal,
+                fruit,
+                breakfast
             } }
     } = usePlate()
 
@@ -39,6 +41,14 @@ const IngredientList = ({ list, type, openList }) => {
                 aux = [...vegetal]
                 break;
 
+            case 'fruit':
+                aux = [...fruit]
+                break;
+
+            case 'breakfast':
+                aux = [...breakfast]
+                break;
+
             default:
                 aux = [...foods]
                 break;
@@ -46,7 +56,7 @@ const IngredientList = ({ list, type, openList }) => {
         return aux
     }
 
-    const handleSelect = ({ name, list, mix = false, lists = false, vegC = false }) => {
+    const handleSelect = ({ name, list, mix = false, lists = false }) => {
         let aux = correctList(list)
 
         if (aux.includes(name)) { //? retirar de la lista
@@ -59,12 +69,6 @@ const IngredientList = ({ list, type, openList }) => {
                     dispatch({ type: l, payload: aux })
                 })
             }
-            //! CHECKEO DE VEG C
-            // if (group.vegC.map(e => e.name).includes(name) || (mix && vegC))
-            //     dispatch({
-            //         type: 'vegC',
-            //         payload: false
-            //     })
         } else { //? agregar a la lista
             aux.push(name)
 
@@ -75,12 +79,6 @@ const IngredientList = ({ list, type, openList }) => {
                     dispatch({ type: l, payload: aux })
                 })
             }
-            //! CHECKEO DE VEG C
-            // if (group.vegC.map(e => e.name).includes(name) || (mix && vegC))
-            //     dispatch({
-            //         type: 'vegC',
-            //         payload: true
-            //     })
         }
 
         dispatch({

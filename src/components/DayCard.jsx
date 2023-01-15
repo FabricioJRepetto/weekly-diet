@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { MealCard } from './MealCard'
-import './style/DayCard.css'
 import { BiDumbbell } from 'react-icons/bi';
 import { FaHamburger } from "react-icons/fa";
 import { TiThumbsDown, TiThumbsUp } from "react-icons/ti";
+import { ExtrasCard } from './ExtrasCard';
 
-export const DayCard = ({ data, openDelete, menu = true }) => {
+import './style/DayCard.css'
+
+export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
     const [show, setShow] = useState(false)
     const [section, setSection] = useState(false)
     const xpos = useRef(false)
@@ -98,18 +100,26 @@ export const DayCard = ({ data, openDelete, menu = true }) => {
                         </div>}
                 </div>
 
-                <div className="daycard-inner-container testingcard">
-                    <p><b>Desayuno:</b>{!breakfast.empty ? breakfast.toString() : '--'}</p>
-                    <p><b>Merienda:</b>{!afternoonsnack.empty ? afternoonsnack.toString() : '--'}</p>
-                    <div>
-                        {!!workOut.length && <p>
-                            <BiDumbbell />
-                            <b>Actividad</b>
-                        </p>}
+                <div className="daycard-inner-container extras-card">
+                    <ExtrasCard data={breakfast}
+                        extraData={{ _id, date, mealType: 'breakfast' }}
+                        openDelete={openDelete} />
+
+                    <ExtrasCard data={afternoonsnack}
+                        extraData={{ _id, date, mealType: 'afternoonsnack' }}
+                        openDelete={openDelete} />
+
+                    <div className='extras-card-extras'>
+                        {!!workOut.length &&
+                            <div className='card-style3'
+                                onClick={() => editWorkOut(date, workOut)}>
+                                <BiDumbbell className='i-medium i-margin-t i-margin-r i-blue' />
+                                <b>Actividad: </b> {workOut.join(', ')}
+                            </div>}
 
                         {!!cheatFood.length && <p>
                             <FaHamburger />
-                            <b>Permitido</b>
+                            <b>Permitido: </b> {cheatFood.join(', ')}
                         </p>}
                     </div>
                 </div>

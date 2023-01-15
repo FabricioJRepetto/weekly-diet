@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { usePlate } from './plate-context';
 import MealMenu from './components/MealMenu';
+import BreakfastMenu from './components/BreakfastMenu';
 import Home from './components/Home';
 import LogInScreen from './components/LogInScreen';
 import { defineWeek } from './components/helpers/defineWeek';
@@ -34,6 +35,7 @@ function App() {
             if (token) {
                 (async () => {
                     const { data } = await axios(`/user/autologin`)
+                    // console.log(data);
                     if (!data.error) {
                         dispatch({
                             type: 'login',
@@ -66,6 +68,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/mealMenu" element={<MealMenu />} />
+                        <Route path="/breakfastMenu" element={<BreakfastMenu />} />
                         <Route path="/customFoods" element={<CustomFoods />} />
                         <Route path="/history" element={<AllWeeks />} />
                         <Route path="/checkpoint" element={<Checkpoint />} />

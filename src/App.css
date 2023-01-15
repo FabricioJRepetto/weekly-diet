@@ -114,6 +114,10 @@
     color: #7f7f7f;
 }
 
+.i-black {
+    color: rgb(32, 32, 32);
+}
+
 .i-green {
     color: var(--veg);
 }

@@ -42,8 +42,7 @@ const styles = StyleSheet.create({
 });
 
 export const DayColumn = ({ data }) => {
-    console.log(data);
-
+    // console.log(data);
     const {
         afternoonsnack,
         breakfast,
@@ -56,10 +55,12 @@ export const DayColumn = ({ data }) => {
     const stringer = (e) => {
         if (e) {
             const food = e.foods.join(', '),
-                prot = e.protein.filter(e => !/\(/g.test(e)).join(', '),
-                carb = e.carbohydrate.filter(e => !/\(/g.test(e)).join(', '),
-                veg = e.vegetal.filter(e => !/\(/g.test(e)).join(', '),
-                string = `${food ? food + ',' : ''} ${prot ? prot + ',' : ''} ${carb ? carb + ',' : ''} ${veg ? veg : ''}`.replace(',', ', ');
+                prot = e.protein && e.protein.filter(e => !/\(/g.test(e)).join(', '),
+                carb = e.carbohydrate && e.carbohydrate.filter(e => !/\(/g.test(e)).join(', '),
+                veg = e.vegetal && e.vegetal.filter(e => !/\(/g.test(e)).join(', '),
+                brk = e.breakfast && e.breakfast.filter(e => !/\(/g.test(e)).join(', ').join(', '),
+                fru = e.fruit.filter(e => !/\(/g.test(e)).join(', '),
+                string = `${food ? food + ',' : ''} ${prot ? prot + ',' : ''} ${carb ? carb + ',' : ''} ${veg ? veg : ''} ${brk ? brk : ''} ${fru ? fru : ''}`.replace(',', ', ');
 
             let vegC = e?.vegetalC
 
@@ -93,7 +94,7 @@ export const DayColumn = ({ data }) => {
     return (
         <View style={styles.dayColumn}>
             <View style={styles.smallCell}>
-                <Text style={styles.vegc}>{Bstring.vegC ? 'Veg.C' : ''}</Text>
+                {/* <Text style={styles.vegc}>{Bstring.vegC ? 'Veg.C' : ''}</Text> */}
                 <Text>{Bstring.m}</Text>
             </View>
             <View style={styles.bigCell}>
@@ -101,7 +102,7 @@ export const DayColumn = ({ data }) => {
                 <Text>{Lstring.m}</Text>
             </View>
             <View style={styles.smallCell}>
-                <Text style={styles.vegc}>{Astring.vegC ? 'Veg.C' : ''}</Text>
+                {/* <Text style={styles.vegc}>{Astring.vegC ? 'Veg.C' : ''}</Text> */}
                 <Text>{Astring.m}</Text>
             </View>
             <View style={styles.bigCell}>

@@ -21,7 +21,6 @@ export const Checkpoint = () => {
         !checkpoints && (async () => {
             const { data } = await axios(`/history/checkpoint`)
             if (!data.error) {
-                console.log(data);
                 let aux = mergeSort(data.checkpoints)
                 setCheckpoints(() => aux)
             }
