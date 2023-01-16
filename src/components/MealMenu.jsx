@@ -22,6 +22,7 @@ const MealMenu = () => {
     const {
         dispatch,
         state: {
+            currentPlate,
             currentPlate: {
                 protein,
                 foods,
@@ -41,6 +42,8 @@ const MealMenu = () => {
         lunch: 'Almuerzo',
         dinner: 'Cena',
     }
+
+    console.log(currentPlate);
 
     const closeTypeHandler = () => {
         closeType()
@@ -139,7 +142,7 @@ const MealMenu = () => {
             <Suggested />
 
             <section className='ingredients ing-main'>
-                {(foods && foods.length > 0) &&
+                {foods.length > 0 &&
                     <div onClick={() => openSection('foods')}
                         className='ingredients-cell ing-f card-style'>
                         <b>Comidas</b>

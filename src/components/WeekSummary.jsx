@@ -61,9 +61,9 @@ const WeekSummary = () => {
                 <div className='weeksummary-container fade-in'>
                     <div className='your-week card-style'>
                         <b>Tu semana:</b>
-                        <div>Actividades: {<Counter num={week.workOuts} max={7} />}</div>
-                        <div>Vegetales C: {<Counter num={week.vegetalC} max={4} />}</div>
-                        <div>Permitidos: {<Counter num={week.cheatFoods} max={5} />}</div>
+                        <div>Actividades: {<Counter num={week.workOuts} max={7} iconstyle='workout' />}</div>
+                        <div>Vegetales C: {<Counter num={week.vegetalC} max={4} iconstyle='vegC' />}</div>
+                        <div>Permitidos: {<Counter num={week.cheatFoods} max={5} iconstyle='cheat' />}</div>
                     </div>
 
                     {week.today && (!week.today?.lunch.empty && week.today?.dinner.empty) && <LastMeal />}
@@ -82,8 +82,10 @@ const WeekSummary = () => {
 
                     <section className='week-container'>
                         {week?.days && week.days.map(day => (
-                            !day.empty && <DayCard key={day._id} data={day}
+                            !day.empty &&
+                            <DayCard key={day._id} data={day}
                                 openDelete={openDelete}
+                                menu={new Date(day.date).getTime() === new Date().getTime()}
                                 editWorkOut={editWorkOut} />
                         ))}
                     </section>

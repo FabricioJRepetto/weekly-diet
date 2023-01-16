@@ -36,6 +36,7 @@ export const MealCard = ({ data, extraData, i, openDelete, setShow, showing, men
         foods,
         carbohydrate,
         vegetal,
+        fruit,
         vegetalC,
     } = data,
         {
@@ -56,12 +57,14 @@ export const MealCard = ({ data, extraData, i, openDelete, setShow, showing, men
     const edit = (e) => {
         e.stopPropagation()
         dispatch({
-            type: 'edit', payload: {
+            type: 'edit',
+            payload: {
                 edit: {
                     day_id: _id,
                     date,
                     mealType
                 },
+                fruit,
                 protein,
                 foods,
                 carbohydrate,

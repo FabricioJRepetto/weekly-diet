@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import axios from 'axios'
 import { usePlate } from '../plate-context'
 import { deleteCookie } from './helpers/cookies'
@@ -32,8 +32,19 @@ export const NavBar = () => {
         }
     }
 
+    const hour = () => {
+        let aux = Math.round(new Date().getHours() * 4.16)
+        // console.log(aux);
+        return `${aux}%`
+    }
+
+    const elstyle = useRef(hour())
+
     return (
         <div className={`navbar-container fade-in ${session ? 'navbar' : ''}`}>
+
+            <div className="testing-dynamic-color" style={{ backgroundPositionX: elstyle.current }}></div>
+
             <b className='navlogo' onClick={() => go('/')}>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>
                 {open
@@ -52,8 +63,8 @@ export const NavBar = () => {
                 </div>
 
                 <div>
-                    {/* <p onClick={() => go('/testing')}>Testing</p> */}
-                    <p onClick={migrateDataToV2}>migrar datos a V2</p>
+                    <p onClick={() => go('/testing')}>Testing</p>
+                    {/* <p onClick={migrateDataToV2}>migrar datos a V2</p> */}
 
                     <i>usuario:</i>
                     <i>{user_name}</i>

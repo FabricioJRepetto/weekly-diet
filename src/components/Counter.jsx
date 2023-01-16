@@ -1,14 +1,22 @@
-import React, { useRef } from 'react'
-import { BiCheckSquare, BiCheckbox } from 'react-icons/bi';
+import React, { Fragment, useRef } from 'react'
+import { BiErrorCircle, BiCheckCircle, BiCircle, BiXCircle } from 'react-icons/bi';
 
-export const Counter = ({ num, max }) => {
-    const blueprint = useRef('t'.repeat(num) + 'f'.repeat(max - num))
+export const Counter = ({ num, max, iconstyle }) => {
+    const icon = {
+        'workout': <BiCheckCircle className='i-small i-blue' />,
+        'vegC': <BiErrorCircle className='i-small i-orange' />,
+        'cheat': <BiXCircle className='i-small i-red' />
+    }
+    const f = num > max ? num : max - num
+    const blueprint = useRef('t'.repeat(num) + 'f'.repeat(f))
 
     return (
         <>{blueprint.current.split('').map((c, i) => (
             (c === 't')
-                ? <BiCheckSquare key={new Date().getTime() + i} />
-                : <BiCheckbox key={new Date().getTime() + i} />
+                ? <Fragment key={new Date().getTime() + i}>
+                    {icon[iconstyle]}
+                </Fragment>
+                : <BiCircle key={new Date().getTime() + i} className='i-small i-grey' />
         ))}</>
     )
 }

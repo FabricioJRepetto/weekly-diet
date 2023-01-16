@@ -4,6 +4,8 @@ import { BiDumbbell } from 'react-icons/bi';
 import { FaHamburger } from "react-icons/fa";
 import { TiThumbsDown, TiThumbsUp } from "react-icons/ti";
 import { ExtrasCard } from './ExtrasCard';
+import { usePlate } from '../plate-context';
+import { useNavigate } from 'react-router-dom';
 
 import './style/DayCard.css'
 
@@ -13,6 +15,9 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
     const xpos = useRef(false)
     const xmove = useRef(false)
     const day = useRef(new Date(data.date).toLocaleDateString("es-AR", { weekday: "long" }))
+
+    const { dispatch } = usePlate()
+    const navigate = useNavigate()
 
     // console.log(data)
     const {
@@ -56,6 +61,27 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
         xpos.current = false
     }
 
+    const edit = (e, mealType) => {
+        e.stopPropagation()
+        dispatch({
+            type: 'edit',
+            payload: {
+                edit: {
+                    day_id: _id,
+                    date,
+                    mealType
+                },
+                protein: [],
+                foods: [],
+                carbohydrate: [],
+                vegetal: [],
+                fruit: [],
+                vegetalC: false
+            }
+        })
+        navigate('/mealMenu')
+    }
+
     return (
         <div className={`daycard-outer-container card-style ${(!lunch.empty && !dinner.empty) &&
             (balanced
@@ -85,7 +111,9 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
                             setShow={() => toogleShow('lunch')}
                             showing={!show || show === 'lunch'} />
                         : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
-                            <p>Almuerzo no registrado</p>
+                            <p onClick={(e) => edit(e, 'lunch')}>
+                                Almuerzo no registrado, click para agregar
+                            </p>
                         </div>}
                     {!dinner.empty
                         ? <MealCard i={1} key={_id + 'dinner'}
@@ -96,7 +124,9 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
                             setShow={() => toogleShow('dinner')}
                             showing={!show || show === 'dinner'} />
                         : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
-                            <p>Cena no registrada</p>
+                            <p onClick={(e) => edit(e, 'dinner')}>
+                                Cena no registrada, click para agregar
+                            </p>
                         </div>}
                 </div>
 

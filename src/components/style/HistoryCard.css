@@ -25,6 +25,8 @@
 }
 
 .cp-cards-container {
+    display: flex;
+    flex-direction: column-reverse;
     padding: 1em;
 }
 
@@ -171,4 +173,10 @@
 
 .allWeeksOpen {
     height: fit-content;
+}
+
+.chart-container {
+    width: calc(100% - 1em);
+    height: fit-content;
+    margin: .5em auto;
 }

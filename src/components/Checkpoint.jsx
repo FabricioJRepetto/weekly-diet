@@ -4,6 +4,7 @@ import { ControlCard } from './ControlCard'
 import { mergeSort } from './helpers/dateMergeSort'
 import Modal from './helpers/Modal'
 import { useModal } from './helpers/useModal'
+import { Chart, Bar, Line } from 'react-chartjs-2'
 
 export const Checkpoint = () => {
     const [form, setForm] = useState({
@@ -15,14 +16,48 @@ export const Checkpoint = () => {
         date: new Date().toLocaleDateString('en-CA') + 'T' + new Date().getHours() + ':' + new Date().getMinutes()
     })
     const [checkpoints, setCheckpoints] = useState(false)
+    const [dataSet, setDataSet] = useState(false)
+    const options = {
+        scales: {
+            y: {
+                beginAtZero: false,
+            },
+        },
+    };
     const [isOpen, openModal, closeModal] = useModal()
 
     useEffect(() => {
         !checkpoints && (async () => {
             const { data } = await axios(`/history/checkpoint`)
             if (!data.error) {
+                console.table(data.checkpoints);
                 let aux = mergeSort(data.checkpoints)
                 setCheckpoints(() => aux)
+
+                const dataset = {
+                    labels: aux.map(e => e.date),
+                    datasets: [
+                        {
+                            id: 1,
+                            type: 'line',
+                            label: 'Peso (kg) ',
+                            data: aux.map(e => parseFloat(e.weight)),
+                        },
+                        {
+                            id: 2,
+                            type: 'bar',
+                            label: 'Muculatura (%) ',
+                            data: aux.map(e => parseFloat(e.muscle || 0)),
+                        },
+                        {
+                            id: 3,
+                            type: 'bar',
+                            label: 'Grasa (%) ',
+                            data: aux.map(e => parseFloat(e.fat || 0)),
+                        }
+                    ],
+                }
+                setDataSet(() => dataset)
             }
         })()
         // eslint-disable-next-line
@@ -65,11 +100,9 @@ export const Checkpoint = () => {
                 Agregar control
             </button>
 
-            <div className='divisor'></div>
-            <div>
-                gráfico [WIP]
+            <div className='chart-container'>
+                {dataSet && <Chart data={dataSet} options={options} />}
             </div>
-            <div className='divisor'></div>
 
             <div className='cp-cards-container'>{
                 !!checkpoints.length && checkpoints.map(e => (
