@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { BiChevronDown, BiFlag } from 'react-icons/bi'
 
 export const ControlCard = ({ data, showDate = true, showOpen = true, open = false, setOpen = false }) => {
@@ -11,11 +11,13 @@ export const ControlCard = ({ data, showDate = true, showOpen = true, open = fal
         date
     } = data
 
+    const dateStr = useRef(new Date(date).toLocaleDateString("es-AR", { year: 'numeric', month: 'long', day: 'numeric' }))
+
     return (
         <div className={`history-card-section card-style3 ${open ? 'cpOpen' : ''}`}
             onClick={() => setOpen(!open)}>
             <span className='history-card-control-head'>
-                <p><BiFlag className='icon i-margin-r i-blue' /> Control {showDate && date}</p>
+                <p><BiFlag className='icon i-margin-r i-blue' />{showDate ? dateStr.current : 'Control'}</p>
                 {showOpen && <BiChevronDown className={`icon i-grey ${open ? 'i-arrow-close' : ''}`} />}
             </span>
 

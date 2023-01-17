@@ -22,7 +22,7 @@ const MealMenu = () => {
     const {
         dispatch,
         state: {
-            currentPlate,
+            // currentPlate,
             currentPlate: {
                 protein,
                 foods,
@@ -42,8 +42,6 @@ const MealMenu = () => {
         lunch: 'Almuerzo',
         dinner: 'Cena',
     }
-
-    console.log(currentPlate);
 
     const closeTypeHandler = () => {
         closeType()

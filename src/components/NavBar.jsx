@@ -43,7 +43,8 @@ export const NavBar = () => {
     return (
         <div className={`navbar-container fade-in ${session ? 'navbar' : ''}`}>
 
-            <div className="testing-dynamic-color" style={{ backgroundPositionX: elstyle.current }}></div>
+            {/* <div className="testing-dynamic-color" 
+                style={{ backgroundPositionX: elstyle.current }}></div> */}
 
             <b className='navlogo' onClick={() => go('/')}>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>
@@ -63,7 +64,7 @@ export const NavBar = () => {
                 </div>
 
                 <div>
-                    <p onClick={() => go('/testing')}>Testing</p>
+                    {/* <p onClick={() => go('/testing')}>Testing</p> */}
                     {/* <p onClick={migrateDataToV2}>migrar datos a V2</p> */}
 
                     <i>usuario:</i>

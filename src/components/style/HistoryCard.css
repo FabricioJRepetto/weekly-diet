@@ -180,3 +180,42 @@
     height: fit-content;
     margin: .5em auto;
 }
+
+.custom-select {
+    position: relative;
+}
+
+.custom-select select {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: .5em;
+    padding: .25em;
+    outline: none;
+    padding-left: .5em;
+    padding-right: 2em;
+}
+
+.select-arrow {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    right: .5em;
+    width: calc(fit-content + 1em);
+    z-index: +1;
+    color: black;
+    transform: translate(0, -50%) scale(1.5);
+}
+
+.controlcard-jekyll {
+    background-color: #202020;
+    height: fit-content;
+    opacity: 1;
+    transition: all .3s ease;
+}
+
+.controlcard-hyde {
+    background-color: #202020;
+    opacity: 0;
+    height: 0 !important;
+    transition: all .3s ease;
+}
