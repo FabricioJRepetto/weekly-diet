@@ -15,6 +15,7 @@ import AllWeeks from './components/AllWeeks';
 
 import './App.css';
 import { Test } from './components/Test';
+import { CreateCheckpoint } from './components/CreateCheckpoint';
 
 function App() {
     const navigate = useNavigate()
@@ -73,9 +74,10 @@ function App() {
                         <Route path="/customFoods" element={<CustomFoods />} />
                         <Route path="/history" element={<AllWeeks />} />
                         <Route path="/checkpoint" element={<Checkpoint />} />
+                        <Route path="/createcheckpoint" element={<CreateCheckpoint />} />
                         <Route path="/config" element={<Config />} />
 
-                        <Route path="/testing" element={<Test />} />
+                        {/* <Route path="/testing" element={<Test />} /> */}
                     </Routes>
                 </div>}
         </div>

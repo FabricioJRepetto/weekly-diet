@@ -2,32 +2,29 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { ControlCard } from './ControlCard'
 import { mergeSort } from './helpers/dateMergeSort'
-import Modal from './helpers/Modal'
-import { useModal } from './helpers/useModal'
 import { Chart } from 'react-chartjs-2'
 import { Spinner } from './Spinner'
 import { BiChevronDown } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom'
 
 export const Checkpoint = () => {
-    const [form, setForm] = useState({
-        weight: '',
-        muscle: '',
-        fat: '',
-        abdominal: '',
-        body_age: '',
-        date: new Date().toLocaleDateString('en-CA') + 'T' + new Date().getHours() + ':' + new Date().getMinutes()
-    })
     const [loading, setLoading] = useState(true)
     const [selectedCard, setSelectedCard] = useState(false)
     const [checkpoints, setCheckpoints] = useState(false)
     const [dataSet, setDataSet] = useState(false)
     const chartRef = useRef(null)
+    const navigate = useNavigate()
 
     const options = {
         scales: {
             y: {
                 beginAtZero: false,
             },
+        },
+        elements: {
+            point: {
+                hitRadius: 10
+            }
         },
         layout: {
             padding: 5
@@ -55,7 +52,6 @@ export const Checkpoint = () => {
             cardFinder(element[0]?.index)
         }
     };
-    const [isOpen, openModal, closeModal] = useModal()
 
     const cardFinder = (index) => {
         if (!index) setSelectedCard(() => false)
@@ -98,36 +94,6 @@ export const Checkpoint = () => {
         })()
         // eslint-disable-next-line
     }, [])
-
-    const handleClose = () => {
-        closeModal()
-        setForm(() => ({
-            weight: '',
-            muscle: '',
-            fat: '',
-            abdominal: '',
-            body_age: '',
-            date: new Date().toLocaleDateString('en-CA') + 'T' + new Date().getHours() + ':' + new Date().getMinutes()
-        }))
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        console.log(new Date(form.date).toLocaleDateString('en'));
-        const checkpoint = {
-            ...form,
-            date: new Date(form.date).toLocaleDateString('en')
-        }
-        const { data } = await axios.post(`/history/checkpoint`, { checkpoint })
-
-        if (!data.error) {
-            setCheckpoints(() => data.checkpoints)
-            handleClose()
-        } else {
-            console.warn(data.error)
-        }
-    }
-    //? calculo de IMC: peso / (altura^2)
 
     const niceDate = (d) => {
         return d.slice(0, -5).split('/').reverse().join('/')
@@ -187,7 +153,7 @@ export const Checkpoint = () => {
         <div>
             <h2>Controles</h2>
             <button className='ingredients-cell add-ing'
-                onClick={openModal}>
+                onClick={() => navigate(`/createcheckpoint`)}>
                 Agregar control
             </button>
 
@@ -221,33 +187,6 @@ export const Checkpoint = () => {
                     </div>
                 ))
             }</div>
-
-            <Modal isOpen={isOpen} closeModal={handleClose}>
-                <div>
-                    <form onSubmit={handleSubmit} className='control-form'>
-                        <input type="datetime-local"
-                            value={form.date}
-                            onChange={e => setForm(c => ({ ...c, date: e.target.value }))} />
-                        <input type="number" placeholder='peso'
-                            value={form.weight}
-                            required
-                            onChange={e => setForm(f => ({ ...f, weight: e.target.value }))} />
-                        <input type="number" placeholder='% muscular'
-                            value={form.muscle}
-                            onChange={e => setForm(f => ({ ...f, muscle: e.target.value }))} />
-                        <input type="number" placeholder='% de grasa'
-                            value={form.fat}
-                            onChange={e => setForm(f => ({ ...f, fat: e.target.value }))} />
-                        <input type="number" placeholder='grasa visceral'
-                            value={form.abdominal}
-                            onChange={e => setForm(f => ({ ...f, abdominal: e.target.value }))} />
-                        <input type="number" placeholder='edad corporal'
-                            value={form.body_age}
-                            onChange={e => setForm(f => ({ ...f, body_age: e.target.value }))} />
-                    </form>
-                    <button onClick={handleSubmit} className='button'>guardar</button>
-                </div>
-            </Modal>
         </div>
     )
 }
