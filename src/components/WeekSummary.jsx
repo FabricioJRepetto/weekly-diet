@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePlate } from '../plate-context'
 import LastMeal from './LastMeal'
 import axios from 'axios'
@@ -21,13 +21,32 @@ const WeekSummary = () => {
     const navigate = useNavigate()
     const {
         dispatch,
-        state: { week, group: { workouts } }
+        state: { week, group: { workouts }, config: { tutorials } }
     } = usePlate()
     // console.log(week);
     const [isOpenDelete, openDelete, closeDelete, prop] = useModal();
     const [isOpenMenu, openMenu, closeMenu, menuProp] = useModal();
     const [workout, setWorkout] = useState(false)
     const [loading, setLoading] = useState(false)
+
+
+    //????????????????????????????????????? convertir en hook
+    useEffect(() => {
+        if (tutorials && tutorials.activated && tutorials.mainMenu) {
+            (async () => {
+                const { data } = await axios.put('/user/config', { tutorial: 'mainMenu' })
+                if (!data.error) {
+                    dispatch({ type: 'userConfig', payload: data.config })
+                } else console.console.warn(data);
+            })()
+            dispatch({ type: 'openTuto', payload: 'mainMenu' })
+        }
+        // eslint-disable-next-line
+    }, [tutorials])
+
+    const tutotest = () => {
+        dispatch({ type: 'openTuto', payload: 'creationMenu' })
+    }
 
     const deleteConfirmed = async () => {
         setLoading(() => true)
@@ -59,6 +78,7 @@ const WeekSummary = () => {
         <>
             {!!Object.values(week).length &&
                 <div className='weeksummary-container fade-in'>
+                    <button onClick={tutotest}> open tuto </button>
                     <div className='your-week card-style'>
                         <b>Tu semana:</b>
                         <div>Actividades: {<Counter num={week.workOuts} max={7} iconstyle='workout' />}</div>

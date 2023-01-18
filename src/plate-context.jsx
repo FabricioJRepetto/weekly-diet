@@ -171,6 +171,18 @@ function plateReducer(state, action) {
                 }
             }
         }
+        case 'openTuto': {
+            return {
+                ...state,
+                openTuto: action.payload
+            }
+        }
+        case 'closeTuto': {
+            return {
+                ...state,
+                openTuto: false
+            }
+        }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
         }
@@ -199,15 +211,9 @@ function PlateProvider({ children }) {
         config: {
             height: 0,
             plateStyle: true,
-            tutorials: {
-                activated: true,
-                mainMenu: true,
-                creationMenu: true,
-                checkpoints: true,
-                customMeals: true,
-                history: true,
-            }
-        }
+            tutorials: false
+        },
+        openTuto: false
     })
     const value = { state, dispatch }
 

@@ -13,9 +13,10 @@ import { Checkpoint } from "./components/Checkpoint";
 import { CreateCheckpoint } from './components/CreateCheckpoint';
 import { Config } from "./components/Config";
 import AllWeeks from './components/AllWeeks';
+import { TutorialContainer } from './components/TutorialContainer';
+// import { Test } from './components/Test';
 
 import './App.css';
-// import { Test } from './components/Test';
 
 function App() {
     const navigate = useNavigate()
@@ -81,6 +82,8 @@ function App() {
 
                         {/* <Route path="/testing" element={<Test />} /> */}
                     </Routes>
+
+                    <TutorialContainer />
                 </div>}
         </div>
     );

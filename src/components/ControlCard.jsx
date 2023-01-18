@@ -16,7 +16,6 @@ export const ControlCard = ({ data, showDate = true, showOpen = true, open = fal
 
     //? calculo de IMC: peso / (altura^2)
 
-
     return (
         <div className={`history-card-section card-style3 ${open ? 'cpOpen' : ''}`}
             onClick={() => setOpen(!open)}>

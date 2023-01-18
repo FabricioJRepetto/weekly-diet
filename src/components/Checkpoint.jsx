@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { ControlCard } from './ControlCard'
 import { mergeSort } from './helpers/dateMergeSort'
-import { Chart as ChartJS, LineController, LineElement, PointElement, LinearScale, Title, Filler } from 'chart.js'
+import { Chart as ChartJS, LineController, LineElement, PointElement, LinearScale, Title, Filler, CategoryScale } from 'chart.js'
 import { Chart } from 'react-chartjs-2'
 import { Spinner } from './Spinner'
 import { BiChevronDown } from 'react-icons/bi';
@@ -16,7 +16,7 @@ export const Checkpoint = () => {
     const chartRef = useRef(null)
     const navigate = useNavigate()
 
-    ChartJS.register(LineController, LineElement, PointElement, LinearScale, Title, Filler);
+    ChartJS.register(LineController, LineElement, PointElement, LinearScale, Title, Filler, CategoryScale);
 
     const options = {
         scales: {
@@ -55,6 +55,8 @@ export const Checkpoint = () => {
             cardFinder(element[0]?.index)
         }
     };
+
+    // Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
 
     const cardFinder = (index) => {
         if (!index) setSelectedCard(() => false)

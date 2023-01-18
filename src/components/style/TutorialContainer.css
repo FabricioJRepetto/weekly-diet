@@ -1,0 +1,37 @@
+.TutorialContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 200;
+    background-color: #00000090;
+    pointer-events: none;
+    display: none;
+}
+
+.tutoOpen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+}
+
+.tuto-content {
+    height: fit-content;
+    min-height: 10em;
+    width: 100vw;
+    max-width: 600px;
+    padding: 1em;
+    margin: 1em;
+    border-radius: .5em;
+    background-color: rgb(33, 33, 33);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tuto-content p {
+    font-size: 1.1rem;
+}
