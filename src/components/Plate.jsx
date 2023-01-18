@@ -1,15 +1,17 @@
 import React from 'react'
 import { IoAlertCircleSharp, IoLeafSharp } from "react-icons/io5";
+import { usePlate } from '../plate-context';
 
 import "../components/style/Plate.css"
 
 const Plate = ({ protein, carbohydrate, vegetal, vegC, size }) => {
+    const { state: { config: { plateStyle } } } = usePlate()
 
     return (
         <div className='plate-container'
             style={{ height: size, width: size }}>
 
-            <div className='white-plate'>
+            <div className={plateStyle ? 'detailed-plate' : 'simple-plate'}>
                 <div></div>
             </div>
 

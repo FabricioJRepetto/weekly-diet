@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { BiChevronDown, BiFlag } from 'react-icons/bi'
+import { usePlate } from '../plate-context'
 
 export const ControlCard = ({ data, showDate = true, showOpen = true, open = false, setOpen = false }) => {
     const {
@@ -10,8 +11,11 @@ export const ControlCard = ({ data, showDate = true, showOpen = true, open = fal
         body_age,
         date
     } = data
-
+    const { state: { config: { height } } } = usePlate()
     const dateStr = useRef(new Date(date).toLocaleDateString("es-AR", { year: 'numeric', month: 'long', day: 'numeric' }))
+
+    //? calculo de IMC: peso / (altura^2)
+
 
     return (
         <div className={`history-card-section card-style3 ${open ? 'cpOpen' : ''}`}
@@ -25,7 +29,7 @@ export const ControlCard = ({ data, showDate = true, showOpen = true, open = fal
                 <p>Peso:</p><p>{weight} Kg.</p>
             </div>
             <div>
-                <p>IMC:</p><p>--</p>
+                <p>IMC:</p><p>{height ? (weight / Math.pow(height / 100, 2)).toFixed(1) : '---'}</p>
             </div>
             <div className='divisor-inv'></div>
             {muscle && <div>

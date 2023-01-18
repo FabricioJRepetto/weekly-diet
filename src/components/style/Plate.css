@@ -14,7 +14,18 @@
     position: absolute;
 }
 
-.white-plate {
+.simple-plate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 83%;
+    width: 83%;
+    border-radius: 50%;
+    background-color: rgb(243, 243, 243);
+}
+
+.detailed-plate {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -37,7 +48,7 @@
     ;
 }
 
-.white-plate div {
+.detailed-plate div {
     position: absolute;
     top: 13%;
     left: 13%;

@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
+// import axios from 'axios'
 import { usePlate } from '../plate-context'
 import { deleteCookie } from './helpers/cookies'
 import { BiLogOut, BiMenu, BiArrowToRight } from 'react-icons/bi'
@@ -23,22 +23,22 @@ export const NavBar = () => {
         navigate(rout)
     }
 
-    const migrateDataToV2 = async () => {
-        const { data: old } = await axios('/history/migrate')
-        console.log(old);
-        if (old) {
-            const { data } = await axios.post('/history/migrate2', { old: old.oldDays })
-            console.log(data);
-        }
-    }
+    // const migrateDataToV2 = async () => {
+    //     const { data: old } = await axios('/history/migrate')
+    //     console.log(old);
+    //     if (old) {
+    //         const { data } = await axios.post('/history/migrate2', { old: old.oldDays })
+    //         console.log(data);
+    //     }
+    // }
 
-    const hour = () => {
-        let aux = Math.round(new Date().getHours() * 4.16)
-        // console.log(aux);
-        return `${aux}%`
-    }
+    // const hour = () => {
+    //     let aux = Math.round(new Date().getHours() * 4.16)
+    //     // console.log(aux);
+    //     return `${aux}%`
+    // }
 
-    const elstyle = useRef(hour())
+    // const elstyle = useRef(hour())
 
     return (
         <div className={`navbar-container fade-in ${session ? 'navbar' : ''}`}>
@@ -60,7 +60,7 @@ export const NavBar = () => {
                     <p onClick={() => go('/history')}>Historal</p>
                     <p onClick={() => go('/checkpoint')}>Controles</p>
                     <p onClick={() => go('/customFoods')}>Mis preparaciones</p>
-                    <p className='nav-disabled' onClick={() => undefined}>Configuración</p>
+                    <p onClick={() => go('/config')}>Configuración</p>
                 </div>
 
                 <div>

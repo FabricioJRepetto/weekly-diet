@@ -10,7 +10,7 @@ function plateReducer(state, action) {
                 session: true,
                 user_id: action.payload.id,
                 user_name: action.payload.email,
-                loading: false
+                // loading: false
             }
         }
         case 'logout': {
@@ -32,6 +32,12 @@ function plateReducer(state, action) {
                 history: [],
                 week: false,
                 group: {}
+            }
+        }
+        case 'userConfig': {
+            return {
+                ...state,
+                config: action.payload
             }
         }
         case 'loading': {
@@ -189,7 +195,19 @@ function PlateProvider({ children }) {
         user_name: null,
         history: [],
         week: false,
-        group: {}
+        group: {},
+        config: {
+            height: 0,
+            plateStyle: true,
+            tutorials: {
+                activated: true,
+                mainMenu: true,
+                creationMenu: true,
+                checkpoints: true,
+                customMeals: true,
+                history: true,
+            }
+        }
     })
     const value = { state, dispatch }
 

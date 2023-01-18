@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { ControlCard } from './ControlCard'
 import { mergeSort } from './helpers/dateMergeSort'
+import { Chart as ChartJS, LineController, LineElement, PointElement, LinearScale, Title, Filler } from 'chart.js'
 import { Chart } from 'react-chartjs-2'
 import { Spinner } from './Spinner'
 import { BiChevronDown } from 'react-icons/bi';
@@ -14,6 +15,8 @@ export const Checkpoint = () => {
     const [dataSet, setDataSet] = useState(false)
     const chartRef = useRef(null)
     const navigate = useNavigate()
+
+    ChartJS.register(LineController, LineElement, PointElement, LinearScale, Title, Filler);
 
     const options = {
         scales: {
@@ -68,7 +71,7 @@ export const Checkpoint = () => {
             const { data } = await axios(`/history/checkpoint`)
             if (!data.error) {
                 let aux = mergeSort(data.checkpoints)
-                console.table(aux);
+                // console.table(aux);
                 setCheckpoints(() => aux)
 
                 const dataset = {

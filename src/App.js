@@ -10,12 +10,12 @@ import { defineWeek } from './components/helpers/defineWeek';
 import { deleteCookie, getCookie } from './components/helpers/cookies';
 import { CustomFoods } from './components/CustomFoods';
 import { Checkpoint } from "./components/Checkpoint";
+import { CreateCheckpoint } from './components/CreateCheckpoint';
 import { Config } from "./components/Config";
 import AllWeeks from './components/AllWeeks';
 
 import './App.css';
-import { Test } from './components/Test';
-import { CreateCheckpoint } from './components/CreateCheckpoint';
+// import { Test } from './components/Test';
 
 function App() {
     const navigate = useNavigate()
@@ -31,6 +31,14 @@ function App() {
                 const { data } = await axios(`/history/fullhistory/v2?today=${today}&start=${start}`)
                 // console.log(data);
                 dispatch({ type: 'save', payload: data })
+
+                const { data: data2 } = await axios(`/user/config`)
+                // console.log(data2);
+                dispatch({
+                    type: 'userConfig',
+                    payload: data2.config
+                })
+                dispatch({ type: 'loading', payload: false })
             })()
         } else {
             const token = getCookie('autoLogin')
@@ -46,17 +54,11 @@ function App() {
                         navigate('/')
                     } else {
                         deleteCookie('autoLogin')
-                        dispatch({
-                            type: 'loading',
-                            payload: false
-                        })
+                        dispatch({ type: 'loading', payload: false })
                     }
                 })()
             } else {
-                dispatch({
-                    type: 'loading',
-                    payload: false
-                })
+                dispatch({ type: 'loading', payload: false })
             }
         }
         // eslint-disable-next-line
