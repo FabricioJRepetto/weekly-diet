@@ -1,0 +1,19 @@
+.config-section {
+    padding: .25em 0;
+    margin: .5em 0;
+}
+
+.config-section h3 {
+    margin: .3em 0;
+}
+
+.config-section div {
+    margin: 0.5em auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.config-section>p {
+    margin: 0.5em auto;
+}

@@ -104,17 +104,14 @@ export const MealCard = ({ data, extraData, i, openDelete, setShow, showing, men
                         <div className='daycard-ingredients'>
                             {proportions.current.boolean.p &&
                                 <div className={`daycard-ing ${i === 1 ? 'ing-reverse' : ''}`} style={proportions.current.p}>
-                                    {/* <b style={{ color: 'var(--prot)' }}>Proteínas</b> */}
                                     <p>{protein.toString().replaceAll(',', ', ')}</p>
                                 </div>}
                             {proportions.current.boolean.c &&
                                 <div className={`daycard-ing ing-carb ${i === 1 ? 'ing-reverse' : ''}`} style={proportions.current.c}>
-                                    {/* <b style={{ color: 'var(--carb)' }}>Carbohidratos</b> */}
                                     <p>{carbohydrate.toString().replaceAll(',', ', ')}</p>
                                 </div>}
                             {proportions.current.boolean.v &&
                                 <div className={`daycard-ing ing-veg ${i === 1 ? 'ing-reverse' : ''}`} style={proportions.current.v}>
-                                    {/* <b style={{ color: 'var(--veg)' }}>Vegetales</b> */}
                                     <p>{vegetal.toString().replaceAll(',', ', ')}</p>
                                 </div>}
                         </div>
@@ -131,10 +128,12 @@ export const MealCard = ({ data, extraData, i, openDelete, setShow, showing, men
                         </p>}
                 </div>
 
-                {menu && <div className='daycard-options'>
-                    <p className='button-opt' onClick={edit}>editar</p>
-                    <p className='button-opt b-o-delete' onClick={deleteHandler}>borrar</p>
-                </div>}
+                <div className='daycard-options'>
+                    {menu && <>
+                        <p className='button-opt' onClick={edit}>editar</p>
+                        <p className='button-opt b-o-delete' onClick={deleteHandler}>borrar</p>
+                    </>}
+                </div>
             </div>
 
             <div className={`daycard-plate ${preview ? '' : 'plate-opacity plate-pos' + i}`}>

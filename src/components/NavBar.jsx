@@ -6,6 +6,7 @@ import { BiLogOut, BiMenu, BiArrowToRight } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 
 import './style/NavBar.css'
+import { hour } from './helpers/hour'
 
 export const NavBar = () => {
     const navigate = useNavigate()
@@ -32,21 +33,13 @@ export const NavBar = () => {
     //     }
     // }
 
-    // const hour = () => {
-    //     let aux = Math.round(new Date().getHours() * 4.16)
-    //     // console.log(aux);
-    //     return `${aux}%`
-    // }
-
-    // const elstyle = useRef(hour())
-
     return (
         <div className={`navbar-container fade-in ${session ? 'navbar' : ''}`}>
 
             {/* <div className="testing-dynamic-color" 
                 style={{ backgroundPositionX: elstyle.current }}></div> */}
 
-            <b className='navlogo' onClick={() => go('/')}>Diet mate</b>
+            <b className={`navlogo ${hour()}`} onClick={() => go('/')}>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>
                 {open
                     ? <BiArrowToRight className='icon i-white' />
@@ -67,8 +60,9 @@ export const NavBar = () => {
                     {/* <p onClick={() => go('/testing')}>Testing</p> */}
                     {/* <p onClick={migrateDataToV2}>migrar datos a V2</p> */}
 
-                    <i>usuario:</i>
-                    <i>{user_name}</i>
+                    <i className='italic'>usuario:</i>
+                    <i className='italic'>{user_name}</i>
+
                     <p onClick={logout}>
                         <BiLogOut className='icon i-margin-r' />
                         Cerrar sesión

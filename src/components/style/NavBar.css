@@ -23,21 +23,6 @@
     font-family: 'Caveat', cursive;
     font-size: 2rem;
     user-select: none;
-    color: #f5bb51;
-}
-
-.testing-dynamic-color {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.2;
-    /* width: 25%; */
-    /* height: .5em; */
-    background: linear-gradient(90deg, rgba(11, 37, 89, 1) 0%, rgba(11, 54, 140, 1) 21%, rgba(245, 159, 4, 1) 31%, rgba(254, 241, 219, 1) 43%, rgba(255, 255, 255, 1) 51%, rgba(253, 232, 213, 1) 62%, rgba(242, 116, 5, 1) 79%, rgba(115, 12, 2, 1) 87%, rgba(11, 37, 89, 1) 100%);
-    background-size: 3000%;
-    z-index: -1;
 }
 
 .navbar-menu {
@@ -62,7 +47,7 @@
     padding-left: 2em;
 }
 
-.navbar-menu i {
+.italic {
     font-size: .9rem;
     padding-left: 2em;
     color: #606060;

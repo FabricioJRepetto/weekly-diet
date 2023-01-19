@@ -123,7 +123,12 @@ export const TutorialContainer = () => {
         history: [
             <Fragment key={'tutoh1'}>
                 <h2>Historial</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio mollitia et vero tempora obcaecati unde tempore aliquam adipisci laborum officiis, possimus perspiciatis velit fugit ipsum natus accusamus iste praesentium eligendi.</p>
+                <p>En esta sección verás todos los registros que hayas realizado,<br />
+                    ordenados por semana y, si existen, los controles correspondientes a la misma.
+                </p>
+            </Fragment>,
+            <Fragment key={'tutoh2'}>
+                <p>También es posible descargar la información de una o multiples semanas en un archivo PDF.</p>
             </Fragment>
         ],
         checkpoints: [
@@ -160,6 +165,13 @@ export const TutorialContainer = () => {
                 <div className='tuto-content card-style'>
                     {content[openTuto][diapo]}
 
+                    {diapo >= content[openTuto].length - 1 &&
+                        <label className='dontshow' htmlFor='dontshow'
+                            onClick={() => setDontShowAgain(() => true)}>
+                            <input id='dontshow' type='checkbox'></input>
+                            <p>no volver a mostrar</p>
+                        </label>}
+
                     <button disabled={closeButton}
                         onClick={diapo < content[openTuto].length - 1 ? nextDiapo : close}
                         className='button'>
@@ -167,14 +179,6 @@ export const TutorialContainer = () => {
                             ? 'siguiente'
                             : 'entendido'}
                     </button>
-
-                    {diapo >= content[openTuto].length - 1 &&
-                        <label className='dontshow' htmlFor='dontshow'
-                            onClick={() => setDontShowAgain(() => true)}>
-                            <input id='dontshow' type='checkbox'></input>
-                            <p>no volver a mostrar</p>
-                        </label>
-                    }
                 </div>}
         </div>
     )

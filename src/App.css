@@ -179,6 +179,18 @@
     margin-bottom: .5em;
 }
 
+.blue-hour {
+    color: #4751ba;
+}
+
+.orange-hour {
+    color: #f5ab51;
+}
+
+.white-hour {
+    color: #ffffff;
+}
+
 .fade-in {
     animation: fadein .3s ease-in forwards;
 }

@@ -17,6 +17,8 @@
     font-family: 'Caveat', cursive;
     font-size: 4rem;
     margin-bottom: 2rem;
+    color: #ffffff;
+    transition: color 5s ease-in;
 }
 
 .transparent {

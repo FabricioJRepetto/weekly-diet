@@ -4,6 +4,7 @@ import { usePlate } from '../plate-context'
 import { setCookie } from './helpers/cookies'
 import { Spinner } from './Spinner'
 import LoadingHints from './LoadingHints'
+import { hour } from './helpers/hour'
 
 import './style/LogInScreen.css'
 
@@ -57,7 +58,7 @@ const LogInScreen = () => {
 
     return (
         <div className='login-container'>
-            <h1 className='logo'>Diet Mate</h1>
+            <h1 className={`logo ${hour()}`}>Diet Mate</h1>
             {loading &&
                 <>
                     <Spinner />

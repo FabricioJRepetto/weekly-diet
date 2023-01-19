@@ -56,7 +56,6 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) =>
             demoRef.current = setInterval(demoplay, 10000);
         }
         return () => {
-            console.log('clear interval');
             clearInterval(demoRef.current)
         }
         // eslint-disable-next-line
@@ -143,7 +142,7 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) =>
                             showing={!show || show === 'lunch'} />
                         : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
                             <p onClick={(e) => menu ? edit(e, 'lunch') : undefined}>
-                                Almuerzo no registrado, click para agregar
+                                Almuerzo no registrado, toca para agregar
                             </p>
                         </div>}
                     {!dinner.empty
@@ -156,7 +155,7 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) =>
                             showing={!show || show === 'dinner'} />
                         : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
                             <p onClick={(e) => menu ? edit(e, 'dinner') : undefined}>
-                                Cena no registrada, click para agregar
+                                Cena no registrada, toca para agregar
                             </p>
                         </div>}
                 </div>
