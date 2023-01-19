@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { usePlate } from '../plate-context'
 import Plate from './Plate'
 
-export const MealCard = ({ data, extraData, i, openDelete, setShow, showing, menu }) => {
+export const MealCard = ({ data, extraData, i, openDelete, setShow, showing, menu = true, demo = undefined }) => {
     const propotionsMaker = () => {
         let p = !!protein.length
             ? !!protein.length && !!carbohydrate.length
@@ -30,6 +30,15 @@ export const MealCard = ({ data, extraData, i, openDelete, setShow, showing, men
             }
         }
     }
+
+    useEffect(() => {
+        if (demo !== undefined) {
+            if (demo) {
+                setPreview(false)
+            } else setPreview(true)
+        }
+    }, [demo])
+
 
     const {
         protein,

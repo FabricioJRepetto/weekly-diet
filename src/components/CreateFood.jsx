@@ -34,9 +34,9 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
         }
         if (!customFood || selected.length < 2) return
 
-        let flag = group.foods.filter(e => e.name === customFood)
+        let flag = edit ? false : group.foods.filter(e => e.name === customFood)
 
-        if (!!flag.length) {
+        if (!!flag?.length) {
             setError1(() => 'Nombre ya utilizado')
             return
         }

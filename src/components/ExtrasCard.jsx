@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { usePlate } from '../plate-context';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 
-export const ExtrasCard = ({ data, extraData, openDelete }) => {
+export const ExtrasCard = ({ data, extraData, openDelete, menu }) => {
     const { dispatch } = usePlate()
     const {
         foods,
@@ -47,8 +47,8 @@ export const ExtrasCard = ({ data, extraData, openDelete }) => {
 
             {!empty
                 ? <>
-                    <BiDotsVerticalRounded className='icon i-margin-t menu-dots'
-                        onClick={() => setOptions(!options)} />
+                    {menu && <BiDotsVerticalRounded className='icon i-margin-t menu-dots'
+                        onClick={() => setOptions(!options)} />}
 
                     {options && <div className='extras-options'>
                         <p onClick={edit}>editar</p>

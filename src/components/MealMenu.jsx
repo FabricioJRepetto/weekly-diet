@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { usePlate } from '../plate-context'
 import Modal from './helpers/Modal'
@@ -22,7 +22,6 @@ const MealMenu = () => {
     const {
         dispatch,
         state: {
-            // currentPlate,
             currentPlate: {
                 protein,
                 foods,
@@ -31,6 +30,9 @@ const MealMenu = () => {
                 fruit,
                 vegetalC,
                 edit
+            },
+            config: {
+                tutorials
             }
         } } = usePlate()
     const navigate = useNavigate()
@@ -42,6 +44,13 @@ const MealMenu = () => {
         lunch: 'Almuerzo',
         dinner: 'Cena',
     }
+
+    useEffect(() => {
+        if (tutorials && tutorials.activated && tutorials.creationMenu) {
+            dispatch({ type: 'openTuto', payload: 'creationMenu' })
+        }
+        // eslint-disable-next-line
+    }, [tutorials])
 
     const closeTypeHandler = () => {
         closeType()

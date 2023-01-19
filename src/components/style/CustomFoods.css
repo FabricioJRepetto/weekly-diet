@@ -1,8 +1,18 @@
 .customfood-cell {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* margin: .5em 0; */
+    flex-direction: column;
+    margin: .25em;
+    height: 1em;
+    overflow: hidden;
+}
+
+.customfood-cell div:first-child {
+    display: flex;
+    justify-content: center;
+}
+
+.customfood-expanded {
+    height: fit-content;
 }
 
 .customfood-cell p {
@@ -14,6 +24,15 @@
     text-overflow: ellipsis;
 }
 
-.customfood-cell div>* {
-    margin: 0 1em;
+.customfood-buttons {
+    z-index: +1;
+    height: 1em;
+}
+
+.customfood-buttons>* {
+    margin: 0 1em 0 1em;
+}
+
+.customfood-ingredients {
+    margin: 1em 0 0 1em;
 }

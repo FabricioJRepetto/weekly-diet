@@ -7,6 +7,7 @@ import { Chart } from 'react-chartjs-2'
 import { Spinner } from './Spinner'
 import { BiChevronDown } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom'
+import { usePlate } from '../plate-context'
 
 export const Checkpoint = () => {
     const [loading, setLoading] = useState(true)
@@ -17,6 +18,22 @@ export const Checkpoint = () => {
     const navigate = useNavigate()
 
     ChartJS.register(LineController, LineElement, PointElement, LinearScale, Title, Filler, CategoryScale);
+
+    const {
+        dispatch,
+        state: {
+            config: {
+                tutorials
+            }
+        }
+    } = usePlate()
+
+    useEffect(() => {
+        if (tutorials && tutorials.activated && tutorials.checkpoints) {
+            dispatch({ type: 'openTuto', payload: 'checkpoints' })
+        }
+        // eslint-disable-next-line
+    }, [tutorials])
 
     const options = {
         scales: {

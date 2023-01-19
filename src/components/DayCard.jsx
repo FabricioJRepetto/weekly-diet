@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MealCard } from './MealCard'
 import { BiDumbbell } from 'react-icons/bi';
 import { FaHamburger } from "react-icons/fa";
@@ -9,11 +9,13 @@ import { useNavigate } from 'react-router-dom';
 
 import './style/DayCard.css'
 
-export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
+export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) => {
     const [show, setShow] = useState(false)
     const [section, setSection] = useState(false)
     const xpos = useRef(false)
     const xmove = useRef(false)
+    const demoRef = useRef(false)
+    const [demoCardTouch, setDemoCardTouch] = useState(false)
     const day = useRef(new Date(data.date).toLocaleDateString("es-AR", { weekday: "long" }))
 
     const { dispatch } = usePlate()
@@ -31,6 +33,35 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
         date,
         _id
     } = data
+
+    useEffect(() => {
+        if (demo) {
+            const demoplay = () => {
+                setTimeout(() => {
+                    setShow('dinner')
+                    setDemoCardTouch(true)
+                }, 1000);
+                setTimeout(() => {
+                    setShow(false)
+                    setDemoCardTouch(false)
+                }, 4000);
+                setTimeout(() => {
+                    setSection(true)
+                }, 6000);
+                setTimeout(() => {
+                    setSection(false)
+                }, 9000);
+            }
+            demoplay()
+            demoRef.current = setInterval(demoplay, 10000);
+        }
+        return () => {
+            console.log('clear interval');
+            clearInterval(demoRef.current)
+        }
+        // eslint-disable-next-line
+    }, [])
+
 
     const toogleShow = (n) => {
         if (xmove.current < 75) {
@@ -111,7 +142,7 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
                             setShow={() => toogleShow('lunch')}
                             showing={!show || show === 'lunch'} />
                         : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
-                            <p onClick={(e) => edit(e, 'lunch')}>
+                            <p onClick={(e) => menu ? edit(e, 'lunch') : undefined}>
                                 Almuerzo no registrado, click para agregar
                             </p>
                         </div>}
@@ -119,12 +150,12 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
                         ? <MealCard i={1} key={_id + 'dinner'}
                             data={dinner}
                             extraData={{ _id, date, mealType: 'dinner' }}
-                            menu={menu}
+                            menu={menu} demo={demoCardTouch}
                             openDelete={openDelete}
                             setShow={() => toogleShow('dinner')}
                             showing={!show || show === 'dinner'} />
                         : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
-                            <p onClick={(e) => edit(e, 'dinner')}>
+                            <p onClick={(e) => menu ? edit(e, 'dinner') : undefined}>
                                 Cena no registrada, click para agregar
                             </p>
                         </div>}
@@ -132,17 +163,19 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true }) => {
 
                 <div className="daycard-inner-container extras-card">
                     <ExtrasCard data={breakfast}
+                        menu={menu}
                         extraData={{ _id, date, mealType: 'breakfast' }}
                         openDelete={openDelete} />
 
                     <ExtrasCard data={afternoonsnack}
+                        menu={menu}
                         extraData={{ _id, date, mealType: 'afternoonsnack' }}
                         openDelete={openDelete} />
 
                     <div className='extras-card-extras'>
                         {!!workOut.length &&
                             <div className='card-style3'
-                                onClick={() => editWorkOut(date, workOut)}>
+                                onClick={() => menu ? editWorkOut(date, workOut) : undefined}>
                                 <BiDumbbell className='i-medium i-margin-t i-margin-r i-blue' />
                                 <b>Actividad: </b> {workOut.join(', ')}
                             </div>}

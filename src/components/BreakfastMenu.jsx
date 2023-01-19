@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { usePlate } from '../plate-context'
@@ -18,6 +18,9 @@ const BreakfastMenu = () => {
                 foods,
                 fruit,
                 breakfast
+            },
+            config: {
+                tutorials
             }
         } } = usePlate()
     const [params] = useSearchParams()
@@ -27,6 +30,13 @@ const BreakfastMenu = () => {
     const [loading, setLoading] = useState(false)
     const [isOpenList, openList, closeList] = useModal()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (tutorials && tutorials.activated && tutorials.creationMenu) {
+            dispatch({ type: 'openTuto', payload: 'creationMenu' })
+        }
+        // eslint-disable-next-line
+    }, [tutorials])
 
     const openSection = (section) => {
         setList(section)
