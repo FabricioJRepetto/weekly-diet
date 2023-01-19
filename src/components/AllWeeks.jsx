@@ -85,57 +85,53 @@ const AllWeeks = () => {
         <div>
             <h2>Historial</h2>
 
-            {data
-                ? <>
-                    {!loading &&
-                        <div className={`pdf-menu-container card-style2 ${selectMode ? 'pdf-open' : ''}`}>
-                            <span className='history-card-details-head'
-                                onClick={handleModeButton}>
-                                <p><BiFile className='icon i-margin-r' /> Descargar historial</p>
-                                <BiChevronDown className={`icon i-grey ${selectMode ? 'i-arrow-close' : ''}`} />
-                            </span>
+            {data &&
+                <div className={`pdf-menu-container fade-in card-style2 ${selectMode ? 'pdf-open' : ''}`}>
+                    <span className='history-card-details-head'
+                        onClick={handleModeButton}>
+                        <p><BiFile className='icon i-margin-r' /> Descargar historial</p>
+                        <BiChevronDown className={`icon i-grey ${selectMode ? 'i-arrow-close' : ''}`} />
+                    </span>
 
-                            <div>
-                                <p>Para descargar una copia del historial selecciona las semanas que deseas incluir en el archivo</p>
+                    <div>
+                        <p>Para descargar una copia del historial selecciona las semanas que deseas incluir en el archivo</p>
 
-                                <div className='pdf-selected-list'>
-                                    {selected.map(e => <span key={e}>{e}</span>)}
-                                </div>
-                                <div onClick={selectAll}
-                                    className='checkbox'>
-                                    {allSelected
-                                        ? <BiCheckSquare className='i-large i-margin-r i-blue' />
-                                        : <BiCheckbox className='i-large i-margin-r' />}
-                                    <p>incluir todo</p>
-                                </div>
-
-                                <div className='pdf-menu-buttons'>
-                                    {payload
-                                        ? <PDF data={payload} />
-                                        : <button disabled className='button'><BiDownload className='icon i-margin-r' /> descargar</button>}
-
-                                    <button className={`button sec`}
-                                        onClick={handleModeButton}>cancelar
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>}
-
-                    {loading
-                        ? <Spinner />
-                        : <div className='weeks-container fade-in'>
-                            {!!data.length &&
-                                data.map((e, i) => (
-                                    <HistoryCard data={e} key={Date.now() + i}
-                                        selectMode={selectMode}
-                                        selected={allSelected || selected.includes(e.dates.start)}
-                                        select={() => selectHandle({ dates: e.dates, weekDays: e.weekDays }, e.dates.start)} />
-                                ))}
+                        <div className='pdf-selected-list'>
+                            {selected.map(e => <span key={e}>{e}</span>)}
                         </div>
-                    }
-                </>
-                : <p>Aún no tienes registros para mostrar</p>
+                        <div onClick={selectAll}
+                            className='checkbox'>
+                            {allSelected
+                                ? <BiCheckSquare className='i-large i-margin-r i-blue' />
+                                : <BiCheckbox className='i-large i-margin-r' />}
+                            <p>incluir todo</p>
+                        </div>
+
+                        <div className='pdf-menu-buttons'>
+                            {payload
+                                ? <PDF data={payload} />
+                                : <button disabled className='button'><BiDownload className='icon i-margin-r' /> descargar</button>}
+
+                            <button className={`button sec`}
+                                onClick={handleModeButton}>cancelar
+                            </button>
+                        </div>
+                    </div>
+
+                </div>}
+
+            {loading
+                ? <Spinner />
+                : <div className='weeks-container fade-in'>
+                    {!!data.length
+                        ? data.map((e, i) => (
+                            <HistoryCard data={e} key={Date.now() + i}
+                                selectMode={selectMode}
+                                selected={allSelected || selected.includes(e.dates.start)}
+                                select={() => selectHandle({ dates: e.dates, weekDays: e.weekDays }, e.dates.start)} />
+                        ))
+                        : < p > Aún no tienes registros para mostrar</p>}
+                </div>
             }
         </div>
     )

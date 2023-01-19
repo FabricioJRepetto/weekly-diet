@@ -54,12 +54,12 @@ export const DayColumn = ({ data }) => {
 
     const stringer = (e) => {
         if (e) {
-            const food = e.foods.join(', '),
-                prot = e.protein && e.protein.filter(e => !/\(/g.test(e)).join(', '),
-                carb = e.carbohydrate && e.carbohydrate.filter(e => !/\(/g.test(e)).join(', '),
-                veg = e.vegetal && e.vegetal.filter(e => !/\(/g.test(e)).join(', '),
-                brk = e.breakfast && e.breakfast.filter(e => !/\(/g.test(e)).join(', ').join(', '),
-                fru = e.fruit.filter(e => !/\(/g.test(e)).join(', '),
+            const food = e?.foods.join(', '),
+                prot = e?.protein && e.protein.filter(e => !/\(/g.test(e)).join(', '),
+                carb = e?.carbohydrate && e.carbohydrate.filter(e => !/\(/g.test(e)).join(', '),
+                veg = e?.vegetal && e.vegetal.filter(e => !/\(/g.test(e)).join(', '),
+                brk = e?.breakfast && e.breakfast.filter(e => !/\(/g.test(e)).join(', '),
+                fru = e?.fruit.filter(e => !/\(/g.test(e)).join(', '),
                 string = `${food ? food + ',' : ''} ${prot ? prot + ',' : ''} ${carb ? carb + ',' : ''} ${veg ? veg : ''} ${brk ? brk : ''} ${fru ? fru : ''}`.replace(',', ', ');
 
             let vegC = e?.vegetalC
