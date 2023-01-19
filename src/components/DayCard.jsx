@@ -141,7 +141,7 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) =>
                             setShow={() => toogleShow('lunch')}
                             showing={!show || show === 'lunch'} />
                         : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
-                            <p onClick={(e) => menu ? edit(e, 'lunch') : undefined}>
+                            <p onClick={(e) => edit(e, 'lunch')}>
                                 Almuerzo no registrado, toca para agregar
                             </p>
                         </div>}
@@ -154,7 +154,7 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) =>
                             setShow={() => toogleShow('dinner')}
                             showing={!show || show === 'dinner'} />
                         : <div className={`daycard-missing-meal ${show ? 'dc-mm-off' : ''}`}>
-                            <p onClick={(e) => menu ? edit(e, 'dinner') : undefined}>
+                            <p onClick={(e) => edit(e, 'dinner')}>
                                 Cena no registrada, toca para agregar
                             </p>
                         </div>}
