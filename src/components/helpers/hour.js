@@ -8,12 +8,16 @@ export const hour = () => {
             res = 'blue-hour'
             break;
 
+        case (aux >= 5 && aux < 8) || (aux >= 18 && aux < 21):
+            res = 'orange-hour'
+            break;
+
         case aux >= 8 && aux < 18:
             res = 'white-hour'
             break;
 
         default:
-            res = 'orange-hour'
+            res = 'white-hour'
             break;
     }
     return res
