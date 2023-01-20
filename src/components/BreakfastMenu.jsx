@@ -17,7 +17,8 @@ const BreakfastMenu = () => {
                 edit,
                 foods,
                 fruit,
-                breakfast
+                breakfast,
+                cheatfood
             },
             config: {
                 tutorials
@@ -50,6 +51,7 @@ const BreakfastMenu = () => {
             foods: [...foods],
             breakfast: [...breakfast],
             fruit: [...fruit],
+            cheatfood,
             date: edit ? edit.date : new Date().toLocaleDateString('en')
         }
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { MealCard } from './MealCard'
 import { BiDumbbell } from 'react-icons/bi';
-import { FaHamburger } from "react-icons/fa";
 import { TiThumbsDown, TiThumbsUp } from "react-icons/ti";
 import { ExtrasCard } from './ExtrasCard';
 import { usePlate } from '../plate-context';
@@ -29,7 +28,7 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) =>
         afternoonsnack,
         balanced,
         workOut,
-        cheatFood,
+        // cheatFood,
         date,
         _id
     } = data
@@ -106,6 +105,8 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) =>
                 carbohydrate: [],
                 vegetal: [],
                 fruit: [],
+                cheatfood: [],
+                breakfast: [],
                 vegetalC: false
             }
         })
@@ -179,10 +180,10 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) =>
                                 <b>Actividad: </b> {workOut.join(', ')}
                             </div>}
 
-                        {!!cheatFood.length && <p>
+                        {/* {!!cheatFood.length && <p>
                             <FaHamburger />
                             <b>Permitido: </b> {cheatFood.join(', ')}
-                        </p>}
+                        </p>} */}
                     </div>
                 </div>
             </div>

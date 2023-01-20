@@ -28,7 +28,7 @@ export const TutorialContainer = () => {
         if (dontShowAgain) {
             const { data } = await axios.put('/user/config', { tutorial: openTuto })
             if (!data.error) {
-                console.log(data);
+                // console.log(data);
                 dispatch({ type: 'userConfig', payload: data.config })
             } else console.console.warn(data);
         }

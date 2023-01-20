@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { usePlate } from '../plate-context'
 import { suggestions } from './helpers/suggestions'
+import { BiInfoCircle, BiCheckCircle, BiXCircle } from 'react-icons/bi';
 
 import './style/Suggested.css'
 
@@ -22,8 +23,14 @@ export const Suggested = () => {
     const [promp, setPromp] = useState('')
     const [tip, setTip] = useState({})
 
+    const icon = {
+        good: <BiCheckCircle className='i-small' />,
+        bad: <BiXCircle className='i-small' />,
+        neutral: <BiInfoCircle className='i-small' />
+    }
+
     useEffect(() => {
-        if (week?.today?.length === 1) {
+        if (!week?.today?.lunch.empty) {
             const {
                 message,
                 initials
@@ -49,7 +56,7 @@ export const Suggested = () => {
             if (groupA.length < 1 && groupB.length < 1) {
                 setTip(s => ({
                     ...s,
-                    vegetal: 'X Utiliza vegetales de los grupos A y B.'
+                    vegetal: 'Utiliza vegetales de los grupos A y B.'
                 }))
             } else {
                 if (tip.vegetal) {
@@ -84,7 +91,7 @@ export const Suggested = () => {
             ? setTip(s => (
                 {
                     ...s,
-                    [vegGroup]: `✨ Mejora la variedad con vegetales del grupo ${g}.`
+                    [vegGroup]: `Mejora la variedad con vegetales del grupo ${g}.`
                 }
             ))
             : setTip(s => {
@@ -98,7 +105,7 @@ export const Suggested = () => {
 
     return (
         <div className='suggestions-container'>
-            {week.today && week.today.length === 1
+            {week.today && !week.today.lunch.empty
                 ? <>
                     <b>Basado en la comida anterior: </b>
                     <br />
@@ -112,24 +119,24 @@ export const Suggested = () => {
 
             {week.vegetalC >= 3 &&
                 <p className={vegetalC ? 'bad' : 'good'}>
-                    {vegetalC ? 'X' : '✔'}No incluir vegetales C</p>}
+                    {vegetalC ? icon.bad : icon.good}No incluir vegetales C</p>}
 
             {/p/g.test(promp) &&
                 <p className={!!protein.length ? 'good' : 'bad'}>
-                    {!!protein.length ? '✔' : 'X'} Incluir proteínas</p>}
+                    {!!protein.length ? icon.good : icon.bad} Incluir proteínas</p>}
             {promp === 'p' &&
                 <p className={!!carbohydrate.length ? 'bad' : 'good'}>
-                    {!!carbohydrate.length ? 'X' : '✔'} No incluir carbohidratos</p>}
+                    {!!carbohydrate.length ? icon.bad : icon.good} No incluir carbohidratos</p>}
             {/c/g.test(promp) &&
                 <p className={!!carbohydrate.length ? 'good' : 'bad'}>
-                    {!!carbohydrate.length ? '✔' : 'X'} Incluir carbohidratos</p>}
+                    {!!carbohydrate.length ? icon.good : icon.bad} Incluir carbohidratos</p>}
             {promp === 'c' &&
                 <p className={!!protein.length ? 'bad' : 'good'}>
-                    {!!protein.length ? 'X' : '✔'} No incluir proteínas</p>}
+                    {!!protein.length ? icon.bad : icon.good} No incluir proteínas</p>}
 
             {Object.values(tip).length > 0 &&
                 Object.values(tip).map(s => <p key={s}
-                    className={!!vegetal.length ? 'neutral' : 'bad'}>{s}</p>)}
+                    className={!!vegetal.length ? 'neutral' : 'bad'}>{!!vegetal.length ? icon.neutral : icon.bad}{s}</p>)}
         </div>
     )
 }

@@ -16,7 +16,6 @@ import {
 
 
 export const WorkoutSelector = ({ data, close, back, loading, edit }) => {
-    console.log(edit);
     const { dispatch } = usePlate()
     const [selected, setSelected] = useState(edit?.data || [])
     const iconset = {
@@ -55,7 +54,7 @@ export const WorkoutSelector = ({ data, close, back, loading, edit }) => {
             start
         } = defineWeek()
         const { data } = await axios.post(`/history/v2?today=${today}&start=${start}`, aux)
-        console.log(data);
+        // console.log(data);
         if (!data.error) {
             dispatch({ type: 'save', payload: data })
         }

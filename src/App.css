@@ -180,15 +180,27 @@
 }
 
 .blue-hour {
-    color: #4751ba;
+    animation: orangeHour 10s ease forwards;
 }
 
 .orange-hour {
-    color: #f5ab51;
+    animation: blueHour 10s ease forwards;
 }
 
 .white-hour {
     color: #ffffff;
+}
+
+@keyframes orangeHour {
+    100% {
+        color: #f5ab51;
+    }
+}
+
+@keyframes blueHour {
+    100% {
+        color: #4751ba;
+    }
 }
 
 .fade-in {

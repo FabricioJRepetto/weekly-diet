@@ -16,6 +16,7 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
     const [filtered, setFiltered] = useState([])
     const [customFood, setCustomFood] = useState(edit.name || '')
     const [selected, setSelected] = useState(edit.ingredients || [])
+    const [cheat, setCheat] = useState(edit.cheatfood || false)
     const [error1, setError1] = useState('')
     const [error2, setError2] = useState('')
 
@@ -29,10 +30,10 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
     const saveFood = async () => {
         if (!customFood) {
             setError1(() => 'Introduce un nombre')
-        } if (selected.length < 2) {
+        } if (!cheat && selected.length < 2) {
             setError2(() => 'Selecciona por lo menos 2 ingredientes')
         }
-        if (!customFood || selected.length < 2) return
+        if (!customFood || (!cheat && selected.length < 2)) return
 
         let flag = edit ? false : group.foods.filter(e => e.name === customFood)
 
@@ -46,6 +47,7 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
             food = {
                 name: customFood,
                 mix: true,
+                cheatfood: cheat,
                 list: 'foods',
                 lists: Array.from(setOfTypes),
                 ingredients: selected
@@ -133,6 +135,12 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
                                     onClick={() => addIng(e)}>{e.name} <IoAddCircleSharp /></div>
                             )
                         }</div>}
+                    </div>
+
+                    <div onClick={() => setCheat(!cheat)}
+                        className='cheatfood-checkbox dontshow'>
+                        <input checked={cheat} readOnly type='checkbox'></input>
+                        <p>es un permitido</p>
                     </div>
 
                     <button className='button' onClick={saveFood}>guardar</button>

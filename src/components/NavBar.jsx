@@ -4,9 +4,9 @@ import { usePlate } from '../plate-context'
 import { deleteCookie } from './helpers/cookies'
 import { BiLogOut, BiMenu, BiArrowToRight } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
+import { hour } from './helpers/hour'
 
 import './style/NavBar.css'
-import { hour } from './helpers/hour'
 
 export const NavBar = () => {
     const navigate = useNavigate()
@@ -35,9 +35,6 @@ export const NavBar = () => {
 
     return (
         <div className={`navbar-container fade-in ${session ? 'navbar' : ''}`}>
-
-            {/* <div className="testing-dynamic-color" 
-                style={{ backgroundPositionX: elstyle.current }}></div> */}
 
             <b className={`navlogo ${hour()}`} onClick={() => go('/')}>Diet mate</b>
             <button className='icon-button' onClick={() => setOpen(!open)}>

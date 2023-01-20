@@ -1,20 +1,22 @@
 export const hour = () => {
-    let aux = Math.round(new Date().getHours())
+    let aux = Math.round(new Date().getHours()),
+        res = ''
     // console.log(aux);
     // return `${aux}%`
     switch (aux) {
         case aux >= 21 && aux < 5:
-            return 'blue-hour'
-
-        case aux >= 5 && aux < 8:
-            return 'oranje-hour'
+            res = 'blue-hour'
+            break;
 
         case aux >= 8 && aux < 18:
-            return 'white-hour'
+            res = 'white-hour'
+            break;
 
         default:
-            return 'oranje-hour'
+            res = 'orange-hour'
+            break;
     }
+    return res
 }
 
 /*

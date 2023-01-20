@@ -171,6 +171,12 @@
     z-index: 20;
 }
 
+.cheat {
+    left: 75%;
+    transform: translate(-75%);
+    background-color: unset;
+}
+
 .badplate {
     left: unset;
     right: 10%;

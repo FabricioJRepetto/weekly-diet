@@ -18,5 +18,5 @@
 }
 
 .neutral {
-    color: #FFFFFF;
+    color: var(--info);
 }

@@ -25,7 +25,7 @@ export const CreateCheckpoint = () => {
         const { data } = await axios.post(`/history/checkpoint`, { checkpoint })
 
         if (!data.error) {
-            console.log(data);
+            // console.log(data);
             navigate('/checkpoint')
         } else {
             console.warn(data.error)

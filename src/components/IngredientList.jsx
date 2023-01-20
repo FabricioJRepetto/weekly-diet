@@ -56,7 +56,14 @@ const IngredientList = ({ list, type, openList }) => {
         return aux
     }
 
-    const handleSelect = ({ name, list, mix = false, lists = false }) => {
+    const handleSelect = ({ name, list, mix = false, lists = false, cheatfood = false }) => {
+        if (cheatfood) {
+            dispatch({
+                type: 'cheatfood',
+                payload: name
+            })
+        }
+
         let aux = correctList(list)
 
         if (aux.includes(name)) { //? retirar de la lista
@@ -101,12 +108,13 @@ const IngredientList = ({ list, type, openList }) => {
             });
         } else {
             //? si quiero borrar "foods" de todos lados
+            dispatch({ type: 'clearCheatFood' })
             currentPlate[list].forEach(e => {
                 let ele = document.getElementById('ingOpt' + e)
                 ele.checked = false
             });
             Object.entries(currentPlate).forEach(e => {
-                if (Array.isArray(e[1])) {
+                if (e[0] !== 'cheatfood' && Array.isArray(e[1])) {
                     let aux = e[1].filter(ing => !/^\(/.test(ing))
                     dispatch({
                         type: e[0],

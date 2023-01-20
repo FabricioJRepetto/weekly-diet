@@ -23,7 +23,8 @@ function plateReducer(state, action) {
                     vegetal: [],
                     fruit: [],
                     breakfast: [],
-                    vegetalC: false
+                    vegetalC: false,
+                    cheatfood: []
                 },
                 session: false,
                 loading: true,
@@ -80,6 +81,7 @@ function plateReducer(state, action) {
                     vegetal: [],
                     fruit: [],
                     breakfast: [],
+                    cheatfood: [],
                     vegetalC: false
                 }
             }
@@ -171,6 +173,30 @@ function plateReducer(state, action) {
                 }
             }
         }
+        case 'cheatfood': {
+            let aux = [...state.currentPlate.cheatfood]
+            if (aux.includes(action.payload)) {
+                aux = aux.filter(e => e !== action.payload)
+            } else {
+                aux.push(action.payload)
+            }
+            return {
+                ...state,
+                currentPlate: {
+                    ...state.currentPlate,
+                    cheatfood: aux
+                }
+            }
+        }
+        case 'clearCheatFood': {
+            return {
+                ...state,
+                currentPlate: {
+                    ...state.currentPlate,
+                    cheatfood: []
+                }
+            }
+        }
         case 'openTuto': {
             return {
                 ...state,
@@ -199,7 +225,8 @@ function PlateProvider({ children }) {
             vegetal: [],
             fruit: [],
             breakfast: [],
-            vegetalC: false
+            cheatfood: [],
+            vegetalC: false,
         },
         session: false,
         loading: true,

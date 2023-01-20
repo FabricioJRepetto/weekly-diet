@@ -35,15 +35,18 @@ export const CustomFoods = () => {
     }, [])
 
     const deleteConfirmed = async () => {
+        setLoading(true)
+        closeDelete()
         const { data } = await axios.delete(`/foods?food_id=${propDelete}`)
         if (!data.error) {
             setFoods(() => data.foods)
             dispatch({ type: 'saveFoods', payload: data.allFoods })
         }
-        closeDelete()
+        setLoading(false)
     }
 
     const editHandler = (e, data) => {
+        // console.log(data);
         e.stopPropagation()
         openEdit(data)
     }

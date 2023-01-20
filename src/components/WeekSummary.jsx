@@ -21,7 +21,20 @@ const WeekSummary = () => {
     const navigate = useNavigate()
     const {
         dispatch,
-        state: { week, group: { workouts }, config: { tutorials } }
+        state: {
+            week,
+            week: {
+                workOuts,
+                vegetalC,
+                cheatFoods
+            },
+            group: {
+                workouts
+            },
+            config: {
+                tutorials
+            }
+        }
     } = usePlate()
     // console.log(week);
     const [isOpenDelete, openDelete, closeDelete, prop] = useModal();
@@ -68,9 +81,9 @@ const WeekSummary = () => {
                 <div className='weeksummary-container fade-in'>
                     <div className='your-week card-style'>
                         <b>Tu semana:</b>
-                        <div>Actividades: {<Counter num={week.workOuts} max={7} iconstyle='workout' />}</div>
-                        <div>Vegetales C: {<Counter num={week.vegetalC} max={4} iconstyle='vegC' />}</div>
-                        <div>Permitidos: {<Counter num={week.cheatFoods} max={5} iconstyle='cheat' />}</div>
+                        {!!workOuts && <div>Actividades: {<Counter num={workOuts} max={7} />}</div>}
+                        {!!vegetalC && <div>Vegetales C: {<Counter num={vegetalC} max={4} iconstyle='vegC' />}</div>}
+                        {!!cheatFoods && <div>Permitidos: {<Counter num={cheatFoods} max={5} iconstyle='cheat' />}</div>}
                     </div>
 
                     {week.today && (!week.today?.lunch.empty && week.today?.dinner.empty) && <LastMeal />}

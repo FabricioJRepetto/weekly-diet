@@ -9,6 +9,7 @@ export const ExtrasCard = ({ data, extraData, openDelete, menu }) => {
         foods,
         breakfast,
         fruit,
+        cheatfood,
         empty
     } = data
     const {
@@ -32,6 +33,10 @@ export const ExtrasCard = ({ data, extraData, openDelete, menu }) => {
                 foods,
                 breakfast,
                 fruit,
+                cheatfood,
+                protein: [],
+                carbohydrate: [],
+                vegetal: [],
             }
         })
         navigate('/breakfastMenu')

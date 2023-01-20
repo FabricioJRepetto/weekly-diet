@@ -72,9 +72,11 @@
     border: 1px solid rgb(255, 255, 255);
     transition: 0.2s all linear;
     margin: auto 5px;
+    padding: 0 !important;
 }
 
 .dontshow input:checked {
+    width: 1em;
     border: 6px solid rgb(255, 255, 255);
     box-shadow: 0 0 10px 3px #ffffff29;
 }

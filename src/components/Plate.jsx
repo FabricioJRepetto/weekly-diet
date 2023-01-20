@@ -1,17 +1,16 @@
 import React from 'react'
 import { IoAlertCircleSharp, IoLeafSharp } from "react-icons/io5";
-import { usePlate } from '../plate-context';
+import { BiXCircle } from 'react-icons/bi';
 
 import "../components/style/Plate.css"
 
-const Plate = ({ protein, carbohydrate, vegetal, vegC, size }) => {
-    const { state: { config: { plateStyle } } } = usePlate()
+const Plate = ({ protein, carbohydrate, vegetal, vegC, cheat, size, detailed = false }) => {
 
     return (
         <div className='plate-container'
             style={{ height: size, width: size }}>
 
-            <div className={plateStyle ? 'detailed-plate' : 'simple-plate'}>
+            <div className={detailed ? 'detailed-plate' : 'simple-plate'}>
                 <div></div>
             </div>
 
@@ -41,6 +40,11 @@ const Plate = ({ protein, carbohydrate, vegetal, vegC, size }) => {
             {vegC &&
                 <div className='mark'>
                     <IoLeafSharp className='i-medium i-orange' />
+                </div>}
+
+            {cheat && !!cheat.length &&
+                <div className='mark cheat'>
+                    <BiXCircle className='i-margin-t i-medium i-red' />
                 </div>}
 
             {(vegetal.length < 1 || (protein.length < 1 && carbohydrate.length < 1)) &&

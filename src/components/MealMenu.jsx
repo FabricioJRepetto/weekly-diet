@@ -29,6 +29,7 @@ const MealMenu = () => {
                 vegetal,
                 fruit,
                 vegetalC,
+                cheatfood,
                 edit
             },
             config: {
@@ -85,6 +86,7 @@ const MealMenu = () => {
             vegetal: [...vegetal],
             fruit: [...fruit],
             vegetalC,
+            cheatfood: cheatfood,
             date: edit ? edit.date : new Date().toLocaleDateString('en')
         }
 
@@ -141,10 +143,12 @@ const MealMenu = () => {
             <b className='mealmenu-title'>{mealNames[mealType] || ''}{edit ? <i> (editando)</i> : ''}</b>
 
             <Plate size={'34vh'}
+                detailed
                 protein={protein}
                 carbohydrate={carbohydrate}
                 vegetal={vegetal}
-                vegC={vegetalC} />
+                vegC={vegetalC}
+                cheat={cheatfood} />
 
             <Suggested />
 

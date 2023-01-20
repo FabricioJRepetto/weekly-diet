@@ -1,7 +1,7 @@
 import React, { Fragment, useRef } from 'react'
 import { BiErrorCircle, BiCheckCircle, BiCircle, BiXCircle } from 'react-icons/bi';
 
-export const Counter = ({ num, max, iconstyle }) => {
+export const Counter = ({ num = 0, max, iconstyle = 'workout' }) => {
     const icon = {
         'workout': <BiCheckCircle className='i-small i-blue' />,
         'vegC': <BiErrorCircle className='i-small i-orange' />,

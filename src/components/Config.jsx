@@ -12,7 +12,6 @@ export const Config = () => {
         state: {
             config: {
                 height,
-                plateStyle,
                 tutorials: {
                     activated,
                     mainMenu,
@@ -37,7 +36,7 @@ export const Config = () => {
                 tutorial: field
             }
         const { data } = await axios.put('/user/config', aux)
-        console.log(data);
+        // console.log(data);
         if (!data.error) {
             dispatch({
                 type: 'userConfig',
@@ -50,10 +49,10 @@ export const Config = () => {
         if (heightRef.current) {
             let { value } = heightRef.current
             value = value.replace('.', '')
-            console.log(value);
+            // console.log(value);
 
             const { data } = await axios.put('/user/config', { height: value })
-            console.log(data);
+            // console.log(data);
             if (!data.error) {
                 dispatch({
                     type: 'userConfig',
@@ -124,7 +123,7 @@ export const Config = () => {
                 </div>
             </section>
 
-            <section className='config-section card-style'>
+            {/* <section className='config-section card-style'>
                 <h3>Extras</h3>
 
                 <div onClick={() => change('plateStyle')}
@@ -132,7 +131,7 @@ export const Config = () => {
                     <input checked={plateStyle} readOnly type='checkbox'></input>
                     <p>Diseño de plato detallado</p>
                 </div>
-            </section>
+            </section> */}
 
             <p className='italic'>cuenta asociada a: <b>{user_name}</b></p>
 
