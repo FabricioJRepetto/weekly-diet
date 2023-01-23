@@ -11,12 +11,12 @@ export const Counter = ({ num = 0, max, iconstyle = 'workout' }) => {
     const blueprint = useRef('t'.repeat(num) + 'f'.repeat(f))
 
     return (
-        <>{blueprint.current.split('').map((c, i) => (
+        <span className='counter-container fade-in'>{blueprint.current.split('').map((c, i) => (
             (c === 't')
                 ? <Fragment key={new Date().getTime() + i}>
                     {icon[iconstyle]}
                 </Fragment>
                 : <BiCircle key={new Date().getTime() + i} className='i-small i-grey' />
-        ))}</>
+        ))}</span>
     )
 }

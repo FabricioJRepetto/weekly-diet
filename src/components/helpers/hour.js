@@ -1,31 +1,10 @@
 export const hour = () => {
-    let aux = Math.round(new Date().getHours()),
-        res = ''
-    // console.log(aux);
-    // return `${aux}%`
-    switch (aux) {
-        case aux >= 21 && aux < 5:
-            res = 'blue-hour'
-            break;
+    let aux = Math.round(new Date().getHours())
 
-        case (aux >= 5 && aux < 8) || (aux >= 18 && aux < 21):
-            res = 'orange-hour'
-            break;
-
-        case aux >= 8 && aux < 18:
-            res = 'white-hour'
-            break;
-
-        default:
-            res = 'white-hour'
-            break;
-    }
-    return res
+    if (aux >= 21 || aux < 5) return 'blue-hour'
+    if (aux >= 5 && aux < 8) return 'redorange-hour'
+    if (aux >= 8 && aux < 11) return 'orange-hour'
+    if (aux >= 11 && aux < 15) return 'white-hour'
+    if (aux >= 15 && aux < 18) return 'orange-hour'
+    if (aux >= 18 && aux < 21) return 'redorange-hour'
 }
-
-/*
-    21 - 5 = azul
-    5 - 8 = naranja
-    8 - 18 = blanco
-    18 - 21 = naranja
-*/

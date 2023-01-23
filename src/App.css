@@ -180,11 +180,15 @@
 }
 
 .blue-hour {
-    animation: orangeHour 10s ease forwards;
+    animation: blueHour 10s ease forwards;
+}
+
+.redorange-hour {
+    animation: redorangeHour 10s ease forwards;
 }
 
 .orange-hour {
-    animation: blueHour 10s ease forwards;
+    animation: orangeHour 10s ease forwards;
 }
 
 .white-hour {
@@ -193,7 +197,13 @@
 
 @keyframes orangeHour {
     100% {
-        color: #f5ab51;
+        color: #ffca89;
+    }
+}
+
+@keyframes redorangeHour {
+    100% {
+        color: #f19a2f;
     }
 }
 
@@ -228,4 +238,8 @@
         margin-left: auto;
         margin-right: auto;
     }
+}
+
+.counter-container {
+    opacity: 0;
 }

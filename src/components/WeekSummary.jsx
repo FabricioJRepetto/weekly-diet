@@ -81,24 +81,27 @@ const WeekSummary = () => {
                 <div className='weeksummary-container fade-in'>
                     <div className='your-week card-style'>
                         <b>Tu semana:</b>
-                        {!!workOuts && <div>Actividades: {<Counter num={workOuts} max={7} />}</div>}
-                        {!!vegetalC && <div>Vegetales C: {<Counter num={vegetalC} max={4} iconstyle='vegC' />}</div>}
-                        {!!cheatFoods && <div>Permitidos: {<Counter num={cheatFoods} max={5} iconstyle='cheat' />}</div>}
+                        <div>Actividades: {!loading && <Counter num={workOuts} max={7} />}</div>
+                        <div>Vegetales C: {!loading && <Counter num={vegetalC} max={4} iconstyle='vegC' />}</div>
+                        <div>Permitidos: {!loading && <Counter num={cheatFoods} max={4} iconstyle='cheat' />}</div>
+
+                        <br />
+
+                        <button className='ingredients-cell add-ing'
+                            disabled={week?.today?.length > 1}
+                            onClick={() => openMenu(
+                                {
+                                    date: new Date().toLocaleDateString('en'),
+                                    data: week.today?.workOut
+                                }
+                            )}>
+                            <p><IoAddCircleSharp className='i-medium i-margin-r i-margin-t i-black' />
+                                Agregar registro</p>
+                        </button>
                     </div>
 
                     {week.today && (!week.today?.lunch.empty && week.today?.dinner.empty) && <LastMeal />}
 
-                    <button className='ingredients-cell add-ing'
-                        disabled={week?.today?.length > 1}
-                        onClick={() => openMenu(
-                            {
-                                date: new Date().toLocaleDateString('en'),
-                                data: week.today?.workOut
-                            }
-                        )}>
-                        <p><IoAddCircleSharp className='i-medium i-margin-r i-margin-t i-black' />
-                            Agregar registro</p>
-                    </button>
 
                     <section className='week-container'>
                         {week?.days && week.days.map(day => (
