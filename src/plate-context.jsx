@@ -32,7 +32,13 @@ function plateReducer(state, action) {
                 user_name: null,
                 history: [],
                 week: false,
-                group: {}
+                group: {},
+                config: {
+                    height: 0,
+                    plateStyle: true,
+                    tutorials: false
+                },
+                openTuto: false
             }
         }
         case 'userConfig': {

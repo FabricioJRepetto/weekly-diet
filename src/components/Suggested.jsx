@@ -30,7 +30,7 @@ export const Suggested = () => {
     }
 
     useEffect(() => {
-        if (!week?.today?.lunch.empty) {
+        if (week.today && !week?.today?.lunch?.empty) {
             const {
                 message,
                 initials
