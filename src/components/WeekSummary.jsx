@@ -108,7 +108,7 @@ const WeekSummary = () => {
                             !day.empty &&
                             <DayCard key={day._id} data={day}
                                 openDelete={openDelete}
-                                menu={new Date(day.date).getTime() === new Date(new Date().toLocaleDateString('en')).getTime()}
+                                menu={true}
                                 editWorkOut={editWorkOut} />
                         ))}
                     </section>
