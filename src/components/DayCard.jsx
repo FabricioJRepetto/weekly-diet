@@ -173,12 +173,11 @@ export const DayCard = ({ data, openDelete, editWorkOut, menu = true, demo }) =>
                         openDelete={openDelete} />
 
                     <div className='extras-card-extras'>
-                        {!!workOut.length &&
-                            <div className='card-style3'
-                                onClick={() => menu ? editWorkOut(date, workOut) : undefined}>
-                                <BiDumbbell className='i-medium i-margin-t i-margin-r i-blue' />
-                                <b>Actividad: </b> {workOut.join(', ')}
-                            </div>}
+                        <div className={!!workOut.length ? 'card-style3' : 'card-style'}
+                            onClick={() => menu ? editWorkOut(date, workOut) : undefined}>
+                            <BiDumbbell className={`i-medium i-margin-t i-margin-r ${!!workOut.length ? 'i-blue' : 'i-grey'}`} />
+                            <>Actividad: <b>{!!workOut.length ? workOut.join(', ') : ' sin registro'}</b></>
+                        </div>
 
                         {/* {!!cheatFood.length && <p>
                             <FaHamburger />

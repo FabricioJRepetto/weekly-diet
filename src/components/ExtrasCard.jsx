@@ -62,7 +62,8 @@ export const ExtrasCard = ({ data, extraData, openDelete, menu }) => {
 
                     <p>{foods.concat(breakfast, fruit).filter(e => !/\(/g.test(e)).join(', ')}</p>
                 </>
-                : <p style={{ color: 'grey' }}> sin registro</p>
+                : <p style={{ color: 'grey' }} onClick={edit}> sin registro</p>
+
             }
         </div>
     )
