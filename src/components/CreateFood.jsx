@@ -30,10 +30,10 @@ const CreateFood = ({ close, setData = false, edit = false }) => {
     const saveFood = async () => {
         if (!customFood) {
             setError1(() => 'Introduce un nombre')
-        } if (!cheat && selected.length < 2) {
-            setError2(() => 'Selecciona por lo menos 2 ingredientes')
+        } if (!cheat && selected.length < 1) {
+            setError2(() => 'Selecciona por lo menos 1 ingrediente')
         }
-        if (!customFood || (!cheat && selected.length < 2)) return
+        if (!customFood || (!cheat && selected.length < 1)) return
 
         let flag = edit ? false : group.foods.filter(e => e.name === customFood)
 
